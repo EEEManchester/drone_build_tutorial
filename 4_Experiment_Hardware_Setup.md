@@ -29,3 +29,8 @@ PX4 is configured by default to connect to a companion computer connected to the
 
 ### Solutions to power Raspberry Pi 4
 
+
+
+### Setup Wifi rooter in F46
+
+username and password are admin.

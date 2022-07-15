@@ -18,3 +18,5 @@ This note shows main steps to build a drone from kits (hardware) and integrate i
     - FRsky X8R
 ## 2. Step 1 
 
+
+https://shop.holybro.com/uart-cable-for-pixhawk-flight-controllers_p1324.html

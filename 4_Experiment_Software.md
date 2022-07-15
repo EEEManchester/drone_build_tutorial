@@ -1,3 +1,25 @@
+# Drone experiment Software setup
+
+## Table of contents
+  - [Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)](#step-1-brief-introduction-of-onboard-computer-raspberry-pi-4b)
+  - [Step 2. Use Raspberry Pi Imager to write OS images](#step-2-use-raspberry-pi-imager-to-write-os-images)
+  - [Step 3. Install operating systems on Raspberry Pi 4B](#step-3-install-operating-systems-on-raspberry-pi-4b)
+    - [Step 3A Install Ubuntu Server 20.04](#step-3a-install-ubuntu-server-2004)
+    - [Step 3B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04](#step-3b-install-ubuntu-mate-for-raspberry-pi-2004-from-ubuntu-server-2004)
+    - [Step 3C. Choose Raspberry Pi OS](#step-3c-choose-raspberry-pi-os)
+    - [Step 3D. choose Ubuntu MATE (unsloved)](#step-3d-choose-ubuntu-mate-unsloved)
+  - [Step 4. Onboard computer ROS configuration](#step-4-onboard-computer-ros-configuration)
+    - [Step 4.1 Configure Ubuntu](#step-41-configure-ubuntu)
+    - [Step 4.1 Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)](#step-41-install-ros-melodic-in-raspberry-pi-4b-with-os-legacy)
+  - [Step 4.2 Communciation between Rapsberry PI and Pixhawk](#step-42-communciation-between-rapsberry-pi-and-pixhawk)
+    - [Set parameters on PX4](#set-parameters-on-px4)
+  - [5 WIFI communication between Raspberry Pi and base station](#5-wifi-communication-between-raspberry-pi-and-base-station)
+    - [6.1 static IP address for base station and drone](#61-static-ip-address-for-base-station-and-drone)
+    - [5.2 ssh setup](#52-ssh-setup)
+    - [5.3 time synchrionasation](#53-time-synchrionasation)
+  - [ROS communication between Rapsberry Pi and base station](#ros-communication-between-rapsberry-pi-and-base-station)
+    - [6.1 ROS master and client](#61-ros-master-and-client)
+
 ## Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)
 Onborad computer is responsible for transfer commands from base station to autoploit and convert sensor information from autoploit, cameras etc. back to Onborad computers.
 
@@ -129,7 +151,7 @@ Turtoail is given by Ubuntu MATE at the [Raspberry Pi Installation Guide](https:
         ```
 3. Set time
 
-### Step 4.1 Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)
+### Step 4.1B Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)
 
 Note: ROS Melodic is still possible to be installed on Raspberry Pi with Raspbian Buster following a different approach [ROSberryPi/Installing ROS Melodic on the Raspberry Pi](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi).
 
@@ -171,7 +193,7 @@ Pins in red and black can be indentified by using cables with Pixhawk. Here is a
     <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
 </figure>
 
-### Set parameters on PX4
+### Step 4.3 Set parameters on PX4
 Serverl parameters are needed to be modified to enbale serial communication between Pixhawk and Raspberry Pi.
 
 Here are the list
@@ -180,3 +202,42 @@ Here are the list
 - MAV_2_RATE= 80000 Bytes/s
 - MAV_2_FORWARD = True
 - SER_TEL2_BAUD = 921600 baud
+
+## Step 5. WIFI communication between Raspberry Pi and base station
+
+### Step 5.1 static IP address for base station and drone
+
+### Step 5.2 ssh setup
+
+### Step 5.3 time synchrionasation
+We are going to use ntp service for synchronisation.
+First of all, install ntp by running
+```bash
+sudo apt install ntp
+```
+Check if ntp service is on or not
+```bash
+service --status-all
+```
+<figure>
+    <img src="5_Experiment_Software_Setup/ntp_on.png"
+         alt="drawing" style="width:700px;"/>
+    <figcaption> Ntp service is on </figcaption>
+</figure>
+and check its status
+```bash
+sudo systemctl status ntp.service
+```
+<figure>
+    <img src="5_Experiment_Software_Setup/ntp_status.png"
+         alt="drawing" style="width:700px;"/>
+    <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
+</figure>
+Check all the servers
+```bash
+    ntpq -p
+```
+
+## Step 6. ROS communication between Rapsberry Pi and base stationdf
+
+### 6.1 ROS master and client
