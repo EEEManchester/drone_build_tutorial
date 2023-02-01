@@ -220,7 +220,7 @@ Check if ntp service is on or not
 service --status-all
 ```
 <figure>
-    <img src="5_Experiment_Software_Setup/ntp_on.png"
+    <img src="5_Experiment_OnboardComputer_Setup/ntp_on.png"
          alt="drawing" style="width:700px;"/>
     <figcaption> Ntp service is on </figcaption>
 </figure>
@@ -229,7 +229,7 @@ and check its status
 sudo systemctl status ntp.service
 ```
 <figure>
-    <img src="5_Experiment_Software_Setup/ntp_status.png"
+    <img src="5_Experiment_OnboardComputer_Setup/ntp_status.png"
          alt="drawing" style="width:700px;"/>
     <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
 </figure>

@@ -1,5 +1,7 @@
 # Aesembly drone kits
-This note shows main steps to build a drone from kits (hardware) and integrate it in ROS framework (software).
+This note shows main steps to build a drone from kits (hardware).
+
+Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html](https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html).
 
 ## 1. Drone kits and commercial elements
 1. Drone frame Kits: [Holybro X500 V2 Kit](http://www.holybro.com/product/x500-v2-kit/) cluding
@@ -16,7 +18,30 @@ This note shows main steps to build a drone from kits (hardware) and integrate i
 4. Remote controller and receivor
     - FrSky Taranis X9D
     - FRsky X8R
-## 2. Step 1 
+## 2. Overview of main elements 
+<figure>
+    <img src="1_Assembly/autoploit.png"
+         alt="drawing" style="width:700px;"/>
+</figure> 
 
+## 3. Steps
+### 3.1 Build chassis
+<figure>
+    <img src="1_Assembly/chassis.png"
+         alt="drawing" style="width:400px;"/>
+</figure> 
 
-https://shop.holybro.com/uart-cable-for-pixhawk-flight-controllers_p1324.html
+### 3.2 Connect power module
+<figure>
+    <img src="1_Assembly/power.png"
+         alt="drawing" style="width:400px;"/>
+</figure> 
+
+### 3.3 Drone is ready.
+<figure>
+    <img src="1_Assembly/drone.png"
+         alt="drawing" style="width:400px;"/>
+</figure> 
+
+### 3.4 Setup onboard computer
+See 5_Experiment_OnboardComputer_Setup.md.
