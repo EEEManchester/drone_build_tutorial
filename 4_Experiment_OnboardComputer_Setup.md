@@ -25,7 +25,7 @@ Onborad computer is responsible for transfer commands from base station to autop
 
 Choices for onborad computers are Raspberry Pi, Odroid, Tegra K1 etc. Here we show how to buid a drone using Raspberry Pi, i.e. Raspbery Pi 4B.
 <figure>
-    <img src="images/RaspberPi_4B.jpg"
+    <img src="4_Experiment_OnboardComputer_Setup/RaspberPi_4B.jpg"
          height="200"
          alt="Albuquerque, New Mexico">
     <figcaption>Raspbery Pi 4B</figcaption>
@@ -39,7 +39,7 @@ Raspberry Pi Imager is officierial tool to install OS for raspberry pi boards. I
  A Youtube video is available [here](https://youtu.be/y45hsd2AOpw).
 
 <figure>
-    <img src="4_Experiment_Hardware_Setup/raspberry_pi_imager.png"
+    <img src="4_Experiment_OnboardComputer_Setup/raspberry_pi_imager.png"
          height="190">
     <figcaption>Raspbery Pi Imager</figcaption>
 </figure>
@@ -128,7 +128,7 @@ Turtoail is given by Ubuntu MATE at the [Raspberry Pi Installation Guide](https:
 
 2. Run Raspbery Pi Imager and choose the downloaded file 
 <figure>
-    <img src="4_Experiment_Hardware_Setup/write_mate_2004.png"
+    <img src="4_Experiment_OnboardComputer_Setup/write_mate_2004.png"
          height="300"
     >
     <figcaption>Write Ubuntu MATE with Raspbery Pi Imager </figcaption>
@@ -160,7 +160,7 @@ A tutorial to install Melodic on Rapsberry Pi OS is given [here](https://www.lin
 ## Step 4.2 Communciation between Rapsberry PI and Pixhawk
 Let us have a look at all the ports provided by Pixhawk
 <figure>
-    <img src="4_Experiment_Hardware_Setup/px4_port_raspberry.png"
+    <img src="4_Experiment_OnboardComputer_Setup/px4_port_raspberry.png"
          alt="drawing" style="width:600px;"/>
     <figcaption> Pixhawk ports </figcaption>
 </figure>
@@ -168,27 +168,27 @@ Therefore, we will use Telem 2 as the port for Raspberry Pi.
 
 The details of Telem 2 is shown by the figure below
 <figure>
-    <img src="4_Experiment_Hardware_Setup/px4_telem2_ports.png"
+    <img src="4_Experiment_OnboardComputer_Setup/px4_telem2_ports.png"
          alt="drawing" style="width:400px;"/>
     <figcaption> Pins of Tele 2 port </figcaption>
 </figure>
 
 Pins in red and black can be indentified by using cables with Pixhawk. Here is an example.
 <figure>
-    <img src="4_Experiment_Hardware_Setup/px4_telen2_ports_drone.jpeg"
+    <img src="4_Experiment_OnboardComputer_Setup/px4_telen2_ports_drone.jpeg"
          alt="drawing" style="width:400px;"/>
     <figcaption> Pixhawk ports </figcaption>
 </figure>
 
 <figure>
-    <img src="4_Experiment_Hardware_Setup/GPIO_Raspberry.png"
+    <img src="4_Experiment_OnboardComputer_Setup/GPIO_Raspberry.png"
          alt="drawing" style="width:600px;"/>
     <figcaption> Pixhawk ports </figcaption>
 </figure>
 
 
 <figure>
-    <img src="4_Experiment_Hardware_Setup/Pixhawk_raspberry.png"
+    <img src="4_Experiment_OnboardComputer_Setup/Pixhawk_raspberry.png"
          alt="drawing" style="width:700px;"/>
     <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
 </figure>
@@ -220,7 +220,7 @@ Check if ntp service is on or not
 service --status-all
 ```
 <figure>
-    <img src="5_Experiment_OnboardComputer_Setup/ntp_on.png"
+    <img src="4_Experiment_OnboardComputer_Setup/ntp_on.png"
          alt="drawing" style="width:700px;"/>
     <figcaption> Ntp service is on </figcaption>
 </figure>
@@ -229,7 +229,7 @@ and check its status
 sudo systemctl status ntp.service
 ```
 <figure>
-    <img src="5_Experiment_OnboardComputer_Setup/ntp_status.png"
+    <img src="4_Experiment_OnboardComputer_Setup/ntp_status.png"
          alt="drawing" style="width:700px;"/>
     <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
 </figure>
@@ -237,7 +237,7 @@ Check all the servers
 ```bash
     ntpq -p
 ```
-
+TODO
 ## Step 6. ROS communication between Rapsberry Pi and base stationdf
 
 ### 6.1 ROS master and client

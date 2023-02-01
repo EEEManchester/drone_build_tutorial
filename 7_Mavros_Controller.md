@@ -1,16 +1,16 @@
 # Understand and apply mavros_controller
-This turtorial is to show how to implement mavros_controller in real-world experiments.
+This turtorial is to help understand and apply introduce mavros_controller.
 
-## 1. Nodes and control in mavros_controller
-There are two nodes to be run:
+The package mavros_controller provides two packages
 1. **trajectory_publisher** is a node publishing setpoints as states from motion primitives / trajectories for the controller to follow.
 2. **geometric_controller** is a node computing and sending commands to drones in order to follow reference trajectory published by **trajectory_publisher**.
 
-### 1.1 geometric_controller
+# Understand mavros_controller
+## 2 geometric_controller
 Here is a schematic for **geometric_controller**.
 <figure>
     <img src="7_Mavros_Controller/v1_0.png"
-         alt="drawing" style="width:700px;"/>
+         alt="drawing" style="width:900px;"/>
 </figure>
 
 This node 
@@ -18,7 +18,7 @@ This node
 - receives reference trajectory in **ref position** and **ref velocity** from <u>reference/setpoint</u>
 
 
-#### Step 1. receivce reference position and velocity
+### 2.1 Step 1. receivce reference position and velocity
 
 **Reference position** and **velocity** are gained at the topic <u>reference/setpoint</u> that is published by **trajectory_publisher**. Then Reference acce are computed with the derivative of velocity.
 
@@ -48,7 +48,7 @@ void geometricCtrl::targetCallback(const geometry_msgs::TwistStamped &msg) {
 }
 
 ```
-#### Step 2. Control application
+### 2.2 Step 2. Control application
 
 Callback function ```cmdloopCallback``` is defined in the constrcuctor as
 ```c++
@@ -96,7 +96,7 @@ void geometricCtrl::cmdloopCallback(const ros::TimerEvent &event) {
 ```
 
 
-##### 1. ```controlPosition```
+#### 2.2.1 ```controlPosition```
 ```C++ 
   desired_acc = controlPosition(targetPos_, targetVel_, targetAcc_);
 ```
@@ -137,7 +137,7 @@ Eigen::Vector3d geometricCtrl::controlPosition(const Eigen::Vector3d &target_pos
   }
 ```
 
-##### 2. ```computeBodyRateCmd```
+#### 2.2.2 ```computeBodyRateCmd```
  ```C++
  // Line 392-408
  void geometricCtrl::computeBodyRateCmd(Eigen::Vector4d &bodyrate_cmd, const Eigen::Vector3d &a_des) {
@@ -286,7 +286,7 @@ Eigen::Vector3d geometricCtrl::controlPosition(const Eigen::Vector3d &target_pos
 1. Usually, only ```attcontroller``` and ```geometric_attcontroller``` are available
 2. Set ```command_input = 2``` leads to ```geometric_attcontroller```, while ```command_input = 1``` leads to ```attcontroller```.
 
-##### 3. ```pubReferencePose```
+#### 2.2.3 ```pubReferencePose```
 This function is to publish reference position and attitude to the topic <u>reference/pose</u> as
 ```c++
   pubReferencePose(targetPos_, q_des);
@@ -311,7 +311,7 @@ This function is to publish reference position and attitude to the topic <u>refe
   ```
 
 
-##### 4. ```pubRateCommands```
+#### 2.2.4 ```pubRateCommands```
 This function is to publish the control input (body rate and thrust) to the topic <u>command/bodyrate_command</u> as
   ```c++ 
     pubRateCommands(cmdBodyRate_, q_des);
@@ -342,7 +342,7 @@ where is maped to <u>/mavros/setpoint_raw/attitude</u>
 }
   ```
 
-##### 5. ```pubReferencePose``` and ```pubPoseHistory()```
+#### 2.2.5 ```pubReferencePose``` and ```pubPoseHistory()```
 Here we do two things
 + with ```appendPoseHistory()```, we record the drone's position and attitude and save them into a vector ```posehistory_vector_``` with a size of```posehistory_window_``` (default = 200).
   ```c++
@@ -373,11 +373,11 @@ Here we do two things
       posehistoryPub_.publish(msg);
     }
   ```
-## 1.2 trajectory_publisher
+# 3 trajectory_publisher
 It is implemented in ```trajectoryPublisher.cpp```.
 
 
-### Step 0
+## 3.1 Step 1
 In the constructor,
   ```c++
   trajectoryPublisher::trajectoryPublisher(const ros::NodeHandle& nh, const ros::NodeHandle& nh_private)//
@@ -410,7 +410,7 @@ In the constructor,
   }
   ```
 
-### step 1 Choose trajectory planning
+## 3.2 step 2 Choose trajectory planning
 Trajectory can be planned with two different methods:
 + polynomial trajectory by setting ```trajectory_type_ =0```
 + shape trajectory by setting ```trajectory_type_ =1```
@@ -446,7 +446,7 @@ Trajectory can be planned with two different methods:
 
 ```motion_selector_```
 
-### step 1 Publish reference trajectory and setpoints
+## 3.3 step 3 Publish reference trajectory and setpoints
 Core functions are ```loopCallback``` and ```refCallback```: ```loopCallback``` is called with a frequency of 10HZ, while ```refCallback```is called with a frequency of 100HZ.
 
 ```c++
@@ -456,7 +456,7 @@ Core functions are ```loopCallback``` and ```refCallback```: ```loopCallback``` 
 ```
 
 
-#### ```loopCallback``` publish reference trajectory
+### ```loopCallback``` publish reference trajectory
 Whole/Segment reference trajecotry is publised to <u>trajectory_publisher/trajectory</u>.
 ```c++
   void trajectoryPublisher::loopCallback(const ros::TimerEvent& event) {
@@ -496,7 +496,7 @@ where the publisher is defined as
   primitivePub_.push_back(nh_.advertise<nav_msgs::Path>("trajectory_publisher/primitiveset", 1));
 ```
 
-### step 3 send setpoint of reference trajectory to drone
+## 3.4 step 4 send setpoint of reference trajectory to drone
 Inside ```refCallback```, we have three options to compute setpoints for drone.
 
 ```c++
@@ -524,7 +524,6 @@ void trajectoryPublisher::refCallback(const ros::TimerEvent& event) {
 | 8   | ```pubrefState```        |p_targ, v_targ| ```reference/setpoint```|
 | 16   | ```pubrefSetpointRaw```        |p_targ, v_targ, a_targ | ```mavros/setpoint_raw/local```|
 
-sd
 
 ```c++
   void trajectoryPublisher::updateReference() {
@@ -538,8 +537,8 @@ sd
 ```
 
 
-# 6 Appendix 
-## 6.1 algorithm in geometirc_controller
+# 4 Appendix 
+## 4.1 algorithm in geometirc_controller
 ### acc2quaternion
 ```acc2quaternion``` is to compute a reference rotation from reference acceleration, which is called in ```controlPosition```and ```computeBodyRateCmd```
 ```c++
@@ -649,3 +648,4 @@ advertiseService
 
 ```advertiseService``` allows us to creat a ```ros::ServiceServer`` that works similar to how the ```subscribe()``` method works.
 
+# Apply mavros_controller

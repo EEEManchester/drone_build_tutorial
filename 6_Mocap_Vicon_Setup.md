@@ -1,10 +1,10 @@
 # Use Mocap for drone indoor flight
-## Setup and Calibrate Vicon
-### Environment
+## 1 Setup and Calibrate Vicon
+### 1.1 Environment
 Vicon system
 - version: 3.6.1
 
-### Start Vicon system
+### 1.2 Start Vicon system
 1. Satart Vicon tracker
 2. Calibrate system
     - green lights mean OK
@@ -14,8 +14,8 @@ Vicon system
     - Put the bar and click Start and Set
     - **Donot touch cage or gate to impact cameras**. Once the light is blinking, redo calibration.
     - Layout should be checked visually
-### Build rigid body in Vicon
-1. See markers in cicon
+### 1.3 Build rigid body in Vicon
+1. See markers in Vicon
 2. Choose Objects tag and select all markers
 3. Name object and create
 4. Select object in Object Tag
@@ -29,17 +29,18 @@ Vicon system
         - RX, RY, RZ are Euler angles and TX, TY and TZ are translation
 8. Online measurement:
     - check vicon_bridge        
-### Get pose information from Vicon    
+### 1.4 Get pose information from Vicon    
 1. download and build ros package *vicon_bridge*
 2. connnect pc to hub throught a internet port
 3. configure Enthernet mannually 192.168.10.XX
 4. go live and choose object
 
 
-## Communication schematic among MoCap, drone and base station
-image missing
+TODO 
+## 2 Communication schematic among MoCap, drone and base station
 
-## State estimation operated by PX4
+
+### 2.1 State estimation operated by PX4
 https://docs.px4.io/v1.12/en/advanced_config/tuning_the_ecl_ekf.html
 <figure>
     <img src="6_Mocap/ECL_overview.png"
@@ -65,7 +66,7 @@ Following the guide [https://docs.px4.io/v1.12/en/advanced_config/tuning_the_ecl
     - SENS_IMU_MODE = 1 as 1: Publish primary IMU selection,
     - SENS_MAG_MODE = 1 as 1: Publish primary magnetometer
 
-## Set Px4 to accept MoCap infor
+### 2.2 Set Px4 to accept MoCap infor
 Indoor flights need Motion Capture System to provide pose information for drones. Vicon is setup in F46 and we shall configure PX4 such that our drone takes pose information from Vicon to meet auto flight conditions.
 
 EKF2_AID_MASK is the parameter to be tuned:
