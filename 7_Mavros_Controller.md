@@ -649,3 +649,15 @@ advertiseService
 ```advertiseService``` allows us to creat a ```ros::ServiceServer`` that works similar to how the ```subscribe()``` method works.
 
 # Apply mavros_controller
+
+## Modification
+
+## Prepare real flight
+Bench test is to 
+1. check if **we can arm and offboard a drone with RC controller**
+2. debuy and tune geometirc_controller without propellers
+<figure>
+    <img src="7_Mavros_Controller/bench_test.png"/>
+</figure>
+
+
