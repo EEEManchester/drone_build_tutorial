@@ -1,9 +1,9 @@
 # Use Vicon for drone indoors flight
 
 - [ ] How to start vicon
-    - [ ] image of online
+    - [X] image of online
     - [ ] image of wizard
-    - [ ] image of vicon with objects 
+    - [X] image of vicon with objects 
     - [ ] image of vicon in ros topic and message
 - [ ] Vicon frame explanation
 - [ ] How to use Vicon
@@ -34,10 +34,19 @@ Several points to understand this figure:
     - dance with favourite music
     - camera's light becomes green: it mean OK.
     - all cameras's light becoming blinking if they are all calibrated.
+<figure>
+    <img src="6_Vicon/Vicon_calibrate.PNG"  width="250"//>
+</figure>
+    
 3. Set origin
     - set volume origin 
     - put the bar on the ground where you want **the origin** is
     - and click *Start* and *Set*
+    - you should find the cameras' position in the 3D perspective as the same as the real world.  
+<figure>
+    <img src="6_Vicon/Vicon_origin.png"  width="500"/>
+</figure>
+    
 4. Recalibrate Vicon
     -   **Donot touch cage or gate to impact cameras**. 
     - once a camera's light is blinking, redo calibration.
@@ -51,8 +60,14 @@ Several points to understand this figure:
 2. In *Vicon tracker*, Choose *Objects* tag and select all markers
 3. Name object and then create
 4. Select object in *Object* Tag
-6. Go *Online*->Click *Start* in Show parameters
-
+6. *Go Live* 
+<figure>
+    <img src="6_Vicon/Vicon_live.png"/>
+</figure>
+    and we should see the object like below
+<figure>
+    <img src="6_Vicon/Vicon_object.PNG" width="400"/>
+</figure>
 
 
 ### 1.4 Get Vicon information in ros at base station    
