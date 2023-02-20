@@ -1,15 +1,5 @@
 # Use Vicon for drone indoors flight
 
-- [ ] How to start vicon
-    - [X] image of online
-    - [ ] image of wand
-    - [X] image of vicon with objects 
-    - [ ] image of vicon in ros topic and message
-- [ ] Vicon frame explanation
-- [ ] How to use Vicon
-    - [ ] EKF 2
-    - [ ] use vicon in drone controller
-    
 Here is where you are going to fly drones with Vicon at the University of Manchester.
 <figure>
     <img src="6_Vicon/Vicon_cage.jpg"/>
