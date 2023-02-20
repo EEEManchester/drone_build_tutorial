@@ -27,7 +27,8 @@ Other paramerts can be set to allow more time to take actions
 
 ```bash
 COM_OF_LOSS_T = 10
-COM_DISARM_LAND =10
+COM_DISARM_LAND =10 
+COM_DISARM_LAND = -1 means disable this
 ```
 ### 1.2 Step 2 Choose drone controller library
 There are serverial libraries developed for PX4 drones.
