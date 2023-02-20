@@ -19,7 +19,7 @@ This tutorial aims to provide guides begining at building a drone from kits and 
     It suggests what to do if more addional devices are to be added to a drone to extend its functions.
 
 
-6. [Setup Motion Capture system](6_Mocap_Vicon_Setup.md)
+6. [Setup and use Vicon system](6_Vicon_Setup_Use.md)
     It gives an idea of how to use a motion capture system for drone experiments.
 
 7. [Use mavros_controller](7_Mavros_Controller.md)
