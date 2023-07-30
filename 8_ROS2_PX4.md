@@ -157,6 +157,7 @@ ROS 2 allows to completely create a distributed system.
 **API differences**
 
 <img src="8_ROS2/API_structure.png" width="600"/>
+
 - c++ and python in ROS 2 are united by using a common client library.
   - roscpp and rospy are independent, some functions exsit only for one or the other. It is possible to come across that the needed features only are available in rospy, while your project uses roscpp.
   - rclcpp and rclpy are much more simular. Both of them depend on rcl and providing the binding: all functions are implemented in rcl. 
@@ -166,6 +167,11 @@ ROS 2 allows to completely create a distributed system.
 Supports for Python and C++
 - ROS 2 is only for Python 3.
 - ROS 2 supports C++ 11 and 14 by default, C++ 17 is also on the roadmap.
+
+**Workspace overlays**
+<img src="8_ROS2/ROS2_overlays.png" width="600"/>
+We can overlay workspace and pkgs.
+
 
 ### Key concepts of ROS2
 #### Node
@@ -187,8 +193,19 @@ A node in ROS2 is a class that can be:
 - Compiled, run or stopped independently
 - Written in different languages (C++ / Python3)
 
+### ROS bridge 
+
+
 ## Workspace Configuration for ROS2
-### Configuration for colcon 
+In ROS2, ament is the new building system, and on top of that we get the colcon command line tool.
+
+However, in ROS, catkin is the building system that combines CMake macros and Python scripts on top of CMake's normal workflow. That is why we use CMakeLists.txt.
+
+To better understand, we use ROS as a refernce
+- colcon like catkin tools, provide commands to create, build and test pkgs,
+- ament is iterated on catkin from ROS.
+
+### Configuration for colcon
 Three tools are essential for ROS2:
 - ROS2, itself;
 - colcon as build tools.
@@ -238,9 +255,215 @@ Finally, we have added three lines into ~/.bashrc
 |Build pkgs | colcon build | catkin build |
 |Create pkg | ros2 pkg create <pkg_name> --build-type ament_cmake | catkin create pkg  <pkg_name>|
 || ros2 pkg create <pkg_name> --build-type ament_python| |
-|Find pkg | ros2 run <pkg_name> <exe_name>  | ros run <pkg_name> <exe_name> |
-|Run exe | ros2 pkg prefix <pkg_name> | ros pkg find <pkg_name> |
+|Build certain pkg| colcon build --packages-select  <pkg_name> | catkin build <pkg_name> |
+|Run pkg | ros2 run <pkg_name> <exe_name>  | ros run <pkg_name> <exe_name> |
+|Find exe | ros2 pkg prefix <pkg_name> | ros pkg find <pkg_name> |
 
+
+## Pkg
+A package is a basic organizational unit for your ROS2. 
+
+### Simple example to create pkg
+Steps in details to follow "how to create a hello world" C++ pkg in ROS 2 https://docs.ros.org/en/foxy/Tutorials/Beginner-Client-Libraries/Creating-Your-First-ROS2-Package.html.
+
+Step 1: create a hello world c++ pkg
+
+```shell
+    cd ros2_ws/src
+    ros2 pkg create --build-type ament_cmake --node-name hello_node hello_package
+```
+we should see
+
+<img src="8_ROS2/colcon_create_pkg.png" width="600"/>
+
+Step 2: build hello world pkg
+```shell
+    cd ros2_ws/
+    colcon build --packages-select hello_package
+```
+as
+
+<img src="8_ROS2/colcon_build_pkg.png" width="600"/>
+
+Step 3: source for new pkg
+
+```shell
+    cd ros2_ws/
+    source install/local_setup.bash
+```
+<img src="8_ROS2/colcon_source.png" width="600"/>
+
+Sourcing the local_setup of the overlay will only add the packages available in the overlay to your environment. setup sources the overlay as well as the underlay it was created in, allowing you to utilize both workspaces.
+
+So, sourcing your main ROS 2 installation’s setup and then the ros2_ws overlay’s local_setup, like you just did, is the same as just sourcing ros2_ws’s setup, because that includes the environment of its underlay.
+
+Step 4: run pkg
+```shell
+    ros2 run hello_package hello_node
+```
+<img src="8_ROS2/colcon_pkg_run.png" width="600"/>
+
+
+Refereces:
+1. ROS2 Basics #3 - Understanding ROS2 Packages and Workspace https://youtu.be/lN4_-l7FCWk.
+2. ROS2 Tutorials #4: How to create a ROS2 Package for C++ [NEW], https://youtu.be/C2bKwFJ5HEY.
+3. what is the use of --symlink-install in ROS2 colcon build?, https://answers.ros.org/question/371822/what-is-the-use-of-symlink-install-in-ros2-colcon-build/
+
+
+```html
+    my_package/
+        CMakeLists.txt
+        include/my_package/
+        package.xml
+        src/
+        launch/
+```
+where
+- CMakeLists.txt file that describes how to build the code within the package
+- include/<package_name> directory containing the public headers for the package
+- package.xml file containing meta information about the package
+- src directory containing the source code for the package
+
+### CMakeLists for ament
+
+```make
+    cmake_minimum_required(VERSION 3.5)
+    project(my_project)
+
+    ament_package()
+```
+
+
+## Publisher and Subscriber
+
+### Create a simple node in pkg in ROS2
+
+**Step 1. Write C++ scipts to creat a node**
+```c++
+// 1. get h file for using c++ in ROS2
+#include "rclcpp/rclcpp.hpp"
+
+int main(int argc, char **argv)
+{
+    // 2. initiate ROS2 communications with rclcpp::init()
+    rclcpp::init(argc, argv);
+    // 3. create a node 
+    auto node = std::make_shared<rclcpp::Node>("my_node_name");
+    // 3. make node spin
+    rclcpp::spin(node);
+    // 4. will stop ROS2 communications
+    rclcpp::shutdown();
+    return 0;
+}
+```
+Two ways to create a node
+1. ```auto node = std::make_shared<rclcpp::Node>("my_node_name");```
+   - It uses a shared pointer to create an instance of class ```rclcpp::Node```. The name of node is *my_node_name*. 
+   - It is a good choice for complex node classes as it can pass additional arguments to the constructor of the ```rclcpp::Node``` class.
+2. ```auto node = rclcpp::Node::make_shared("my_node_name");```
+   - It calles a method of namespace ```rclcpp::Node``` to create a shared pointer to an instance.
+   - It is an efficient way to creat a simple node.
+
+**Step 2. Edit CMakeLists to build node**
+Since we use the binding, rclcpp, to interact with rcl, linking rclcpp to our node is necessary. 
+
+
+```cmake
+cmake_minimum_required(VERSION 3.5)
+project(hello_package)
+
+find_package(ament_cmake REQUIRED)
+
+#------------TO ADD------------#
+find_package(rclcpp REQUIRED) #like binding for rcl
+
+add_executable(hello_node src/hello_node.cpp)
+
+# link rclcpp for node
+ament_target_dependencies(hello_node rclcpp) 
+# or target_link_libraries(hello_node rclcpp) 
+# choose ament_target_dependencies if use overlay workspaces 
+
+#------------TO ADD------------#
+
+install(TARGETS hello_node
+  DESTINATION lib/${PROJECT_NAME})
+
+```
+More detials about understanding cmake commands can be found in cmake tutorial of the author. Here we only explain key ideas of commands used here. Two main commands are 
+- ```find_package(rclcpp REQUIRED)``` to locate lib rclcpp
+- ```ament_target_dependencies(hello_node rclcpp) ``` to link rclcpp with our node (exe).
+
+Referces
+1. ament_cmake user documentation https://docs.ros.org/en/foxy/How-To-Guides/Ament-CMake-Documentation.html
+
+
+
+**Step 3. Edit package.xml to add dependence**
+<depend>rclcpp</depend>
+
+
+
+
+**Step 4. Develop Launch file**
+Three methods are available to create launch fiels: Python scripts, XML, YAML.
+
+XML files are used in ROS and no addiontal efforts are needed.
+
+Recall the strucre of a pkg
+```
+    my_package/
+        CMakeLists.txt
+        include/my_package/
+        package.xml
+        src/
+        launch/
+```
+A launch file with extention *name.launch.xml* must be created in folder launch.
+```shell
+   cd my_package/launch
+   touch name.launch.xml
+```
+Edit name.launch.xml to launch an exe from a pkg as
+
+```xml
+<launch>
+    <!-- call exe hello_node from pkg hello_package-->
+    <node pkg="hello_package" exec="hello_node"/>
+</launch>
+```
+
+Remember everything everying built will be installed, so we need to install the folder launch as well such that ros2 launch can find these files.
+
+In CMakeLists.txt, we add install commands as 
+
+```cmake
+# install launch folder so ros2 launch can find launch files 
+install(DIRECTORY
+        launch
+        DESTINATION share/${PROJECT_NAME}/
+      )
+```
+
+It is also suggested to add ```<exec_depend>ros2launch</exec_depend>``` in package.xml.
+
+Here is how to call hello_node from hello_package with launch file say_hello.launch.xml.
+
+```shell
+    # go to ros2_ws
+    cd ros2_ws
+    # build pkg
+    colcon build packages-select hello_package
+    # source 
+    source install/local_setup.bash
+    # call launch command
+    ros2 launch hello_package say_hello.launch.xml
+```
+
+1. Creating a launch file, https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
+
+2. ROS2 - Create a Launch File with XML, https://youtu.be/Le1vx1_KUDQ
+### Write a publisher in C++
 
 
 
