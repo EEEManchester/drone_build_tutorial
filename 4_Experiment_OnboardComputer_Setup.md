@@ -20,6 +20,16 @@
   - [ROS communication between Rapsberry Pi and base station](#ros-communication-between-rapsberry-pi-and-base-station)
     - [6.1 ROS master and client](#61-ros-master-and-client)
 
+Big picture of a drone with a Pixhawk 5 and a raspberry pi 4b.
+
+<figure>
+    <img src="4_Experiment_OnboardComputer_Setup/Drone_components.png"
+         height="350"
+         alt="Albuquerque, New Mexico">
+    <figcaption></figcaption>
+</figure>
+
+
 ## Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)
 Onborad computer is responsible for transfer commands from base station to autoploit and convert sensor information from autoploit, cameras etc. back to Onborad computers.
 
@@ -33,7 +43,9 @@ Choices for onborad computers are Raspberry Pi, Odroid, Tegra K1 etc. Here we sh
 
 Raspberry Pi requires an operating system (OS). However, The supported OSs by Raspberry Pi depend on versions. Raspberry Pi 4B can only support Ubuntu desktop 21.04 (Not LTS), Raspberry Pi OS, Ubuntu server 20.04 (LTS), Ubuntu Core 20, which can be found at (see [Ubuntu for Raspberry Pi](https://ubuntu.com/download/raspberry-pi)).
 
-## Step 2. Use Raspberry Pi Imager to write OS images
+## Step 2. Install operating systems on Raspberry Pi 4B
+**Note:** An image is provided for  Ubuntu Mate for Raspberry Pi 20.04 with ROS and mavors.
+
 Raspberry Pi Imager is officierial tool to install OS for raspberry pi boards. It can be downloaded from [https://www.raspberrypi.com/software/](https://www.raspberrypi.com/software/).
 
  A Youtube video is available [here](https://youtu.be/y45hsd2AOpw).
@@ -44,13 +56,13 @@ Raspberry Pi Imager is officierial tool to install OS for raspberry pi boards. I
     <figcaption>Raspbery Pi Imager</figcaption>
 </figure>
 
-## Step 3. Install operating systems on Raspberry Pi 4B
 Here are serveral potions for OS to be used on Raspberry Pi 4b:
-- Ubuntu Desktop/Server 22.04
-- Ubuntu Server 20.04
-- Ubuntu Mate 20.04(for Raspberry Pi)
+- Ubuntu Desktop/Server 20.04
+- **(recommended)** Ubuntu Mate 20.04 for Raspberry Pi
+- Raspberry Pi OS
+- Ubuntu Mate 20.04 for Raspberry Pi directly (unsolved)
 
-### Step 3A Install Ubuntu Server 20.04
+### Step 2A Install Ubuntu Server 20.04
 A server is ligher than a Desktop as it does not contain packages for GUI and Office. Thus, choosing server is also a good choice for an onboard computer.
 
 1. Choose Ubuntu Server 20.04 LTS using Raspberry Pi Imager.
@@ -79,8 +91,8 @@ A server is ligher than a Desktop as it does not contain packages for GUI and Of
     - ```sudo apt install ubuntu-mate-desktop```    
     - choose gmd3 or lightdm (recommended)
 
-### Step 3B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04
-Repeat Steps 1-5 above.
+### Step 2B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04
+Repeat Steps 1-5 above in Step 2A.
 
 6. Use Desktopify to convert Ubuntu server 20.04 to Ubuntu Mate 20.04. A video tutorial is available [Install Ubuntu Mate On the Raspberry Pi 4 with Desktopify The Fastest Desktop Experience For The Pi4](https://youtu.be/zo5eReiXYuo).
     - ```cd ~```
@@ -88,17 +100,17 @@ Repeat Steps 1-5 above.
     - ```cd desktopify``` 
         ```sudo ./desktopify --de ubuntu-mate```     
 
-### Step 3C. Choose Raspberry Pi OS
+### Step 2C Install Raspberry Pi OS
 Raspberry Pi OS is an official operating system supported by Raspberry Pi.
 
 After understanding how to use Raspberry Pi Imager, a choice is going to be made for choosing a version of Raspberry Pi OS, yes, another choice of versions :( . In fact, Raspberry Pi OS is built using a Linux kernel of Debian, therefore we can find Debian version information of each Raspberry Pi OS. Raspberry Pi OS uses Debian 11 (Bullseye), while Raspberry Pi OS (Legacy) takes Debian 10 (Buster).
 <figure>
-    <img src="images/Raspberry_OS_option1.png"
+    <img src="4_Experiment_OnboardComputer_Setup/Raspberry_OS_option1.png"
          height="200">
     <figcaption>Raspbery Pi OS with Debian 11 (Bullseye)</figcaption>
 </figure>
 <figure>
-    <img src="images/Raspberry_OS_option2.png"
+    <img src="4_Experiment_OnboardComputer_Setup/Raspberry_OS_option2.png"
          height="200">
     <figcaption>Raspbery Pi OS (Legacy) with Debian 10 (Buster)</figcaption>
 </figure>
@@ -110,11 +122,11 @@ Till April 2022, there two ROS options to choose: ROS Melodic and ROS Noetic. No
 
 Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry Pi. 
 
-### Step 3D. choose Ubuntu MATE (unsloved)
+### Step 2D. choose Ubuntu MATE (unsloved)
 We choose Ubuntu MATE as the OS system for our Rapberry Pi 4 (see [Ubuntu MATE for Raspberry Pi](https://ubuntu-mate.org/raspberry-pi/)). 
 
 <figure>
-    <img src="images/Mate_rapspberry.jpg"
+    <img src="4_Experiment_OnboardComputer_Setup/Mate_rapspberry.jpg"
          height="300"
          alt="Albuquerque, New Mexico">
     <figcaption>Ubuntu MATE for Raspbery Pi</figcaption>
@@ -133,11 +145,11 @@ Turtoail is given by Ubuntu MATE at the [Raspberry Pi Installation Guide](https:
     >
     <figcaption>Write Ubuntu MATE with Raspbery Pi Imager </figcaption>
 </figure>
-   
+      
 
-## Step 4. Onboard computer ROS configuration
+## Step 3. Onboard computer ROS configuration
 
-### Step 4.1 Configure Ubuntu
+### Step 3.1 Configure Ubuntu
 1. Boot your Ubuntu MATE 
     - set language and user names
         - user name: droneREEG
@@ -149,16 +161,25 @@ Turtoail is given by Ubuntu MATE at the [Raspberry Pi Installation Guide](https:
         ```
             sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
         ```
-3. Set time
+3. Set time zone and keyboard layout
 
-### Step 4.1B Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)
+Then, we install ROS for the onboard computer. 
+
+### Step 3.2A Install ROS for Ubuntu or Ubuntu Mate
+Please refoer to [ROS Installation](http://wiki.ros.org/ROS/Installation).
+
+### Step 3.2B Install ROS for Rapsberry Pi OS
 
 Note: ROS Melodic is still possible to be installed on Raspberry Pi with Raspbian Buster following a different approach [ROSberryPi/Installing ROS Melodic on the Raspberry Pi](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi).
 
 A tutorial to install Melodic on Rapsberry Pi OS is given [here](https://www.linkedin.com/pulse/easiest-way-install-ros-melodic-raspberrypi-4-shubham-nandi/).  
 
-## Step 4.2 Communciation between Rapsberry PI and Pixhawk
-Let us have a look at all the ports provided by Pixhawk
+## Step 4 Communciation between Rapsberry Pi and Pixhawk 5.
+
+There are two ways for communication between a Pixhawk 5 and a Raspberry pi.
+
+## Step 4.1A Communication through serial ports of Rapsberry Pi
+Let us have a look at all the ports provided by Pixhawk 5.
 <figure>
     <img src="4_Experiment_OnboardComputer_Setup/px4_port_raspberry.png"
          alt="drawing" style="width:600px;"/>
@@ -193,7 +214,10 @@ Pins in red and black can be indentified by using cables with Pixhawk. Here is a
     <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
 </figure>
 
-### Step 4.3 Set parameters on PX4
+## Step 4.1B Communication through USB ports of Raspberry Pi
+
+
+### Step 4.2 Set parameters on PX4
 Serverl parameters are needed to be modified to enbale serial communication between Pixhawk and Raspberry Pi.
 
 Here are the list
@@ -203,13 +227,17 @@ Here are the list
 - MAV_2_FORWARD = True
 - SER_TEL2_BAUD = 921600 baud
 
-## Step 5. WIFI communication between Raspberry Pi and base station
 
-### Step 5.1 static IP address for base station and drone
+## Step 5 Power onboard computer
 
-### Step 5.2 ssh setup
 
-### Step 5.3 time synchrionasation
+## Step 6. WIFI communication between Raspberry Pi and base station
+
+### Step 6.1 static IP address for base station and drone
+
+### Step 6.2 ssh setup
+
+### Step 6.3 time synchrionasation
 We are going to use ntp service for synchronisation.
 First of all, install ntp by running
 ```bash
@@ -240,4 +268,3 @@ Check all the servers
 TODO
 ## Step 6. ROS communication between Rapsberry Pi and base stationdf
 
-### 6.1 ROS master and client
