@@ -193,6 +193,10 @@ A node in ROS2 is a class that can be:
 - Compiled, run or stopped independently
 - Written in different languages (C++ / Python3)
 
+
+ROS1 vs ROS2, Practical Overview For ROS Developers, https://roboticsbackend.com/ros1-vs-ros2-practical-overview/
+
+
 ### ROS bridge 
 
 
@@ -432,8 +436,10 @@ Edit name.launch.xml to launch an exe from a pkg as
     <node pkg="hello_package" exec="hello_node"/>
 </launch>
 ```
-
+**Note**
 Remember everything everying built will be installed, so we need to install the folder launch as well such that ros2 launch can find these files.
+
+In fact, when we can ros2 launch, ros2 run launch files in folder install, not in folder src. It means, everytime we modify launch files, we must rebuild the pkg.
 
 In CMakeLists.txt, we add install commands as 
 
@@ -459,12 +465,19 @@ Here is how to call hello_node from hello_package with launch file say_hello.lau
     # call launch command
     ros2 launch hello_package say_hello.launch.xml
 ```
+1. Create a ROS2 Cpp Package, https://roboticsbackend.com/create-a-ros2-cpp-package/
+2. Creating a launch file, https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
 
-1. Creating a launch file, https://docs.ros.org/en/foxy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html
+3. ROS2 - Create a Launch File with XML, https://youtu.be/Le1vx1_KUDQ
 
-2. ROS2 - Create a Launch File with XML, https://youtu.be/Le1vx1_KUDQ
+4. Write a Minimal ROS2 Cpp Node, https://roboticsbackend.com/write-minimal-ros2-cpp-node/
+
 ### Write a publisher in C++
 
+
+### Creat own lib in ROS2
+
+How to create and use your own C++ Library with ROS2, https://youtu.be/S7AjhNKHpvs
 
 
 ## Reference
