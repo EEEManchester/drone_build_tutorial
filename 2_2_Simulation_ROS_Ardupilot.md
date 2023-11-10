@@ -58,42 +58,7 @@ we should find an interface, a council and a terminal.
          height="300">
 </figure>
 
-2. test connection between Ardupilot and Gazebo by tying commands in the terminal
-    2.1 change mode to guided
-    ```shell
-        mode guided
-    ```
-    at the same time, we should see in the council that
-    <figure>
-        <img src="8_Arduploit/guided.png"
-            height="100">
-    </figure>
-    2.2 arm drone 
-
-    ```shell    
-        arm throttle
-    ```
-    we should see
-    <figure>
-        <img src="8_Arduploit/arm_throttle.png"
-            height="70">
-    </figure>
-    2.3 takeoff
-
-    ```shell
-        takeoff 5
-    ```
-    <figure>
-        <img src="8_Arduploit/takeoff.png"
-            height="70">
-    </figure>
-    2.4 with those commands to Ardupilot firmware, we can observe the drone in gazebo in takin off
-    <figure>
-        <img src="8_Arduploit/drone_gazebo_takeoff.png"
-            height="200">
-    </figure>   
-
-### 2.3 Connect mavros to Ardupilot in Gazebo
+### 3 Connect mavros to Ardupilot in Gazebo
 The ROS package mavros provides support for Ardupilot. Then we can run mavros to get drone information into ROS.
 
 In simulation, we specify '''fcu_url:=udp://127.0.0.1:14551@14555'''.
@@ -117,3 +82,59 @@ with the state being guided and position being 5m
         <img src="8_Arduploit/mavors_state_local_pose.png"
             height="300">
 </figure>   
+
+
+### 3 Test communication among Ardupilot in Gazebo and mavros
+
+#### 3.1 Gazebo Garden
+1.  run 
+    ```shell
+        gz sim -v4 -r iris_runway.sdf
+    ```
+
+2. run Ardupilot firmware
+    ```shell
+        cd Ardupilot/ArduCopter
+        sim_vehicle.py -v ArduCopter -f gazebo-iris --model JSON --map --console
+    ```
+
+3. run mavros to enable communication between Ardupilot and ROS
+    ```shell
+        roslaunch mavros apm.launch fcu_url:=udp://127.0.0.1:14551@14555
+    ```
+
+4. make drone switch to guided mode and take off
+In the same terminal of running sim_vehicle.py, we use the following commands to make the drone take off
+    ```shell
+        mode guided
+        arm throttle
+        takeoff 5
+    ```
+We should see the drone take off and hover in Gazebo
+<figure>
+        <img src="2_Simulation_ROS_Ardupilot/Ardupilot_Gazebo_Garden_Mavros.png"
+            height="300">
+</figure>  
+
+if we echo rostopics /mavros/state and /mavros/local_position/pose, then we should find
+- the drone's mode is guided
+- its height is 5m.
+
+#### 3.2 Gazebo 11
+1.  run Gazebo envrionment
+    ```shell
+        gazebo --verbose worlds/iris_arducopter_runway.world
+    ```
+
+2. run Ardupilot firmware
+    ```shell
+        cd Ardupilot/ArduCopter
+        ../Tools/autotest/sim_vehicle.py -f gazebo-iris --console --map
+    ```
+
+3. -- 4. are the same with Gazebo Garden
+
+    <figure>
+        <img src="8_Arduploit/drone_gazebo_takeoff.png"
+            height="200">
+    </figure>   
