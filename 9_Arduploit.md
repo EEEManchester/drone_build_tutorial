@@ -197,24 +197,31 @@ Arduploit is a great choice for people tired of PX4. Of course, be a nice guy, I
 ## 2.3 Upload Ardupilot firmware into autopilot.
 
 ## 3 ROS-Gazebo simulation with Ardupilot
-Video tutorials provided by Intelligent Quads can be found on Youtube
-- Ubuntu 18.04 [04 Installing Gazebo and ArduPilot Plugin](https://www.youtube.com/watch?v=m7hPyJJmWmU&list=PLy9nLDKxDN683GqAiJ4IVLquYBod_2oA6&index=5&ab_channel=IntelligentQuads)
-- Ubuntu 20.04 [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
 
 
-### 2.1 Import Ardupilot models into Gazebo
+
+### 3.1 Gazebo Garden
+
+### 3.2 Gazebo 11
+
+Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
+
+
+We follow the steps specified by [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy). 
+
 Given that our development environments are
 - Ubunt 20.04
 - ROS noetic
 - Gazebo 11.12.0
 
-We follow the steps specified by [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy). If you are using different ROS or Gazebo, please refer to [Using SITL with Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo.html).
-
-
+0. install gazebo 11
+```shell
+    sudo apt-get install gazebo11 libgazebo11-dev
+```
 1. get source code of arduploit plugins for gazebo 11.X
 ```shell
     cd where_you_want
-    git clone https://github.com/ZhongmouLi/ardupilot_gazebo.git
+    git clone https://github.com/khancyr/ardupilot_gazebo
 ```
 
 2. build ardupilot plugins for gazebo 11.X
@@ -311,8 +318,6 @@ with the state being guided and position being 5m
             height="300">
 </figure>   
 
-
-# 3 ROS2 and Arupilot
 
 
 # Source
