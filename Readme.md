@@ -5,7 +5,7 @@ This tutorial aims to provide guides begining at building a drone from kits and 
 1. [Assembly](1_Assembly.md)
     It introduces the drone kit used in this tutorial and introduce key steps to build it.
 
-2. [Setup Simulation with ROS PX4](2_Simulation_Setup_ROS_PX4.md)
+2. [Simulation with PX4 and Ardupilot in ROS](2_0_Simulation_ROS.md)
     It explains how to install and configure PX4, ROS and ROS packages for simulation.
 
     

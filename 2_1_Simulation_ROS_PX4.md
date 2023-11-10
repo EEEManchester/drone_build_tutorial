@@ -95,14 +95,14 @@ roslaunch px4 posix_sitl.launch
 Common errors:
 1. gazebo dies
 <figure>
-    <img src="2_Simulation_Setup_ROS_PX4/gazebo_errors.png"
-         height="40">
+    <img src="2_Simulation_Setup_ROS_PX4/gazebo_errors.png">
     <figcaption>gazebo errors</figcaption>
 </figure>
+
 do 
 ```bash
-ps aux | grep gzserver
-kill -2 <pid associated with gzserver>
+    ps aux | grep gzserver
+    kill -2 <pid associated with gzserver>
 ```
 
 ## Step 3 Build Mavros (Mavlink) from source code
