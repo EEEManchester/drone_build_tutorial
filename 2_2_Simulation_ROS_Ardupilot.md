@@ -2,7 +2,13 @@
 ## 1 Build Gazebo environment
 It is suggested to choose one gazebo version between [Gazebo Garden](#1.1-gazebo-garden) and [Gazebo 11](#1.2-gazebo-11)
 
+
+Main references are
+- [Using SITL with Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo.html) for Gazebo Garden.
+- [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy) for Gazebo 11. 
+
 ### 1.1 Gazebo Garden
+
 Install Gazebo Garden following the steps at [Docs/Gazebo Garden-->Binary Installation on Ubuntu](https://gazebosim.org/docs/garden/install_ubuntu), which are
 ```shell
 sudo apt-get update
@@ -28,8 +34,6 @@ and it is OK if we can see
 
 Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
 
-
-We follow the steps specified by [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy). 
 
 Given that our development environments are
 - Ubunt 20.04
