@@ -31,11 +31,11 @@ where
 2. Enable auto completation of colcon    
    -   check if ```colcon-argcomplete.bash``` exisits in 
     ```bash
-    cd /usr/share/colcon_argcomplete/
+    ls /usr/share/colcon_argcomplete/hook
     ``` 
     -  modify ~/.bashrc to source ```colcon-argcomplete.bash``` whenever a new terminal is called by adding the following command
     ```bash
-    source /usr/share/colcon_argcomplete/colcon-argcomplete.bash
+    source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
     ```  
 3. Enable the searching availablity of pkgs in *ros2_ws* by adding the following command to ~/.bashrc
     ```bash

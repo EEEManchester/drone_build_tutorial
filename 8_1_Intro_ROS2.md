@@ -23,6 +23,14 @@ ROS 2 allows to completely create a distributed system.
 
 <img src="8_ROS2/API_structure.png" width="600"/>
 
+
+<img src="8_ROS2/DDS_ROS2.png" width="600"/>
+
+switching DDS is [ROS2 - Switch Between Different DDS Implementations (Fast DDS, cyclone DDS)](https://www.youtube.com/watch?v=V3UPx_3VoyA&ab_channel=RoboticsBack-End)
+
+DDS ref https://hackmd.io/@st9540808/SkM_SOTJH
+
+
 - c++ and python in ROS 2 are united by using a common client library.
   - roscpp and rospy are independent, some functions exsit only for one or the other. It is possible to come across that the needed features only are available in rospy, while your project uses roscpp.
   - rclcpp and rclpy are much more simular. Both of them depend on rcl and providing the binding: all functions are implemented in rcl. 
