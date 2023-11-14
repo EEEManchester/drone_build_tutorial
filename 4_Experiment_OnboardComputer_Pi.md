@@ -1,4 +1,4 @@
-# Drone experiment Software setup
+# Set Raspbeery Pi 4B+ as an onboard computer
 
 ## Table of contents
   - [Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)](#step-1-brief-introduction-of-onboard-computer-raspberry-pi-4b)
@@ -59,7 +59,6 @@ Here are serveral potions for OS to be used on Raspberry Pi 4b:
 - Ubuntu Desktop/Server 20.04
 - **(recommended)** Ubuntu Mate 20.04 for Raspberry Pi
 - Raspberry Pi OS
-- Ubuntu Mate 20.04 for Raspberry Pi directly (unsolved)
 
 ### Step 2A Install Ubuntu Server 20.04
 A server is ligher than a Desktop as it does not contain packages for GUI and Office. Thus, choosing server is also a good choice for an onboard computer.
@@ -149,58 +148,6 @@ Note: ROS Melodic is still possible to be installed on Raspberry Pi with Raspbia
 
 A tutorial to install Melodic on Rapsberry Pi OS is given [here](https://www.linkedin.com/pulse/easiest-way-install-ros-melodic-raspberrypi-4-shubham-nandi/).  
 
-## Step 4 Communciation between Rapsberry Pi and Pixhawk 5.
-
-There are two ways for communication between a Pixhawk 5 and a Raspberry pi.
-
-## Step 4.1A Communication through serial ports of Rapsberry Pi
-Let us have a look at all the ports provided by Pixhawk 5.
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/px4_port_raspberry.png"
-         alt="drawing" style="width:600px;"/>
-    <figcaption> Pixhawk ports </figcaption>
-</figure>
-Therefore, we will use Telem 2 as the port for Raspberry Pi.
-
-The details of Telem 2 is shown by the figure below
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/px4_telem2_ports.png"
-         alt="drawing" style="width:400px;"/>
-    <figcaption> Pins of Tele 2 port </figcaption>
-</figure>
-
-Pins in red and black can be indentified by using cables with Pixhawk. Here is an example.
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/px4_telen2_ports_drone.jpeg"
-         alt="drawing" style="width:400px;"/>
-    <figcaption> Pixhawk ports </figcaption>
-</figure>
-
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/GPIO_Raspberry.png"
-         alt="drawing" style="width:600px;"/>
-    <figcaption> Pixhawk ports </figcaption>
-</figure>
-
-
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/Pixhawk_raspberry.png"
-         alt="drawing" style="width:700px;"/>
-    <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
-</figure>
-
-## Step 4.1B Communication through USB ports of Raspberry Pi
-
-
-### Step 4.2 Set parameters on PX4
-Serverl parameters are needed to be modified to enbale serial communication between Pixhawk and Raspberry Pi.
-
-Here are the list
-- MAV_2_CONFIG = TELEM 2
-- MAV_2_MODE = Onboard
-- MAV_2_RATE= 80000 Bytes/s
-- MAV_2_FORWARD = True
-- SER_TEL2_BAUD = 921600 baud
 
 
 ## Step 5 Power onboard computer
