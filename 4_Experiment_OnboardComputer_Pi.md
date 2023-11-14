@@ -137,56 +137,11 @@ Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry P
         ```
 3. Set time zone and keyboard layout
 
-Then, we install ROS for the onboard computer. 
-
-### Step 3.2A Install ROS for Ubuntu or Ubuntu Mate
-Please refoer to [ROS Installation](http://wiki.ros.org/ROS/Installation).
-
-### Step 3.2B Install ROS for Rapsberry Pi OS
-
-Note: ROS Melodic is still possible to be installed on Raspberry Pi with Raspbian Buster following a different approach [ROSberryPi/Installing ROS Melodic on the Raspberry Pi](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi).
-
-A tutorial to install Melodic on Rapsberry Pi OS is given [here](https://www.linkedin.com/pulse/easiest-way-install-ros-melodic-raspberrypi-4-shubham-nandi/).  
 
 
 
-## Step 5 Power onboard computer
 
 
-## Step 6. WIFI communication between Raspberry Pi and base station
 
-### Step 6.1 static IP address for base station and drone
 
-### Step 6.2 ssh setup
-
-### Step 6.3 time synchrionasation
-We are going to use ntp service for synchronisation.
-First of all, install ntp by running
-```bash
-sudo apt install ntp
-```
-Check if ntp service is on or not
-```bash
-service --status-all
-```
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/ntp_on.png"
-         alt="drawing" style="width:700px;"/>
-    <figcaption> Ntp service is on </figcaption>
-</figure>
-and check its status
-```bash
-sudo systemctl status ntp.service
-```
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/ntp_status.png"
-         alt="drawing" style="width:700px;"/>
-    <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
-</figure>
-Check all the servers
-```bash
-    ntpq -p
-```
-TODO
-## Step 6. ROS communication between Rapsberry Pi and base stationdf
 

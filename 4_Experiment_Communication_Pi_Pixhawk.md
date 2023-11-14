@@ -1,6 +1,6 @@
-# Communciation between Rapsberry Pi and Pixhawk 5.
+# Communciation between Rapsberry Pi 4B+ and Pixhawk 5.
 
-There are two ways for communication between a Pixhawk 5 and a Raspberry pi:
+There are two ways for communication between a Pixhawk 5 and a Raspberry pi 4B+:
 - through serial ports
 - through USB ports
 
