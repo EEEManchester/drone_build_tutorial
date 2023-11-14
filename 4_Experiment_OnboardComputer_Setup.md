@@ -7,7 +7,6 @@
     - [Step 3A Install Ubuntu Server 20.04](#step-3a-install-ubuntu-server-2004)
     - [Step 3B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04](#step-3b-install-ubuntu-mate-for-raspberry-pi-2004-from-ubuntu-server-2004)
     - [Step 3C. Choose Raspberry Pi OS](#step-3c-choose-raspberry-pi-os)
-    - [Step 3D. choose Ubuntu MATE (unsloved)](#step-3d-choose-ubuntu-mate-unsloved)
   - [Step 4. Onboard computer ROS configuration](#step-4-onboard-computer-ros-configuration)
     - [Step 4.1 Configure Ubuntu](#step-41-configure-ubuntu)
     - [Step 4.1 Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)](#step-41-install-ros-melodic-in-raspberry-pi-4b-with-os-legacy)
@@ -122,30 +121,6 @@ Till April 2022, there two ROS options to choose: ROS Melodic and ROS Noetic. No
 
 Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry Pi. 
 
-### Step 2D. choose Ubuntu MATE (unsloved)
-We choose Ubuntu MATE as the OS system for our Rapberry Pi 4 (see [Ubuntu MATE for Raspberry Pi](https://ubuntu-mate.org/raspberry-pi/)). 
-
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/Mate_rapspberry.jpg"
-         height="300"
-         alt="Albuquerque, New Mexico">
-    <figcaption>Ubuntu MATE for Raspbery Pi</figcaption>
-</figure>
-
-Other Ubuntu choices are also possible, such as Ubuntu :). One thing to notice; it is better to keep the versions of base station and Rapberry Pi be the same. Since our base station runs Ubuntu 20.04 LTS, we decide to use Ubuntu Mate 20.04.
-
-Turtoail is given by Ubuntu MATE at the [Raspberry Pi Installation Guide](https://ubuntu-mate.org/raspberry-pi/install/) that shows each step to install Ubuntu MATE Desktop on a Raspberry Pi.
-
-1. Download 20.04 as ubuntu-mate-20.04.1-desktop-arm64+raspi.img.xz.
-
-2. Run Raspbery Pi Imager and choose the downloaded file 
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/write_mate_2004.png"
-         height="300"
-    >
-    <figcaption>Write Ubuntu MATE with Raspbery Pi Imager </figcaption>
-</figure>
-      
 
 ## Step 3. Onboard computer ROS configuration
 
