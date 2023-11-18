@@ -17,14 +17,14 @@
 ## 2 Enable WIFI communication between onboard computer and base station
 
 ### 2.1 Set static IP address for onboard computer
-
+##TODO
 ### 2.1 Set static IP address for base station
-
+##TODO
 
 ### 2.3 Set ssh for remote login
 Install ssh on both machines
 ```shell
-    sudo apt install openssh-client
+    sudo apt install openssh-client openssh-server
 ```
 and we ca check the installation by 
 <figure>
@@ -59,7 +59,9 @@ and entre yes then
 
 3. We are now in the server as the user drone1, as you can see a new user name and a new machine name in the terminal.
 
-4. It is not surpised that we donot want to type ip address every time, and we want to type just another time with sense. Here, we can modify /etc/hosts to enable our machine to do that.
+4. It is not surpised that we dont want to type ip address every time. Since we know the ip address of the Raspberry Pi wont change, it is nature to think can we type something meaningful as long as my machine can understhand my input and link that to the correct ip address.
+
+    Here, we can modify /etc/hosts to enable our machine to do that.
 
     We give a name for our Raspberry Pi as dronepi1, as
 <figure>
@@ -71,10 +73,19 @@ and entre yes then
     <img src="4_Experiment_OnboardComputer_Setup/ssh_host_connect.png"/>
 </figure>    
 
+References on ssh:
+1. How to use SSH (to connect to another computer), https://www.youtube.com/watch?v=3bQRaOPns9k&ab_channel=SyntheticEverything
+
+2. https://tuw-cpsg.github.io/tutorials/dagobert-network-setup.html
+
+3. https://www.youtube.com/watch?v=Wlmne44M6fQ&ab_channel=KnowledgeSharingTech
+
+4. https://wangdoc.com/ssh/client
 
 ## 3 Set ROS communication through WIFI between onboard computer and base station 
 
-### Step 6.3 time synchrionasation
+##TODO
+### 3.1 time synchrionasation
 We are going to use ntp service for synchronisation.
 First of all, install ntp by running
 ```bash
@@ -104,4 +115,4 @@ Check all the servers
 ```
 
 TODO
-## Step 6. ROS communication between Rapsberry Pi and base stationdf
+### 3.2 ROS communication between Rapsberry Pi and base station
