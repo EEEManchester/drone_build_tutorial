@@ -10,7 +10,7 @@ It explains how to install and configurate PX4 or Ardupilot, ROS and ROS package
 
 - Single drone with PX4
     - [Set up PX4, ROS and mavros](2_1_Simulation_ROS_PX4.md) shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
-    - [Run ROS-Gazebo simulation for PX4](2_3_Simulation_PX4_Gazebo.md)shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
+    - [Run ROS-Gazebo simulation for PX4](2_3_Simulation_PX4_Gazebo.md) shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
 
 - Single drone with Ardupilot
     - [Set up Ardupilot, ROS and mavros](2_2_Simulation_ROS_Ardupilot.md) explains the steps to simulate  a **single** quadrotor with the **Ardupilot** firmware in Gazebo.
@@ -38,11 +38,11 @@ It explains how to install and configurate PX4 or Ardupilot, ROS and ROS package
     
 It demonstrates steps to add an onboard computer to a drone. It includes how to power it within the power system of Pixhawk and how to enable ROS communication among it, Pixhawk and base station.
 
-1. Setup of Onboard computer
+1. Set up onboard computer
     - [Set up Raspberry Pi as onboard computer](4_Experiment_OnboardComputer_Pi.md)
-2. Communication between onboad computer and autopilot
-    - [Set up communication between Pi and Pixhawk](4_Experiment_Communication_Pi_Pixhawk.md)
-3. Communication between onboad computer communicate and base station in ROS through WIFI
+2. Enable communication between onboad computer and autopilot
+    - [Set up communication between Pi and Pixhawk with PX4](4_Experiment_Communication_Pi_Pixhawk.md)
+3. Enable communication between onboad computer communicate and base station in ROS through WIFI
     - [Set up ROS communcation between onboard computer and base station through WIFI](4_Experiment_ROS_Communication_Pi_BaseStation.md)
 
 ### 3 Drone controllers
