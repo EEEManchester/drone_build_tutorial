@@ -2,7 +2,7 @@
 This tutorial aims to provide guides begining at building a drone from kits and ending at controlling a drone autonomouly with Vicon.
 
 ## Main contents
-1. [Assembly](1_Assembly.md)
+1. [Assembly](1_0_Assembly.md)
     It introduces the drone kit used in this tutorial and introduce key steps to build it.
 
 2. [Simulation with PX4 and Ardupilot in ROS](2_0_Simulation_ROS.md)
