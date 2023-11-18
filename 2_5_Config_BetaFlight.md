@@ -9,7 +9,7 @@
     - Aocoda RC H743 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xUOMZu&id=679995875558)     
     - BetaFlight 4.4.0
 4. Onboard computer and OS
-    - Navidia NX
+    - Raspberry Pi
     - Ubuntu 20.04
 5. Transmitter
     - RadioLink AT9S Pro
@@ -54,40 +54,16 @@ It is recommended to contact the manufacturer asking which version of BetaFlight
 
 2. run BetaFlight Configurator
 
-3. backup pre-built BetaFlight config files (you can skip this step if you can access Aoco_H7_Config_Manufacturer.txt in /firmware/Aocoda)
-    - click button connect on the top right
-    - click CLI tap
-    - type ```diff all``` in the terminal which a lot of pars will be shown 
-    - copy and save those par in a txt file, call it preconfig.txt
-<figure>
-    <img src="1_Assembly/BetaFlight_Aocoda/Betaflight_Config_save.png">
-</figure>
-
-4. write custmerized firmware
+3. write custmerized firmware
     - **enable DFU mode of the autopilot board**
     - enable "no reboot sequence"
     - enable "Full clip earse" if your previous installation failed and you cannot connect your autopilot
-    - click "Load Firmware" and choose the firmware betaflight_4.4.0_STM32H743.hex 
+    - click "Load Firmware" and choose the obtained firmware XXX.hex. 
     - click "Flash Firmware" and the process is done when 'programming:succesful' can is shown.
     <figure>
         <img src="1_Assembly/BetaFlight_Aocoda/Betaflight_Config_flash.png">
     </figure>
 
-5. load pre-built config
-    - wait for 20s for the autopilot board to refresh, and deplug and replug the USB cable if it does not response.
-    - click button connect on the top right
-    - choose ''Apply custom defaults''
-    - click CLI tap 
-    - click the load file on the botton and choose preconfig.txt, i.e. the txt file in the 3rd step or Aoco_H7_Config_Manufacturer.txt in /firmware/Aocoda. Do not worry if you see some errors in the terminal.
-    <figure>
-    <img src="1_Assembly/BetaFlight_Aocoda/BetaFlight_Import_Config.png">
-    </figure>
-    
-    - type save in the terminal and it will automatically reboot. Then after connecting again, we should be able to see a 3D quadrotor model. This 3D model will show the same attitude of the autopilot when we rotate it, which means the firmware can obtain sensor information through ports on Aoco.
-    <figure>
-    <img src="1_Assembly/BetaFlight_Aocoda/BetaFlight_flash_finished.png">
-    </figure>
-    
 
 ## 2 Configure BetaFlight
 **REMOVE propellers before doing anything else**

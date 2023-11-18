@@ -10,7 +10,7 @@
     - Kakute H7 v1.3 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.28.56917484ySIhA5&id=684452325988)     
     - Ardupilot 4.3
 4. Onboard computer and OS
-    - Navidia NX
+    - Raspberry Pi
     - Ubuntu 20.04
 5. Transmitter
     - RadioLink AT9S Pro
