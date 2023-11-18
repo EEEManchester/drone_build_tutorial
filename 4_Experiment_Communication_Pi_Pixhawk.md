@@ -59,4 +59,3 @@ Here are the list
 ## 2 Communication through USB ports of Raspberry Pi
 
 
-## 3 Power onboard computer

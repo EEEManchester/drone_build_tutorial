@@ -1,25 +1,5 @@
-# Set Raspbeery Pi 4B+ as an onboard computer
-
-## Table of contents
-  - [Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)](#step-1-brief-introduction-of-onboard-computer-raspberry-pi-4b)
-  - [Step 2. Use Raspberry Pi Imager to write OS images](#step-2-use-raspberry-pi-imager-to-write-os-images)
-  - [Step 3. Install operating systems on Raspberry Pi 4B](#step-3-install-operating-systems-on-raspberry-pi-4b)
-    - [Step 3A Install Ubuntu Server 20.04](#step-3a-install-ubuntu-server-2004)
-    - [Step 3B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04](#step-3b-install-ubuntu-mate-for-raspberry-pi-2004-from-ubuntu-server-2004)
-    - [Step 3C. Choose Raspberry Pi OS](#step-3c-choose-raspberry-pi-os)
-  - [Step 4. Onboard computer ROS configuration](#step-4-onboard-computer-ros-configuration)
-    - [Step 4.1 Configure Ubuntu](#step-41-configure-ubuntu)
-    - [Step 4.1 Install ROS Melodic in Raspberry Pi 4B with OS (Legacy)](#step-41-install-ros-melodic-in-raspberry-pi-4b-with-os-legacy)
-  - [Step 4.2 Communciation between Rapsberry PI and Pixhawk](#step-42-communciation-between-rapsberry-pi-and-pixhawk)
-    - [Set parameters on PX4](#set-parameters-on-px4)
-  - [5 WIFI communication between Raspberry Pi and base station](#5-wifi-communication-between-raspberry-pi-and-base-station)
-    - [6.1 static IP address for base station and drone](#61-static-ip-address-for-base-station-and-drone)
-    - [5.2 ssh setup](#52-ssh-setup)
-    - [5.3 time synchrionasation](#53-time-synchrionasation)
-  - [ROS communication between Rapsberry Pi and base station](#ros-communication-between-rapsberry-pi-and-base-station)
-    - [6.1 ROS master and client](#61-ros-master-and-client)
-
-Big picture of a drone with a Pixhawk 5 and a raspberry pi 4b.
+# Set Raspberry Pi 4B as an onboard computer
+Big picture of a drone with a Pixhawk 5 and a Raspberry Pi 4b.
 
 <figure>
     <img src="4_Experiment_OnboardComputer_Setup/Drone_components.png"
@@ -120,10 +100,13 @@ Till April 2022, there two ROS options to choose: ROS Melodic and ROS Noetic. No
 
 Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry Pi. 
 
+## Step 2. Configurate bascis for onboard computer OS
+Take the sd card and put it into the sd slot.
 
-## Step 3. Onboard computer ROS configuration
+Connect the Raspberry Pi with a monitor through a HDMI cable, a mouse through a USB port, a keyboad through a USB port. Then, use the power supply module provided by the manufacturer.
 
-### Step 3.1 Configure Ubuntu
+Now, we should see a Ubuntu Mate start in the monitor. Here is what we need to do for configurate basics of the OS.
+
 1. Boot your Ubuntu MATE 
     - set language and user names
         - user name: droneREEG
@@ -135,7 +118,8 @@ Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry P
         ```
             sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
         ```
-3. Set time zone and keyboard layout
+
+## Step 3. Power onboard computer from battery
 
 
 

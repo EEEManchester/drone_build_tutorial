@@ -16,7 +16,7 @@ This tutorial aims to provide guides begining at building a drone from kits and 
     
     It demonstrates steps to add an onboard computer to a drone. It includes how to power it within the power system of Pixhawk and how to enable ROS communication among it, Pixhawk and base station.
 
-    1. Setup of Onboard computer
+    1. Setup of onboard computer
         - [Setup Raspberry Pi as onboard computer](4_Experiment_OnboardComputer_Pi.md)
     2. Communication between onboad computer and autopilot
         - [Setup communication between Pi and Pixhawk](4_Experiment_Communication_Pi_Pixhawk.md)
