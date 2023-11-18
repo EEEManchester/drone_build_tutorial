@@ -1,4 +1,4 @@
-# Aesembly drone kits
+# Aesembly X500 drone kits
 This note shows main steps to build a drone from kits (hardware).
 
 Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html](https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html).
@@ -20,25 +20,25 @@ Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter
     - FRsky X8R
 ## 2. Overview of main elements 
 <figure>
-    <img src="1_Assembly/autoploit.png"
+    <img src="1_Assembly/PX4_X500/autoploit.png"
          alt="drawing" style="width:700px;"/>
 </figure> 
 
 ## 3. Steps
 ### 3.1 Build chassis
 <figure>
-    <img src="1_Assembly/chassis.png"
+    <img src="1_Assembly/PX4_X500/chassis.png"
          alt="drawing" style="width:400px;"/>
 </figure> 
 
 ### 3.2 Connect power module
 <figure>
-    <img src="1_Assembly/power.png"
+    <img src="1_Assembly/PX4_X500/power.png"
          alt="drawing" style="width:400px;"/>
 </figure> 
 
 ### 3.3 Drone is ready.
 <figure>
-    <img src="1_Assembly/drone.png"
+    <img src="1_Assembly/PX4_X500/drone.png"
          alt="drawing" style="width:400px;"/>
 </figure> 
