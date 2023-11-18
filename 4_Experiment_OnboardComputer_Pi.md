@@ -122,7 +122,11 @@ Now, we should see a Ubuntu Mate start in the monitor. Here is what we need to d
 ## Step 3. Power onboard computer from battery
 
 
-
+<figure>
+    <img src="4_Experiment_OnboardComputer_Setup/Pi_power_supply.png"
+         height="200">
+    <figcaption>https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply</figcaption>
+</figure>
 
 
 
