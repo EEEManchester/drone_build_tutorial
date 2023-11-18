@@ -24,11 +24,12 @@ Installing guide of Noetic for Ubuntu 20.04 can be found [here](http://wiki.ros.
 ## Step 2 Build PX4 from source code
 1. Download PX4 of version 1.12.3
 ```bash
-git clone -b v1.12.3 https://github.com/PX4/PX4-Autopilot.git --recursive
+    cd Robot_Frimware # somewhere you like
+    git clone -b v1.12.3 https://github.com/PX4/PX4-Autopilot.git --recursive
 ```
 Check PX4 version with
 ```bash
-git describe
+    git describe
 ```
 we should get
 <figure>
@@ -39,33 +40,34 @@ we should get
 
 2. Run the script to install dependencies and tools for nuttx, jMAVSim, Gazebo s
 ```bash
-bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
+    cd PX4-Autopilot
+    bash ./Tools/setup/ubuntu.sh
 ```
 3.  Test PX4 within Gazebo
 ```bash
-make px4_sitl gazebo
+    make px4_sitl gazebo
 ```
 ## Step 2.5 Enable rosluanch to launch PX4 in Gazebo
 Following steps of *Install PX4 SITL(Only to Simulate)* [here](https://github.com/ZhongmouLi/mavros_controllers)
-```
-cd <Firmware_directory>
+```shell
+cd PX4-Autopilot
 DONT_RUN=1 make px4_sitl_default gazebo
 ```
 In cases of errors, do
 ```bash
-cd <Firmware_directory>
+cd PX4-Autopilot
 make clean
 rm -r ~/catkin_ws/devel ~/catkin_ws/build 
 ```
 
 Modify .bashrc by adding
-(replace <span style="color:red"> *address_of_PX4-Autopilot* </span>by where you install PX4-Autopilot int the following commande)
+(replace <span style="color:red"> ${address_of_PX4-Autopilot} </span>by where you install PX4-Autopilot int the following commande)
 
 
 ```bash
-source Tools/setup_gazebo.bash address_of_PX4-Autopilot $address_of_PX4-Autopilot/build/px4_sitl_default
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$address_of_PX4-Autopilot
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$address_of_PX4-Autopilot/Tools/sitl_gazebo
+source ${address_of_PX4-Autopilot}/Tools/setup_gazebo.bash ${address_of_PX4-Autopilot} ${address_of_PX4-Autopilot}/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:${address_of_PX4-Autopilot}
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:${address_of_PX4-Autopilot}/Tools/sitl_gazebo
 ```
 5. Check if ros can find px4 package
 ```bash
@@ -93,14 +95,14 @@ roslaunch px4 posix_sitl.launch
 Common errors:
 1. gazebo dies
 <figure>
-    <img src="2_Simulation_Setup_ROS_PX4/gazebo_errors.png"
-         height="40">
+    <img src="2_Simulation_Setup_ROS_PX4/gazebo_errors.png">
     <figcaption>gazebo errors</figcaption>
 </figure>
+
 do 
 ```bash
-ps aux | grep gzserver
-kill -2 <pid associated with gzserver>
+    ps aux | grep gzserver
+    kill -2 <pid associated with gzserver>
 ```
 
 ## Step 3 Build Mavros (Mavlink) from source code
@@ -118,15 +120,28 @@ Here we show do to build MAVROS from source code .
 
 
 1. Install building and managing tools, **catkin_tools** and **wstool** see the [install catkin tools](https://catkin-tools.readthedocs.io/en/latest/installing.html) and [install wstool](http://wiki.ros.org/wstool).
-2. Initialize your source space with wstool
-    1. the target directory of wstool is src
+
+2. Create catkin workspace using catkin tools
+    ```bash
+        cd ~
+        mkdir catkin_ws
+        cd catkin_ws
+        mkdir src
+        catkin init
+    ```
+    Then, add the path of catkin_ws into .bashrc
+    ```bash
+        echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+    ```
+
+3. Initialize your source space with wstool. The target directory of wstool is src
     
     ```bash
     cd catkin_ws
     wstool init ./src
     ```
     
-3. Install MAVLink
+4. Install MAVLink
     (1). note: tee is to write the output of rosinstall_generator into the file mavros.rosinstall
     
     ```bash
@@ -135,9 +150,9 @@ Here we show do to build MAVROS from source code .
     ```
     
     (2). install MAVROS with stable one
-        ```bash
+    ```bash
         rosinstall_generator --upstream mavros | tee -a /tmp/mavros.rosinstall
-        ```   
+    ```   
     As a consequence, we can cat the "/temp/mavros.rosinstall" that is shown below. We can see from that, wstool just records the git rep information, such as URL, branch name and version.
         
         ```bash

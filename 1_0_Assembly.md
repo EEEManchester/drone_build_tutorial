@@ -42,6 +42,3 @@ Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter
     <img src="1_Assembly/drone.png"
          alt="drawing" style="width:400px;"/>
 </figure> 
-
-### 3.4 Setup onboard computer
-See 5_Experiment_OnboardComputer_Setup.md.
