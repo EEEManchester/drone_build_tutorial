@@ -26,13 +26,24 @@ It explains how to install and configurate PX4 or Ardupilot, ROS and ROS package
 ### 2 Experiment preparation
 
 #### 2.1 Assembly drones
-1. [Assembly Holybro X500](1_Assembly_X500.md)
-    It introduces the drone kit used in this tutorial and introduce key steps to build it.
+1. [Build Holybro X500 kit](2_1_X500_Pixhawk5.md)
+2. [Build TransTEC Lightning X Lite with Kakute ](2_2_LightningXLite_Kakute.md)
+    - Chassis TransTEC Lightning X Lite
+    - Motor FPV 致盈EX2306 PLUS [site in Taobao](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.27.52b858176s1EdF&id=634695941707)
+    - ESC:
+        - [Tekko32 F4 Metal 4in1 65A ESC (65A)](https://holybro.com/collections/fpv-esc/products/tekko32-f4-metal-4in1-65a-esc-65a)
+        - [HAKRC 3260A ESC BLHeli-32 ](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.32.193244beujIlvo&id=624599427940)
+    - Autopilot: - Kakute H7 v1.3 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.28.56917484ySIhA5&id=684452325988)     
+3. [Build TransTEC Lightning X Lite with Aocoda](2_3_LightningXLite_Aocoda.md)
+    - Chassis TransTEC Lightning X Lite
+    - Motor FPV 致盈EX2306 PLUS [site in Taobao](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.27.52b858176s1EdF&id=634695941707)
+    - ESC: Aocoda 60A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012)
+    - Autopilot: - Aocoda RC H743 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xUOMZu&id=679995875558)     
 
 #### 2.2 Configurate and tune autpilot for manual flight
 1. PX4
-2. Ardupilot
-3. Betaflight
+2. [Ardupilot]()
+3. [Betaflight](2_5_Config_BetaFlight.md)
 
 #### 2.3 Onboard computer setup
     
