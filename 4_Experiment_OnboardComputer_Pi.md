@@ -9,7 +9,7 @@ Big picture of a drone with a Pixhawk 5 and a Raspberry Pi 4b.
 </figure>
 
 
-## Step 1. Brief introduction of onboard computer (Raspberry Pi 4B)
+## 1. Brief introduction of onboard computer (Raspberry Pi 4B)
 Onborad computer is responsible for transfer commands from base station to autoploit and convert sensor information from autoploit, cameras etc. back to Onborad computers.
 
 Choices for onborad computers are Raspberry Pi, Odroid, Tegra K1 etc. Here we show how to buid a drone using Raspberry Pi, i.e. Raspbery Pi 4B.
@@ -22,9 +22,8 @@ Choices for onborad computers are Raspberry Pi, Odroid, Tegra K1 etc. Here we sh
 
 Raspberry Pi requires an operating system (OS). However, The supported OSs by Raspberry Pi depend on versions. Raspberry Pi 4B can only support Ubuntu desktop 21.04 (Not LTS), Raspberry Pi OS, Ubuntu server 20.04 (LTS), Ubuntu Core 20, which can be found at (see [Ubuntu for Raspberry Pi](https://ubuntu.com/download/raspberry-pi)).
 
-## Step 2. Install operating systems on Raspberry Pi 4B
-**Note:** An image is provided for  Ubuntu Mate for Raspberry Pi 20.04 with ROS and mavors.
-
+## 2. Tools for installing operating systems on Raspberry Pi 4B
+**Note:** An image is provided for  team members that is Ubuntu Mate for Raspberry Pi 20.04 with ROS and mavors.
 Raspberry Pi Imager is officierial tool to install OS for raspberry pi boards. It can be downloaded from [https://www.raspberrypi.com/software/](https://www.raspberrypi.com/software/).
 
  A Youtube video is available [here](https://youtu.be/y45hsd2AOpw).
@@ -40,7 +39,7 @@ Here are serveral potions for OS to be used on Raspberry Pi 4b:
 - **(recommended)** Ubuntu Mate 20.04 for Raspberry Pi
 - Raspberry Pi OS
 
-### Step 2A Install Ubuntu Server 20.04
+## 3. Install Ubuntu Server 20.04
 A server is ligher than a Desktop as it does not contain packages for GUI and Office. Thus, choosing server is also a good choice for an onboard computer.
 
 1. Choose Ubuntu Server 20.04 LTS using Raspberry Pi Imager.
@@ -69,7 +68,7 @@ A server is ligher than a Desktop as it does not contain packages for GUI and Of
     - ```sudo apt install ubuntu-mate-desktop```    
     - choose gmd3 or lightdm (recommended)
 
-### Step 2B Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04
+## 4. Install Ubuntu Mate (for Raspberry Pi) 20.04 from Ubuntu Server 20.04
 Repeat Steps 1-5 above in Step 2A.
 
 6. Use Desktopify to convert Ubuntu server 20.04 to Ubuntu Mate 20.04. A video tutorial is available [Install Ubuntu Mate On the Raspberry Pi 4 with Desktopify The Fastest Desktop Experience For The Pi4](https://youtu.be/zo5eReiXYuo).
@@ -77,8 +76,25 @@ Repeat Steps 1-5 above in Step 2A.
       ```git clone https://github.com/wimpysworld/desktopify.git```
     - ```cd desktopify``` 
         ```sudo ./desktopify --de ubuntu-mate```     
+Take the sd card and put it into the sd slot.
 
-### Step 2C Install Raspberry Pi OS
+Connect the Raspberry Pi with a monitor through a HDMI cable, a mouse through a USB port, a keyboad through a USB port. Then, use the power supply module provided by the manufacturer.
+
+Now, we should see a Ubuntu Mate start in the monitor. Here is what we need to do for configurate basics of the OS.
+
+1. Boot your Ubuntu MATE 
+    - set language and user names
+        - user name: droneREEG
+        - passwork: 123456
+        - computer name: drone1 (drone2 for a second drone)
+        - this can also be done by specifying options of Raspberry Pi Imager before installing
+2. Disable auto update in *Software&Updates > Updates*
+    - stop ubuntu kernel update
+        ```
+            sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
+        ```
+
+## 5 Install Raspberry Pi OS (not fully tested)
 Raspberry Pi OS is an official operating system supported by Raspberry Pi.
 
 After understanding how to use Raspberry Pi Imager, a choice is going to be made for choosing a version of Raspberry Pi OS, yes, another choice of versions :( . In fact, Raspberry Pi OS is built using a Linux kernel of Debian, therefore we can find Debian version information of each Raspberry Pi OS. Raspberry Pi OS uses Debian 11 (Bullseye), while Raspberry Pi OS (Legacy) takes Debian 10 (Buster).
@@ -100,36 +116,29 @@ Till April 2022, there two ROS options to choose: ROS Melodic and ROS Noetic. No
 
 Flasing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry Pi. 
 
-## Step 2. Configurate bascis for onboard computer OS
-Take the sd card and put it into the sd slot.
 
-Connect the Raspberry Pi with a monitor through a HDMI cable, a mouse through a USB port, a keyboad through a USB port. Then, use the power supply module provided by the manufacturer.
+## 6 Install Ubuntu Core for Raspberry Pi
+### 6.1 Introductoin of Ubuntu Core
+In one word, **Ubuntu Core** is the optimised version of Ubuntu for robotics and ROS. **Snaps**, the de facto container for packaging software on Ubuntu, enhanced to support ROS applications. 
 
-Now, we should see a Ubuntu Mate start in the monitor. Here is what we need to do for configurate basics of the OS.
+[Ubuntu official site](https://ubuntu.com/core/docs) states that
+- Ubuntu Core is a version of the Ubuntu operating system designed and engineered for **Internt of Things (IoT)** and embedded systems.
+- Ubuntu Core is ideal for embedded devices because it manages itself. Whether it’s running on an **Intel NUC** hidden for media streaming, or a **Raspberry Pi** handling garage door automation, Ubuntu Core remains transparent, trustworthy and autonomous.
 
-1. Boot your Ubuntu MATE 
-    - set language and user names
-        - user name: droneREEG
-        - passwork: 123456
-        - computer name: drone1 (drone2 for a second drone)
-        - this can also be done by specifying options of Raspberry Pi Imager before installing
-2. Disable auto update in *Software&Updates > Updates*
-    - stop ubuntu kernel update
-        ```
-            sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
-        ```
+More information about how Ubuntu supports robotics can be found at 
+- [Robotics document](https://ubuntu.com/robotics/docs)
+- [Robotics explanation](https://ubuntu.com/robotics/docs/explanation)
 
-## Step 3. Power onboard computer from battery
+### 6.2 Tutorial for using ROS on Ubuntu Core
+https://ubuntu.com/core/docs/uc20/install-raspberry-pi#heading--requirements
 
 
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/Pi_power_supply.png"
-         height="200">
-    <figcaption>https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply</figcaption>
-</figure>
-
-
-
+Ref:
+- [How to get started with Ubuntu Core on Raspberry Pi](https://www.youtube.com/watch?v=aekZhezFCHM&t=681s&ab_channel=CanonicalUbuntu)
+- [Your first robot, part 1: A beginner's guide to ROS and Ubuntu Core](https://www.youtube.com/watch?v=KidVVqbsIHI&ab_channel=KyleFazzari)
+- [Ubuntu Core](https://www.youtube.com/watch?v=6NDWqH1SrGs&list=PLwFSk464RMxk54Xdcb90rgfoyRlKUOjLM&ab_channel=CanonicalUbuntu)
+##TODO
+Ubuntu ESM for ros [ROS Expanded Security Maintenance](https://ubuntu.com/robotics/ros-esm)
 
 
 

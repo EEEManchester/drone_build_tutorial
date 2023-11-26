@@ -59,3 +59,7 @@ Here are the list
 ## 2 Communication through USB ports of Raspberry Pi
 
 
+<figure>
+    <img src="4_Experiment_OnboardComputer_Setup/Pi_power_supply.png">
+    <figcaption>https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply</figcaption>
+</figure>
