@@ -1,4 +1,4 @@
-# Install and configureate BetaFlight
+# Install and configure BetaFlight
 ## 0 Develop kits
 1. Drone frame:
     - Chassis TransTEC Lightning X Lite

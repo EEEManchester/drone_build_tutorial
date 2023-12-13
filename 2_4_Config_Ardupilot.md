@@ -1,4 +1,4 @@
-# Install and configureate BetaFlight Ardupilot
+# Install and configure Ardupilot
 ## 0 Develop kits
 1. Drone frame:
     - Chassis TransTEC Lightning X Lite
@@ -262,7 +262,9 @@ We can be
 
 #### 3.2.2 Calibrate ESC
 
-There are several ways for ESC calibration at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
+Check if your ESCs need calibration or not. In our case, chossing Dshot600 does not require a calibration.
+
+For others, there are several ways for ESC calibration at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
 
 Here, Semi Automatic ESC-by-ESC Calibration is undertaken, as it easier and time-efficient. 
 

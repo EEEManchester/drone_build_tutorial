@@ -36,7 +36,7 @@ It is the time to place them on the chassis
 ### 2.2 Link ESC with power and actuation modules
 Lets take Tekko32 for example.
 
-First, we its order for motors.
+First, we check its order for motors.
 <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Tekko32_Pins.png"
          height="150">
