@@ -16,12 +16,18 @@
 
 ## 2 Enable WIFI communication between onboard computer and base station
 
-### 2.1 Set static IP address for onboard computer
-##TODO
-### 2.1 Set static IP address for base station
-##TODO
+### 2.1 Set static IP address for onboard computer and base station
+Connect to WIFI and open Internet settings.
 
-### 2.3 Set ssh for remote login
+Find Tap IPv4, then choose Manual instead of DHCP.
+
+Then, input an address like 192.168.31.191 where the router's address is 192.168.31.1. Note here, the first three parts must be the same with your router's. Netmask usually should be ```255.255.255.0```. More details can be found at [Subnets of Linux Journey](https://linuxjourney.com/lesson/subnets).
+<figure>
+    <img src="4_Experiment_OnboardComputer_Setup/static_IP.png">
+</figure>
+
+
+### 2.2 Set ssh for remote login
 Install ssh on both machines
 ```shell
     sudo apt install openssh-client openssh-server
@@ -74,19 +80,19 @@ and entre yes then
 </figure>    
 
 References on ssh:
-1. How to use SSH (to connect to another computer), https://www.youtube.com/watch?v=3bQRaOPns9k&ab_channel=SyntheticEverything
+1. [How to use SSH (to connect to another computer), Youtube](https://www.youtube.com/watch?v=3bQRaOPns9k&ab_channel=SyntheticEverything)
 
-2. https://tuw-cpsg.github.io/tutorials/dagobert-network-setup.html
+2. [Running ROS across multiple machines](http://wiki.ros.org/ROS/Tutorials/MultipleMachines)
 
-3. https://www.youtube.com/watch?v=Wlmne44M6fQ&ab_channel=KnowledgeSharingTech
+3. [How to enable SSH on Linux Ubuntu (Easy step by step guide), Youtube](https://www.youtube.com/watch?v=Wlmne44M6fQ&ab_channel=KnowledgeSharingTech)
 
-4. https://wangdoc.com/ssh/client
+4. [SSH in Chinese](https://wangdoc.com/ssh/client)
 
 ## 3 Set ROS communication through WIFI between onboard computer and base station 
 
-##TODO
 ### 3.1 time synchrionasation
-We are going to use ntp service for synchronisation.
+We are going to use ntp service for time synchronisation such that time of onboard computer is based on that of base station.
+
 First of all, install ntp by running
 ```bash
 sudo apt install ntp
@@ -101,18 +107,40 @@ service --status-all
     <figcaption> Ntp service is on </figcaption>
 </figure>
 and check its status
+
 ```bash
 sudo systemctl status ntp.service
 ```
 <figure>
     <img src="4_Experiment_OnboardComputer_Setup/ntp_status.png"
          alt="drawing" style="width:700px;"/>
-    <figcaption> Pixhawk 5x - Raspberry Pi </figcaption>
-</figure>
+
 Check all the servers
 ```bash
     ntpq -p
 ```
+##TODO
 
-TODO
 ### 3.2 ROS communication between Rapsberry Pi and base station
+Once we can ensure Intercet connection between the onboard computer and our base station, we can process ROS communication between them.
+
+We only need to specify the IP addresses of onboard computer and base station into ROS.
+
+1. for the onboard computer, open ```.bashrc``` and add
+```bash
+    export ROS_MASTER_URI=http://IP_base_station:11311
+    export ROS_IP=IP_onboard_computer
+```
+
+2. for the base station, open ```.bashrc``` and add
+```bash
+    #export ROS_MASTER_URI=http://master:11311
+
+    export ROS_MASTER_URI=http://IP_base_station:11311
+    export ROS_IP=IP_base_station
+```
+Note: this configuration only works for THE WLAN. We may need to modify the IP addresses for different WLANs.
+
+Also, we need to comment the two commannds below and uncomment the one above in order to do local simulation and experiments.
+
+More details can be found at [Running ROS on multiple machines](https://husarion.com/tutorials/ros-tutorials/5-running-ros-on-multiple-machines/).
