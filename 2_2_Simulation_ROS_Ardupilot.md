@@ -1,13 +1,39 @@
 
 ## 1 Build Gazebo environment
+It is suggested to choose one gazebo version between [Gazebo Garden](#1.1-gazebo-garden) and [Gazebo 11](#1.2-gazebo-11)
+
+
+Main references are
+- [Using SITL with Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo.html) for Gazebo Garden.
+- [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy) for Gazebo 11. 
+
 ### 1.1 Gazebo Garden
+
+Install Gazebo Garden following the steps at [Docs/Gazebo Garden-->Binary Installation on Ubuntu](https://gazebosim.org/docs/garden/install_ubuntu), which are
+```shell
+sudo apt-get update
+sudo apt-get install lsb-release wget gnupg
+```
+and then 
+```shell
+sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-garden
+```
+To test if the installation is successed, we can run 
+```shell
+gz sim -v4 -r shapes.sdf
+```
+and it is OK if we can see
+<figure>
+        <img src="2_Simulation_ROS_Ardupilot/gz_installed_test.png">
+</figure>  
 
 ### 1.2 Gazebo 11
 
 Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
 
-
-We follow the steps specified by [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy). 
 
 Given that our development environments are
 - Ubunt 20.04
@@ -49,7 +75,7 @@ Given that our development environments are
 ## 2 Link Ardupilot firmware to Gazebo simulator
 1. run ardupilot firmware
 ```shell
-    cd Ardupilot
+    cd Ardupilot/ArduCopter
     sim_vehicle.py -v ArduCopter -f gazebo-iris --console
 ```
 we should find an interface, a council and a terminal.
@@ -58,7 +84,7 @@ we should find an interface, a council and a terminal.
          height="300">
 </figure>
 
-### 3 Connect mavros to Ardupilot in Gazebo
+### 3 Enable ROS communication with Ardupilot using mavros
 The ROS package mavros provides support for Ardupilot. Then we can run mavros to get drone information into ROS.
 
 In simulation, we specify '''fcu_url:=udp://127.0.0.1:14551@14555'''.
