@@ -9,7 +9,12 @@ https://ardupilot.org/dev/docs/ros2.html
 
 
 ### 2.2 mavros for ros2
-#### 2.2.1 docker for mavros2
+
+#### 2.2.1 run mavros2
+```shell
+    ros2 run mavros mavros_node --ros-args --param fcu_url:=udp://127.0.0.1:14551@14555
+```
+#### 2.2.2 docker for mavros2
 docker source [rockstarartist/mavros2](https://hub.docker.com/r/rockstarartist/mavros2)
 
 1. get ardupilot in simulation
