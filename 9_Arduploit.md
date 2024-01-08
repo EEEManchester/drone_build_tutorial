@@ -6,148 +6,85 @@ Arduploit is a great choice for people tired of PX4. Of course, be a nice guy, I
          height="250">
 </figure>
 
-## 1 Install Ardupilpot on Computer
-### Resources
-1. Installing Ardupilot and MAVProxy Ubuntu 20.04, https://github.com/Intelligent-Quads/iq_tutorials/blob/master/docs/Installing_Ardupilot_20_04.md
-2. Video Tutorial at https://youtu.be/1FpJvUVPxL0
 
-### Steps
-1. choose a proper and stable version for the drone according to the hardware that we are going to use.
-    - find the hardware at [https://firmware.ardupilot.org/Copter/stable/](https://firmware.ardupilot.org/Copter/stable/)
-    - Given Pixhawk5x, check Pixhawk5x/firmware-version.txt
-    ```txt
-            4.3.3-FIRMWARE_VERSION_TYPE_OFFICIAL
-    ```
-2. clone a forked Arduploit rep from my github and do not foret adding a star
-    ```git
-        git clone https://github.com/ZhongmouLi/ardupilot
-    ```
+## 2 Learn code of ArduCopter
+Ardupilot is mainly built on C++ and Class are used widely there.
 
-3. install dependencies and configure base station by choosing one of the two methods
-    - manullay install dependcies
-        - packages
+Source [Learning the ArduPilot Codebase](https://ardupilot.org/dev/docs/learning-the-ardupilot-codebase.html).
+[ArduCopter Flight Controllers](https://nrotella.github.io/journal/arducopter-flight-controllers.html)
 
-            ```shell
-            ## install packages
-            sudo apt install python-matplotlib python-serial python-wxgtk3.0 python-wxtools python-lxml python-scipy python-opencv ccache gawk python-pip python-pexpect
-            ```
+```mermaid
+---
+title: control diagram for mode stablize
+---
+classDiagram
+    Copter -- Mode
+    ModeStabilize --|> Mode
 
-            ```shell
-            ## install MAVproxy
-            sudo pip install future pymavlink MAVProxy
-            ```
-        - update .bashrc adding
-            ```shell
-                export PATH=$PATH:$HOME/ardupilot/Tools/autotest
-                export PATH=/usr/lib/ccache:$PATH
-            ```
-    - auto setup dependencies
-        - use install-prereqs-ubuntu.sh for ubuntu base station
-        ```shell                   
-            cd arduploit
-            Tools/environment_install/install-prereqs-ubuntu.sh -y
-        ```
-4. "source" Ardupilot (a better explanation is needed here). One of the two ways listed here should be chosen.
-    - run this command everytime before using Ardupilot
-        ```shell
-            cd arduploit
-            . ~/.profile
-        ```   
-    - modify .bashrc
-        ```shell
-            export PATH=$PATH:$HOME/{where_to_ardupilot}/ardupilot/Tools/autotest 
-            export PATH=/usr/lib/ccache:$PATH
-        ```
-5. there are two ways to get the version for 4.3.3 in the forked Ardupilot.
+    ModeStabilize -- AC_AttitudeControl
+    AC_AttitudeControl_Multi --|> AC_AttitudeControl
+    class Copter{
+        - void fast_loop()
+        + motors_output()
+    }
 
-    It happens that the forked rep does not have all tags/branches up to date and ```git checkout Copter-4.3.3``` can fail.
-
-    - The first way is to find tags for 4.3.3 in master branch.
+    class Mode{
+        - void update_flight_mode()
+        + void get_pilot_desired_lean_angles()
+        + float get_pilot_desired_yaw_rate()
+    }
     
-        Solution is upating forked rep with all needed tags from original Ardupilot:
-        - add upsteam using Ardupilot
-            ```shell
-                cd ardupilot
-                git remote add upstream git@github.com:ArduPilot/ardupilot.git
-            ```
-        - get all tags from original Ardupilot
-                ```shell
-                cd ardupilot
-                git fetch upstream
-                git fetch upstream --tags
-                ```    
-        - push all tags to forked rep
-                ```shell
-                cd ardupilot
-                git push --tags origin 
-                ```       
-    - The sceond way is to get branch 4.3 and switch to tag 4.3.3
-        - add upsteam
-            ```shell
-                cd ardupilot
-                git remote add upstream git@github.com:ArduPilot/ardupilot.git
-            ```
-        - update 
-            ```shell
-                cd ardupilot
-                git fetch upstream
-            ```        
-        - build a new branch for Copter -4.3 and checkout branch names before at the origianl Ardupilot rep
-            ```shell
-                cd ardupilot
-                git checkout Copter-4.3
-            ```   
-        - if you use your own forked rep instead of using mine, it is recommended to get this new branch to your rep
-            ```shell
-                cd ardupilot
-                git push origin Copter-4.3
-            ```             
-    - find the correct version by switching to tag Copter-4.3.3.     
-    ```shell
-        cd ardupilot
-        git checkout Copter-4.3.3
-    ```
-    then update submodue in arduploit
+    class ModeStabilize{
+        - run()
+    }
 
-    ```shell
-        cd arduploit
-        git submodule update --init --recursive
-    ```        
+    class AC_AttitudeControl{
+        - void input_euler_angle_roll_pitch_euler_rate_yaw()
+        + void attitude_controller_run_quat()
+        - void control_monitor_update()
+    }
 
-    NOTE: 
-    
-    
-    
+    class AC_AttitudeControl_Multi{
+        + void rate_controller_run()
+        + void update_throttle_gain_boost()
+        + void update_throttle_rpy_mix()
+    }
 
-6. test if Ardupilot is well installed by runging a STIL
+```
 
-    ```shell
-            cd arduploit/ArduCopter
-            # for the first time add -w
-            sim_vehicle.py -w
-    ```
-    It is perfectly installed if we can see 
-    <figure>
-        <img src="8_Arduploit/arduploit_simu_test.png"
-            height="300">
-    </figure>
+Explanation of methods
++   AC_AttitudeControl_Multi
+    - ```rate_controller_run()```, AC_AttitudeControl_Multi.cpp, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp
+    - ```update_throttle_rpy_mix()```, AC_AttitudeControl_Multi.cpp, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp
+    - ```void update_throttle_gain_boost()```
++ AC_AttitudeControl
+    - attitude_controller_run_quat, AC_AttitudeControl.cpp, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl.cpp
+    - input_euler_angle_roll_pitch_euler_rate_yaw, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl.cpp
++ AC_AttitudeControl_Multi
+    - rate_controller_run(), https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp
+    - set_throttle_out, AC_AttitudeControl_Multi, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/AC_AttitudeControl_Multi.cpp
++ ModeStabilize    
+    - run()
++ Motor    
+    - motor output https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/ArduCopter/motors.cpp
+    - control_monitor_update(), ControlMonitor.cpp, https://github.com/ArduPilot/ardupilot/blob/Copter-4.2/libraries/AC_AttitudeControl/ControlMonitor.cpp.
 
-    Launching Qgroundcontrol and we can see the version that we choose
-    <figure>
-        <img src="8_Arduploit/Ardu_sim_Q.png">
-    </figure>
+
+### 2.1 Position control 
+Source:
+- [Copter Position Control and Navigation](https://ardupilot.org/dev/docs/code-overview-copter-poscontrol-and-navigation.html)
 
 
 
+### 2.3 Attitude control
+- [Copter Attitude Control](https://ardupilot.org/dev/docs/apmcopter-programming-attitude-control-2.html)
 
+## 3 Guided mode and Guided_NoGPS mode
+Guided Mode allows us to control Ardupilot from an onboard computer autonoumously. This is usually essentially needed in research on drones.
 
+Ardupilot provides us with two guided modes:
+- Guided mode that requires a GPS and enables to send one of post, vel and acc comands and some combinations of them.
+- Guided_NoGPS mode that can take angle or body rate commands.
 
-
-
-# Source
-1. how to install ardupliot
-https://github.com/Intelligent-Quads/iq_tutorials/blob/master/docs/Installing_Ardupilot.md
-2. https://ardupilot.org/dev/docs/building-setup-linux.html
-3. https://discuss.ardupilot.org/t/arducopter-version-check-api/46694
-4. build firmware online https://ardupilot.org/copter/docs/common-loading-firmware-onto-chibios-only-boards.html#common-loading-firmware-onto-chibios-only-boards
-5. GSoC 2021 - Custom Firmware Builder, https://discuss.ardupilot.org/t/gsoc-2021-custom-firmware-builder/74946
+Source
+- [ArduCopter Flight Controllers](https://nrotella.github.io/journal/arducopter-flight-controllers.html)

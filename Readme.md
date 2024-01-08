@@ -10,14 +10,14 @@ It explains how to install and configurate PX4 or Ardupilot, ROS and ROS package
 
 - Single drone with PX4
     - [Set up PX4, ROS and mavros](2_1_Simulation_ROS_PX4.md) shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
-    - [Run ROS-Gazebo simulation for PX4](2_3_Simulation_PX4_Gazebo.md) shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
+    - [Run controller in ROS-Gazebo simulation for PX4](2_3_Simulation_PX4_Gazebo.md) demonstrates how to use a **controller** in ROS to controller a **single** quadrotor with the **PX4** firmware in Gazebo.
 
 - Single drone with Ardupilot
     - [Set up Ardupilot, ROS and mavros](2_2_Simulation_ROS_Ardupilot.md) explains the steps to simulate  a **single** quadrotor with the **Ardupilot** firmware in Gazebo.
-    - Run ROS-Gazebo simulation for Ardupilot ##TODO
+    - [Run controller in ROS-Gazebo simulation for Ardupilot] ##TODO
 
 
-#### 1.2 Simulation for **multiple** quadrotors with PX4 and Ardupilot in ROS  ## TODO
+#### 1.2 Simulation for **multiple** quadrotors with PX4 and Ardupilot in ROS  ##TODO
 
 - Multiple drones with PX4
 - Multiple drones with Ardupilot
