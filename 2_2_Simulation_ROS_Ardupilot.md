@@ -67,13 +67,29 @@ Given that our development environments are
 ```shell
     echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/iq_sim/models" >> ~/.bashrc
 ```
-5. launch a gazebo environment with iris model
-```shell
-    roslaunch iq_sim runway.launch
-```
+5. launch a gazebo environment with iris model with iq_sim pkg
+    - get source code of iq_sim
+    ```shell
+    git clone https://github.com/Intelligent-Quads/iq_sim.git
+    ```
+    - add mode path of iq_sim to gazebo
+    ```shell
+    echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/iq_sim/models" >> ~/.bashrc
+    ```
+    - build and resource iq_sim pkg
+    - roslaunch gazebo env of iris_arducopter_runway 
+    ```shell
+        roslaunch iq_sim runway.launch
+    ```
 
-## 2 Link Ardupilot firmware to Gazebo simulator
-1. run ardupilot firmware
+## 2 Install and run Ardupilot firmware in simulation
+### 2.1 Install Ardupilot
+Check Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0) to install Ardupilot.
+
+Read [Setting up the Build Environment (Linux/Ubuntu)](https://ardupilot.org/dev/docs/building-setup-linux.html#building-setup-linux).
+
+### 2.2 Simulate a single quadrotor with Ardupilot
+Run ardupilot firmware
 ```shell
     cd Ardupilot/ArduCopter
     sim_vehicle.py -v ArduCopter -f gazebo-iris --console
@@ -98,7 +114,13 @@ With the help of mavros, we can get mavros topics in ROS showing drone informati
             height="300">
 </figure>   
 
-Since we commande the drone to switch to guided mode and take off to a height of 5m, then we check drone state and position in ROS
+Since we commande the drone to switch to guided mode and take off to a height of 5m with
+```shell
+    mode guided
+    arm throttle
+    takeoff 5
+```
+then we check drone state and position in ROS
 ```shell
     rostopic echo /mavros/state
     rostopic echo /mavros/local_position/pose
@@ -110,7 +132,7 @@ with the state being guided and position being 5m
 </figure>   
 
 
-### 3 Test communication among Ardupilot in Gazebo and mavros
+### 3 Test simulation of Ardupilot in Gazebo and communication using mavros
 
 #### 3.1 Gazebo Garden
 1.  run 
