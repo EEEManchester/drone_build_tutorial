@@ -55,7 +55,7 @@ It demonstrates steps to add an onboard computer to a drone. It includes how to 
     - [Set up Raspberry Pi as onboard computer](4_Experiment_OnboardComputer_Pi.md)
 2. Enable communication between onboad computer and autopilot
     - [Set up communication between Pi and Pixhawk with PX4](4_Experiment_Communication_Pi_Pixhawk.md)
-3. Enable communication between onboad computer communicate and base station in ROS through WIFI
+3. Enable communication between onboad computer and base station in ROS through WIFI
     - [Set up ROS communcation between onboard computer and base station through WIFI](4_Experiment_ROS_Communication_Pi_BaseStation.md)
 
 ### 3 Drone controllers

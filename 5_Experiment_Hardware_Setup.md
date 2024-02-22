@@ -1,7 +1,7 @@
 # Hardware setup
 ## Big picture of Pixhawks_Rapebrrypi
 <figure>
-    <img src="3_Experiment_Setup/schematic_pixhawks_rasperry.png"
+    <img src="5_Experiment_Hardware_Setup/schematic_pixhawks_rasperry.png"
          height="400">
     <figcaption> PX4 system and Companion Computer (https://docs.px4.io/master/en/concept/px4_systems_architecture.html)</figcaption>
 </figure>
@@ -10,13 +10,13 @@
 ### Power requirements of Raspberry Pi 4
 Power supply for Rasberry Pi can be found [Power Supply](https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#power-supply).
 <figure>
-    <img src="3_Experiment_Setup/raspberry_bard.png"
+    <img src="5_Experiment_Hardware_Setup/raspberry_bard.png"
          height="400">
     <figcaption> PX4 system and Companion Computer (https://www.raspberrypi.com/products/raspberry-pi-4-model-b/specifications/)</figcaption>
 </figure>
 
 <figure>
-    <img src="3_Experiment_Setup/raspberry_usb.png"
+    <img src="5_Experiment_Hardware_Setup/raspberry_usb.png"
          height="250">
     <figcaption> USB ports of Raspberry Pi (https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#universal-serial-bus-usb)</figcaption>
 </figure>
