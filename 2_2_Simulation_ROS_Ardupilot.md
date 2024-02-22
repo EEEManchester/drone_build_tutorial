@@ -1,13 +1,39 @@
 
 ## 1 Build Gazebo environment
+It is suggested to choose one gazebo version between [Gazebo Garden](#1.1-gazebo-garden) and [Gazebo 11](#1.2-gazebo-11)
+
+
+Main references are
+- [Using SITL with Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo.html) for Gazebo Garden.
+- [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy) for Gazebo 11. 
+
 ### 1.1 Gazebo Garden
+
+Install Gazebo Garden following the steps at [Docs/Gazebo Garden-->Binary Installation on Ubuntu](https://gazebosim.org/docs/garden/install_ubuntu), which are
+```shell
+sudo apt-get update
+sudo apt-get install lsb-release wget gnupg
+```
+and then 
+```shell
+sudo wget https://packages.osrfoundation.org/gazebo.gpg -O /usr/share/keyrings/pkgs-osrf-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-osrf-archive-keyring.gpg] http://packages.osrfoundation.org/gazebo/ubuntu-stable $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/gazebo-stable.list > /dev/null
+sudo apt-get update
+sudo apt-get install gz-garden
+```
+To test if the installation is successed, we can run 
+```shell
+gz sim -v4 -r shapes.sdf
+```
+and it is OK if we can see
+<figure>
+        <img src="2_Simulation_ROS_Ardupilot/gz_installed_test.png">
+</figure>  
 
 ### 1.2 Gazebo 11
 
 Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
 
-
-We follow the steps specified by [Using SITL with legacy versions of Gazebo](https://ardupilot.org/dev/docs/sitl-with-gazebo-legacy.html#sitl-with-gazebo-legacy). 
 
 Given that our development environments are
 - Ubunt 20.04
@@ -41,15 +67,31 @@ Given that our development environments are
 ```shell
     echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/iq_sim/models" >> ~/.bashrc
 ```
-5. launch a gazebo environment with iris model
-```shell
-    roslaunch iq_sim runway.launch
-```
+5. launch a gazebo environment with iris model with iq_sim pkg
+    - get source code of iq_sim
+    ```shell
+    git clone https://github.com/Intelligent-Quads/iq_sim.git
+    ```
+    - add mode path of iq_sim to gazebo
+    ```shell
+    echo "GAZEBO_MODEL_PATH=${GAZEBO_MODEL_PATH}:$HOME/catkin_ws/src/iq_sim/models" >> ~/.bashrc
+    ```
+    - build and resource iq_sim pkg
+    - roslaunch gazebo env of iris_arducopter_runway 
+    ```shell
+        roslaunch iq_sim runway.launch
+    ```
 
-## 2 Link Ardupilot firmware to Gazebo simulator
-1. run ardupilot firmware
+## 2 Install and run Ardupilot firmware in simulation
+### 2.1 Install Ardupilot
+Check Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0) to install Ardupilot.
+
+Read [Setting up the Build Environment (Linux/Ubuntu)](https://ardupilot.org/dev/docs/building-setup-linux.html#building-setup-linux).
+
+### 2.2 Simulate a single quadrotor with Ardupilot
+Run ardupilot firmware
 ```shell
-    cd Ardupilot
+    cd Ardupilot/ArduCopter
     sim_vehicle.py -v ArduCopter -f gazebo-iris --console
 ```
 we should find an interface, a council and a terminal.
@@ -58,7 +100,7 @@ we should find an interface, a council and a terminal.
          height="300">
 </figure>
 
-### 3 Connect mavros to Ardupilot in Gazebo
+### 3 Enable ROS communication with Ardupilot using mavros
 The ROS package mavros provides support for Ardupilot. Then we can run mavros to get drone information into ROS.
 
 In simulation, we specify '''fcu_url:=udp://127.0.0.1:14551@14555'''.
@@ -72,7 +114,13 @@ With the help of mavros, we can get mavros topics in ROS showing drone informati
             height="300">
 </figure>   
 
-Since we commande the drone to switch to guided mode and take off to a height of 5m, then we check drone state and position in ROS
+Since we commande the drone to switch to guided mode and take off to a height of 5m with
+```shell
+    mode guided
+    arm throttle
+    takeoff 5
+```
+then we check drone state and position in ROS
 ```shell
     rostopic echo /mavros/state
     rostopic echo /mavros/local_position/pose
@@ -84,7 +132,7 @@ with the state being guided and position being 5m
 </figure>   
 
 
-### 3 Test communication among Ardupilot in Gazebo and mavros
+### 3 Test simulation of Ardupilot in Gazebo and communication using mavros
 
 #### 3.1 Gazebo Garden
 1.  run 
