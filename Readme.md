@@ -20,7 +20,7 @@ This tutorial aims to provide guides begining at building a drone from kits and 
         - [Setup Raspberry Pi as onboard computer](4_Experiment_OnboardComputer_Pi.md)
     2. Communication between onboad computer and autopilot
         - [Setup communication between Pi and Pixhawk](4_Experiment_Communication_Pi_Pixhawk.md)
-    3. Communication between onboad computer communicate and base station in ROS through WIFI
+    3. Communication between onboad computer and base station in ROS through WIFI
         - [Setup ROS communcation between onboard computer and base station through WIFI](4_Experiment_ROS_Communication_Pi_BaseStation.md)
 
 5. [Add more devices to drone in experiment](5_Experiment_Hardware_Setup.md)

@@ -90,7 +90,7 @@ References on ssh:
 
 ## 3 Set ROS communication through WIFI between onboard computer and base station 
 
-### 3.1 time synchrionasation
+### 3.1 time synchrionasation with ntp
 We are going to use ntp service for time synchronisation such that time of onboard computer is based on that of base station.
 
 First of all, install ntp by running
@@ -119,7 +119,7 @@ Check all the servers
 ```bash
     ntpq -p
 ```
-##TODO
+### 3.2 time synchrionasation with chrony (todo)
 
 ### 3.2 ROS communication between Rapsberry Pi and base station
 Once we can ensure Intercet connection between the onboard computer and our base station, we can process ROS communication between them.
