@@ -9,7 +9,7 @@ source: https://oscarliang.com/rc-protocols/#RX-Protocols
 1. create new model such that one model for one receiver
     - press mode to entre basicConfig menu
     - choose Model Sel
-    - select a new model for this receiver. It means that if this tranmister already uses model 1 and 2 for another 2 receivers, then we should select other models, like 3. But remember which model is for which receiver.
+    - select a new model for this receiver. It means that if this transmitter already uses model 1 and 2 for another 2 receivers, then we should select other models, like 3. But remember which model is for which receiver.
     - go back to basic menu by pressing End and entre Model Type. choosing multirotor or your type of UAV in option TYPE.
 
 3. set transmitter channel
