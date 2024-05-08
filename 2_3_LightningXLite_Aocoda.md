@@ -24,7 +24,7 @@ First, take parts from Lightning X Lite and prepare alex keys.
     height="200">
 </figure>
 
-We build the base like the picture below. Then, we add the upper part and use M3 screws to fiex them together. 
+We build the base like the picture below. Then, we add the upper part and use M3 screws to fix them together. 
 
 |                        |                          |
 | ----------------------------------- | ----------------------------------- |

@@ -1,5 +1,5 @@
 # Understand and apply mavros_controller
-This turtorial is to help understand and apply introduce mavros_controller.
+This tutorial is to help understand and apply introduce mavros_controller.
 
 The package mavros_controller provides two packages
 1. **trajectory_publisher** is a node publishing setpoints as states from motion primitives / trajectories for the controller to follow.

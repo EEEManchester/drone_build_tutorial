@@ -16,7 +16,7 @@
     - RadioLink R12DSM [Site in Tabo](https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-22611654662.9.59a41dc7RXezIK&id=561805355565)
 
 
-# 2. Assembly and configuratin steps for manual flights
+# 2. Assembly and configuration steps for manual flights
 ## 2.1 Build chassis
 First, take parts from Lightning X Lite and prepare alex keys.
 <figure>
@@ -24,7 +24,7 @@ First, take parts from Lightning X Lite and prepare alex keys.
     height="200">
 </figure>
 
-We build the base like the picture below. Then, we add the upper part and use M3 screws to fiex them together. 
+We build the base like the picture below. Then, we add the upper part and use M3 screws to fix them together. 
 
 |                        |                          |
 | ----------------------------------- | ----------------------------------- |
@@ -58,7 +58,7 @@ After that, we weld a power wire with XT60 and a 35v 470uf capacitance to the po
 
 ### 2.3 Connect autopilot to ESC 
 ### Kakute H7 to Tekko32
-Following the instrcution shown below
+Following the instruction shown below
 <figure>
     <img src="1_Assembly/ArduPilot_Kakute/KakuteH7_Tekko32.png"
          height="250">

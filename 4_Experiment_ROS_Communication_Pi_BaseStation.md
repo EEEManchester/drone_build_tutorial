@@ -1,14 +1,14 @@
-# ROS communiction through WIFI between onboard computer and base station
+# ROS communication through WIFI between onboard computer and base station
 
 ## 1 Install ROS and ROS pkgs for onboard computer
 ### 1.1 Install ROS 
 - for team members, please skip this step
-- for Ubuntu or Ubuntu Mate, please refoer to [ROS Installation](http://wiki.ros.org/ROS/Installation).
+- for Ubuntu or Ubuntu Mate, please refer to [ROS Installation](http://wiki.ros.org/ROS/Installation).
 
-- for Rapsberry Pi OS, 
+- for Raspberry Pi OS, 
     -   ROS Melodic is still possible to be installed on Raspberry Pi with Raspbian Buster following a different approach [ROSberryPi/Installing ROS Melodic on the Raspberry Pi](http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi).
 
-    - A tutorial to install Melodic on Rapsberry Pi OS is given [here](https://www.linkedin.com/pulse/easiest-way-install-ros-melodic-raspberrypi-4-shubham-nandi/).  
+    - A tutorial to install Melodic on Raspberry Pi OS is given [here](https://www.linkedin.com/pulse/easiest-way-install-ros-melodic-raspberrypi-4-shubham-nandi/).  
 ### 1.2 Install mavros
 - for team members, please skip this step
 - for others, please ref to Section Simulation_ROS.
@@ -65,7 +65,7 @@ and entre yes then
 
 3. We are now in the server as the user drone1, as you can see a new user name and a new machine name in the terminal.
 
-4. It is not surpised that we dont want to type ip address every time. Since we know the ip address of the Raspberry Pi wont change, it is nature to think can we type something meaningful as long as my machine can understhand my input and link that to the correct ip address.
+4. It is not surprised that we dont want to type ip address every time. Since we know the ip address of the Raspberry Pi wont change, it is nature to think can we type something meaningful as long as my machine can understand my input and link that to the correct ip address.
 
     Here, we can modify /etc/hosts to enable our machine to do that.
 
@@ -90,7 +90,7 @@ References on ssh:
 
 ## 3 Set ROS communication through WIFI between onboard computer and base station 
 
-### 3.1 time synchrionasation with ntp
+### 3.1 time synchronisation with ntp
 We are going to use ntp service for time synchronisation such that time of onboard computer is based on that of base station.
 
 First of all, install ntp by running
@@ -119,10 +119,10 @@ Check all the servers
 ```bash
     ntpq -p
 ```
-### 3.2 time synchrionasation with chrony (todo)
+### 3.2 time synchronisation with chrony (todo)
 
-### 3.2 ROS communication between Rapsberry Pi and base station
-Once we can ensure Intercet connection between the onboard computer and our base station, we can process ROS communication between them.
+### 3.2 ROS communication between Raspberry Pi and base station
+Once we can ensure Internet connection between the onboard computer and our base station, we can process ROS communication between them.
 
 We only need to specify the IP addresses of onboard computer and base station into ROS.
 
@@ -141,6 +141,6 @@ We only need to specify the IP addresses of onboard computer and base station in
 ```
 Note: this configuration only works for THE WLAN. We may need to modify the IP addresses for different WLANs.
 
-Also, we need to comment the two commannds below and uncomment the one above in order to do local simulation and experiments.
+Also, we need to comment the two commands below and uncomment the one above in order to do local simulation and experiments.
 
 More details can be found at [Running ROS on multiple machines](https://husarion.com/tutorials/ros-tutorials/5-running-ros-on-multiple-machines/).

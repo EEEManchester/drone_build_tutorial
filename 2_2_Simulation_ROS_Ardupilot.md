@@ -21,7 +21,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/pkgs-
 sudo apt-get update
 sudo apt-get install gz-garden
 ```
-To test if the installation is successed, we can run 
+To test if the installation is done, we can run 
 ```shell
 gz sim -v4 -r shapes.sdf
 ```
@@ -32,7 +32,7 @@ and it is OK if we can see
 
 ### 1.2 Gazebo 11
 
-Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
+Video tutorials provided by Intelligent Quads can be found on Youtube [Drone Dev Environment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0)
 
 
 Given that our development environments are
@@ -44,7 +44,7 @@ Given that our development environments are
 ```shell
     sudo apt-get install gazebo11 libgazebo11-dev
 ```
-1. get source code of arduploit plugins for gazebo 11.X
+1. get source code of Ardupilot plugins for gazebo 11.X
 ```shell
     cd where_you_want
     git clone https://github.com/khancyr/ardupilot_gazebo
@@ -84,7 +84,7 @@ Given that our development environments are
 
 ## 2 Install and run Ardupilot firmware in simulation
 ### 2.1 Install Ardupilot
-Check Youtube [Drone Dev Enviorment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0) to install Ardupilot.
+Check Youtube [Drone Dev Environment Ubuntu 20 04 Update](https://youtu.be/1FpJvUVPxL0) to install Ardupilot.
 
 Read [Setting up the Build Environment (Linux/Ubuntu)](https://ardupilot.org/dev/docs/building-setup-linux.html#building-setup-linux).
 
@@ -114,7 +114,7 @@ With the help of mavros, we can get mavros topics in ROS showing drone informati
             height="300">
 </figure>   
 
-Since we commande the drone to switch to guided mode and take off to a height of 5m with
+Since we command the drone to switch to guided mode and take off to a height of 5m with
 ```shell
     mode guided
     arm throttle
@@ -169,7 +169,7 @@ if we echo rostopics /mavros/state and /mavros/local_position/pose, then we shou
 - its height is 5m.
 
 #### 3.2 Gazebo 11
-1.  run Gazebo envrionment
+1.  run Gazebo environment
     ```shell
         gazebo --verbose worlds/iris_arducopter_runway.world
     ```

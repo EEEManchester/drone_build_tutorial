@@ -1,17 +1,17 @@
-# Simulation setup ROS, PX4, Gazebo and Mavros (mavlink) 
+roslaunch# Simulation setup ROS, PX4, Gazebo and mavros (Mavlink) 
 This is to setup simulation environment to simulate drone (PX4) in Gazebo and ROS.
 
 Software and ROS packages needed include
 - **ROS**,
-- **PX4** as framwork of autoploit,
-- **Mavros** for communication between PX4 and ROS,
+- **PX4** as framework of autopilot,
+- **mavros** for communication between PX4 and ROS,
 - Controller library (optional).
 
 ## Table of contents  
   - [Step 1 Install ROS](#step-1-install-ros)
   - [Step 2 Build PX4 from source code](#step-2-build-px4-from-source-code)
-  - [Step 2.5 Enable rosluanch to launch PX4 in Gazebo](#step-25-enable-rosluanch-to-launch-px4-in-gazebo)
-  - [Step 3 Build Mavros (Mavlink) from source code](#step-3-build-mavros-mavlink-from-source-code)
+  - [Step 2.5 Enable roslaunch to launch PX4 in Gazebo](#step-25-enable-roslaunch-to-launch-px4-in-gazebo)
+  - [Step 3 Build mavros (Mavlink) from source code](#step-3-build-mavros-Mavlink-from-source-code)
 
 
 ## Step 1 Install ROS
@@ -24,7 +24,7 @@ Installing guide of Noetic for Ubuntu 20.04 can be found [here](http://wiki.ros.
 ## Step 2 Build PX4 from source code
 1. Download PX4 of version 1.12.3
 ```bash
-    cd Robot_Frimware # somewhere you like
+    cd Robot_Firmware # somewhere you like
     git clone -b v1.12.3 https://github.com/PX4/PX4-Autopilot.git --recursive
 ```
 Check PX4 version with
@@ -47,7 +47,7 @@ we should get
 ```bash
     make px4_sitl gazebo
 ```
-## Step 2.5 Enable rosluanch to launch PX4 in Gazebo
+## Step 2.5 Enable roslaunch to launch PX4 in Gazebo
 Following steps of *Install PX4 SITL(Only to Simulate)* [here](https://github.com/ZhongmouLi/mavros_controllers)
 ```shell
 cd PX4-Autopilot
@@ -105,16 +105,16 @@ do
     kill -2 <pid associated with gzserver>
 ```
 
-## Step 3 Build Mavros (Mavlink) from source code
+## Step 3 Build mavros (Mavlink) from source code
 Mavlink is a protocol for communicating with drones (PX4). 
 
 There are two ways of using Mavlink for communication
-- Mavros wappers Mavlink into ROS,
-- MavSDK provides various programming languages to interface with MAVLink systems.
+- mavros wrappers Mavlink into ROS,
+- MavSDK provides various programming languages to interface with Mavlink systems.
 
-Our development is conducted in ROS, thus is natrual to consider using Mavlink somehow in ROS for the purpose of communicating with drones in ROS environment. Therefore, we take Mavros.
+Our development is conducted in ROS, thus is natural to consider using Mavlink somehow in ROS for the purpose of communicating with drones in ROS environment. Therefore, we take mavros.
 
-PX4 provides guides to install Mavros and Mavlink [ROS with MAVROS Installation Guide](https://docs.px4.io/master/en/ros/mavros_installation.html)
+PX4 provides guides to install mavros and Mavlink [ROS with MAVROS Installation Guide](https://docs.px4.io/master/en/ros/mavros_installation.html)
 
 Here we show do to build MAVROS from source code .
 
@@ -141,12 +141,12 @@ Here we show do to build MAVROS from source code .
     wstool init ./src
     ```
     
-4. Install MAVLink
+4. Install Mavlink
     (1). note: tee is to write the output of rosinstall_generator into the file mavros.rosinstall
     
     ```bash
     # We use the Kinetic reference for all ROS distros as it's not distro-specific and up to date
-    rosinstall_generator --rosdistro kinetic mavlink | tee /tmp/mavros.rosinstall
+    rosinstall_generator --rosdistro kinetic Mavlink | tee /tmp/mavros.rosinstall
     ```
     
     (2). install MAVROS with stable one
@@ -157,13 +157,13 @@ Here we show do to build MAVROS from source code .
         
         ```bash
         - git:
-            local-name: mavlink
-            uri: https://github.com/mavlink/mavlink-gbp-release.git
-            version: release/kinetic/mavlink/2021.3.3-1
+            local-name: Mavlink
+            uri: https://github.com/Mavlink/Mavlink-gbp-release.git
+            version: release/kinetic/Mavlink/2021.3.3-1
         
         - git:
             local-name: mavros
-            uri: https://github.com/mavlink/mavros.git
+            uri: https://github.com/Mavlink/mavros.git
             version: 1.10.0
         ```
         
@@ -206,12 +206,12 @@ Here we show do to build MAVROS from source code .
     source ./devel/source.bash
     ```
     
-9. check if MAVROS and MAVLink are well installed
+9. check if MAVROS and Mavlink are well installed
     
     ```bash
     rospack find mavros
     
-    rospack find mavlink
+    rospack find Mavlink
     ```
     
 
@@ -220,10 +220,10 @@ which gives
 <figure>
     <img src="2_Simulation_Setup_ROS_PX4/Installed_mavros.png"
          height="80">
-    <figcaption>Mavros and Mavlink are installed</figcaption>
+    <figcaption>mavros and Mavlink are installed</figcaption>
 </figure>
 
-10. run mavros for communcation in simulation
+10. run mavros for communication in simulation
 ```bash
 roslaunch mavros px4.launch fcu_url:="udp://:14540@127.0.0.1:14557"
 ```
