@@ -1,12 +1,12 @@
 # Drone tutorial
-This tutorial aims to provide guides begining at building a drone from kits and ending at controlling drones in experiments.
+This tutorial aims to provide guides on building a drone from kits and ending at controlling drones in experiments.
 
 ## Main contents
 
 ### 1 Simulation
 
 #### 1.1 Simulation for a **single** quadrotor with PX4 and Ardupilot in ROS
-It explains how to install and configurate PX4 or Ardupilot, ROS and ROS packages for ROS-Gazebo simulation.
+It explains how to install and configure PX4 or Ardupilot, ROS and ROS packages for ROS-Gazebo simulation.
 
 - Single drone with PX4
     - [Set up PX4, ROS and mavros](2_1_Simulation_ROS_PX4.md) shows how to simulate a **single** quadrotor with the **PX4** firmware in Gazebo.
@@ -42,7 +42,7 @@ It explains how to install and configurate PX4 or Ardupilot, ROS and ROS package
     - ESC: Aocoda 60A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012)
     - Autopilot: - Aocoda RC H743 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xUOMZu&id=679995875558)     
 
-#### 2.2 Configurate and tune autpilot for manual flight
+#### 2.2 Configure and tune autopilot for manual flight
 1. PX4
 2. [Ardupilot](2_4_Config_Ardupilot.md)
 3. [Betaflight](2_5_Config_BetaFlight.md)
@@ -71,7 +71,7 @@ It demonstrates steps to add an onboard computer to a drone. It includes how to 
 
 #### 4.2 Add functional payloads and sensors
 1. [Add more devices to drone in experiment](5_Experiment_Hardware_Setup.md)
-    It suggests what to do if more addional devices are to be added to a drone to extend its functions.
+    It suggests what to do if more additional devices are to be added to a drone to extend its functions.
 
 ### 5 ROS2 for drones
 1. [ROS2 and PX4](8_ROS2_PX4.md)

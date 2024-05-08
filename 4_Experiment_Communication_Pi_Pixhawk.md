@@ -1,15 +1,15 @@
-# Communciation between Rapsberry Pi 4B+ and Pixhawk 5.
+# Communication between Raspberry Pi 4B+ and Pixhawk 5.
 
 There are two ways for communication between a Pixhawk 5 and a Raspberry pi 4B+:
 - through serial ports
 - through USB ports
 
-There are also different methods to power Rapsberry Pi:
+There are also different methods to power Raspberry Pi:
 - through battery and BEC
 - through autopilot (not tested)
 
-## 1 Communication through serial ports of Rapsberry Pi
-### 1.1 Connect Rapsberry Pi and Pixhawk 5
+## 1 Communication through serial ports of Raspberry Pi
+### 1.1 Connect Raspberry Pi and Pixhawk 5
 Let us have a look at all the ports provided by Pixhawk 5.
 <figure>
     <img src="4_Experiment_OnboardComputer_Setup/px4_port_raspberry.png"
@@ -46,7 +46,7 @@ We need to make a wire to connect them like the way below
 </figure>
 
 ### 1.2 Set parameters on PX4
-Serverl parameters are needed to be modified to enbale serial communication between Pixhawk and Raspberry Pi.
+Some parameters are needed to be modified to enable serial communication between Pixhawk and Raspberry Pi.
 
 Here are the list
 - MAV_2_CONFIG = TELEM 2

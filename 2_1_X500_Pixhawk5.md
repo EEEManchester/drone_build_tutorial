@@ -1,7 +1,7 @@
-# Aesembly X500 drone kits
+# Assembly X500 drone kits
 This note shows main steps to build a drone from kits (hardware).
 
-Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html](https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html).
+Tutorial in details can be found [https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html](https://docs.px4.io/main/en/frames_multicopter/holybro_x500V2_pixhawk5x.html).
 
 ## 1. Drone kits and commercial elements
 1. Drone frame Kits: [Holybro X500 V2 Kit](http://www.holybro.com/product/x500-v2-kit/) cluding
@@ -15,7 +15,7 @@ Toturial in details can be found [https://docs.px4.io/main/en/frames_multicopter
     - PX4 version (1.12)
 3. Onboard computer and OS
     - Raspberry PI 4b+
-4. Remote controller and receivor
+4. Remote controller and receiver
     - FrSky Taranis X9D
     - FRsky X8R
 ## 2. Overview of main elements 

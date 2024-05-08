@@ -1,4 +1,4 @@
-# Install and configureate BetaFlight Ardupilot
+# Install and configure BetaFlight Ardupilot
 ## 0 Develop kits
 1. Drone frame:
     - Chassis TransTEC Lightning X Lite
@@ -18,20 +18,20 @@
 
 
 ## 1 Install and flash Ardupilot
-### 1.1 Check pre-builin firmware
+### 1.1 Check pre-builtin firmware
 Different pre-built firmware lead to different installation ways.
 
 It is suggested to ask the manufacturer about the pre-built firmware and its version.
 
 Our Kakute H7 v1.3 has a pre-built firmware of BetaFlight. Then the version can be found with the help of BetaFlight Configurator that can auto detect the pre-built board and firmware.
 
-Run BetaFlight Configurator, in Disconected status, we click Firmware Flasher on the left sidebar, then it will auto detect the board and the firmware version
+Run BetaFlight Configurator, in Disconnected status, we click Firmware Flasher on the left sidebar, then it will auto detect the board and the firmware version
 <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Kakute_prebuilt_board.png"
          height="200">
 </figure>
 
-Also, we can switch to Connected status by cliking connect on the top right. Click CLI on the left side bar, typing dump on the terminal on the right will give more information 
+Also, we can switch to Connected status by clicking connect on the top right. Click CLI on the left side bar, typing dump on the terminal on the right will give more information 
 <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Kakute_prebuilt_firmware.png"
          height="200">
@@ -52,7 +52,7 @@ Following steps shown in [Loading Firmware onto boards without existing ArduPilo
 
 Or, we can build an Ardupilot firmware ourself.
 #### Build Ardupilot firmware from source code
-1. use Waf to build an ardupliot firmware for the chosen board. Tutorials to use Waf https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md.
+1. use Waf to build an Ardupilot firmware for the chosen board. Tutorials to use Waf https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md.
     - clean previous built firmware
     ```shell
          cd ardupliot
@@ -91,12 +91,12 @@ Or, we can build an Ardupilot firmware ourself.
         <img src="8_Arduploit/build_bin.png">
     </figure>    
 
-### 1.4 Write Firemware into FC
+### 1.4 Write Firmware into FC
 There are two ways to write Ardupilot firmware into Kakuteh7: STM32CubeProgrammer or BetaFlight Configurator.
 
-**Connnect FC in DFU mode**
+**Connect FC in DFU mode**
 
-Kakute must be connected in DFU mode. To do that, press the button of Kakute, and then connnect it to the work station through a USB port.
+Kakute must be connected in DFU mode. To do that, press the button of Kakute, and then connect it to the work station through a USB port.
 
 Check if Kakute is in DFU mode, we type
 ```shell
@@ -111,7 +111,7 @@ if we can see something like Internal Flash, shown below, it means Kakute is in 
 **Use STM32CubeProgrammer**
 1. Download STM32CubeProgrammer software for Linux from [its official site](https://www.st.com/en/development-tools/stm32cubeprog.html?dl=r%2FDZ7hJ7r7LZnJS4M%2Bj%2FYg%3D%3D%2CrqQw3Z8zMJTVH%2FiHwZRxG3hJGQZEmlN4OzbGJFeuEufO47XaPWyM38drgWLJg%2F%2FukxP6agHPDG343C5L3VFsTTk12wTB%2FrA3oq9%2FGySQjLM3nRGLsi7eIQH9DlYY5OUSVtr25RNJsWoeocZdEfwKn9T7waqy41WKTicuSubVQdd1fd%2B0ydjzklycTlZd3z5c2CLMiyXRW6Dp3sndw6IxOB14m2l2wbA6%2FKQhfiyTPQe7NHIEkvcHbRwAyYBAJ22lSYc%2FzN8rHJSJh9EFm6ND6vltYTICAqp%2BihBh%2BHCVrrPfkE3nf9OUm%2BaBrMd9breQH71gc8%2B31MtN75QSPpBOAHqhdAD1VdxVDoGwk9GEUJVc8oE6F5dxFST1GI2xA6eC)
 1. Install and run STM32CubeProgrammer
-2. Choose USB as connection way and choose USB1, according to your station, as Port. Clikc flash buttion next port if nothing shows there.
+2. Choose USB as connection way and choose USB1, according to your station, as Port. Click flash button next port if nothing shows there.
 
 <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Step1_STM32CubeProgrammer.png"
@@ -140,7 +140,7 @@ Go to Setup-->Mandatory Hardware-->Frame Type.
     <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Mission_Planner_setup1.png">
 </figure>
-- Since our chassis and ESC are for BetaFlight type, we need to go to Configeration->Full parameter list, and set FRAME_TYPE to be 12.
+- Since our chassis and ESC are for BetaFlight type, we need to go to Configuration->Full parameter list, and set FRAME_TYPE to be 12.
 
 All supported types are available [here](https://ardupilot.org/copter/docs/connect-escs-and-motors.html)
     <figure>
@@ -148,21 +148,21 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
             height="250">
     </figure>
 
-### 2.2 Configurate receiver and transmitter
-1. Bind receiver and transmiter
+### 2.2 Configure receiver and transmitter
+1. Bind receiver and transmitter
 
-Plese see [Transmitter](2_6_Transmitter.md) for RadioLink AT9S Pro and RadioLink R12DSM.
+Please see [Transmitter](2_6_Transmitter.md) for RadioLink AT9S Pro and RadioLink R12DSM.
 
-For the receiver's protocol, it is suggested to use SBUS. It can be done by prssed the button for 2s and we should see the LED flashs blue.
+For the receiver's protocol, it is suggested to use SBUS. It can be done by pressed the button for 2s and we should see the LED flash blue.
 
 2. Configurate Ardcupilot
 
 ##TODO
 
 
-### 2.3 Configerate motors
+### 2.3 Configure motors
 
-Connect a battery to the drone and also connect the drone to the work station runing Mission Planner through a USB port.
+Connect a battery to the drone and also connect the drone to the work station running Mission Planner through a USB port.
 
 1. Test motor order
 This is to check if the motors are connected to the ESC board correctly, motor 1 is corrected to the ESC's pin for motor 1.
@@ -174,7 +174,7 @@ We can see from [Connect ESCs and Motors](https://ardupilot.org/copter/docs/conn
 </figure>
 
 
-Then, open Initial Setup->Optinal Hardware->Motor Test.
+Then, open Initial Setup->Optional Hardware->Motor Test.
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/MissionPlanner_MotorTest.png " height="300">
 </figure>
@@ -186,11 +186,11 @@ Control motors in sequence to see if the correct motors spin:
 - motor C - motor 3 on the back left,
 - motor D - motor 4 on the front left spin.
 
-It is essential to notice that ArduPilot keeps this trandition nameing motor A, B, C, D in a different way than 1, 2, 3, 4 in Motor Test.
+It is essential to notice that ArduPilot keeps this tradition naming motor A, B, C, D in a different way than 1, 2, 3, 4 in Motor Test.
 
-If one motors reponds in a wrong way, we need to check if it is connected to ESC at the correct pins.
+If one motors responds in a wrong way, we need to check if it is connected to ESC at the correct pins.
 
-2. Test motor directoin
+2. Test motor direction
 
 Motors directions also must be checked tests. As we can see from the image above that
 - motor A, or motor 2, must spin in CCW,
@@ -200,7 +200,7 @@ Motors directions also must be checked tests. As we can see from the image above
 
 Dont worry if they are not in the correct direction. It is possible to change their directions with BLHeLiSuite32 as our ESC is BLHeli32.
 
-Config Arduciplot to enable using to change the motors' directions following the steps in [Pass-Through Support](https://ardupilot.org/copter/docs/common-blheli32-passthru.html).
+Config Ardupilot to enable using to change the motors' directions following the steps in [Pass-Through Support](https://ardupilot.org/copter/docs/common-blheli32-passthru.html).
 
 
 Adjust the motors' directions following the Youtube video [How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=SvltkIvUdiLomp0G)
@@ -223,7 +223,7 @@ Source:
 ##TODO
 
 ## 3 Calibrate sensors
-### 3.1 accelemeters and gyroscope
+### 3.1 accelerometer and gyroscope
 If you prefer using QGroundControl, you can read [Sensor Setup using QGroundControl for Ardupilot](https://docs.qgroundcontrol.com/master/en/SetupView/s.ensors_ardupilot.html).
 
 
@@ -243,7 +243,7 @@ IMU is MPU6000 and we can look for MPU6000 information from its datasheet at [MP
 
 We can be 
 
-2. Calibrate acclemeter
+2. Calibrate accelerometer
 
 3. Calibrate gyroscope
 
@@ -290,7 +290,7 @@ https://www.youtube.com/watch?v=lqb8lpuh6uk&ab_channel=RakishRc
 
 Enable log on sd card
 
-### 5.1 Use intial tune parameters
+### 5.1 Use initial tune parameters
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/Auto_Tunner.png">
 </figure>
@@ -301,7 +301,7 @@ Enable log on sd card
 </figure>
 
 ### 5.2 Tune PID gains for drone
-PID parameters are in Tab Extened Tuning
+PID parameters are in Tab Extended Tuning
 
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/PID_Parameters.png">
