@@ -1,24 +1,5 @@
-# Install and configure BetaFlight Ardupilot
-## 0 Develop kits
-1. Drone frame:
-    - Chassis TransTEC Lightning X Lite
-    - Motor FPV 致盈EX2306 PLUS [site in Taobao](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.27.52b858176s1EdF&id=634695941707)
-2. ESC:
-    - [Tekko32 F4 Metal 4in1 65A ESC (65A)](https://holybro.com/collections/fpv-esc/products/tekko32-f4-metal-4in1-65a-esc-65a)
-    - [HAKRC 3260A ESC BLHeli-32 ](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.32.193244beujIlvo&id=624599427940)
-3. Autopilot and framework
-    - Kakute H7 v1.3 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.28.56917484ySIhA5&id=684452325988)     
-    - Ardupilot 4.3
-4. Onboard computer and OS
-    - Raspberry Pi
-    - Ubuntu 20.04
-5. Transmitter
-    - RadioLink AT9S Pro
-    - RadioLink R12DSM [Site in Tabo](https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-22611654662.9.59a41dc7RXezIK&id=561805355565)
-
-
-## 1 Install and flash Ardupilot
-### 1.1 Check pre-builtin firmware
+## 3 Firmware Ardupilot and Kakute H7 v1.3
+### 3.1 Check pre-builtin firmware
 Different pre-built firmware lead to different installation ways.
 
 It is suggested to ask the manufacturer about the pre-built firmware and its version.
@@ -37,10 +18,10 @@ Also, we can switch to Connected status by clicking connect on the top right. Cl
          height="200">
 </figure>
 
-### 1.2 Install driver and bootloader
+### 3.2 Install driver and bootloader
 Tutorials are given by Ardupilot at [Loading Firmware onto boards without existing ArduPilot firmware¶](https://ardupilot.org/copter/docs/common-loading-firmware-onto-chibios-only-boards.html). Read this before going further.
 
-### 1.3 Obtain Ardupilot firmware for KakuteH7
+### 3.3 Obtain Ardupilot firmware for KakuteH7
 #### Download Ardupilot firmware
 Since Kakuteh7's prebuilt firmware is not Ardupilot, installation files should include bootloaders. 
 
@@ -91,7 +72,7 @@ Or, we can build an Ardupilot firmware ourself.
         <img src="8_Arduploit/build_bin.png">
     </figure>    
 
-### 1.4 Write Firmware into FC
+### 3.4 Write Firmware into FC
 There are two ways to write Ardupilot firmware into Kakuteh7: STM32CubeProgrammer or BetaFlight Configurator.
 
 **Connect FC in DFU mode**
@@ -129,10 +110,10 @@ if we can see something like Internal Flash, shown below, it means Kakute is in 
 **Use BetaFlight Configurator (To check)** 
 
 
-## 2 Config Ardupilot
-[Mandatory Hardware Configuration](https://ardupilot.org/copter/docs/configuring-hardware.html)
+## 4 Configure Ardupilot
+Please read [Mandatory Hardware Configuration](https://ardupilot.org/copter/docs/configuring-hardware.html) first.
 
-### 2.1 Choose Frame Class and Type Configuration
+### 4.1 Choose Frame Class and Type Configuration
 Connecting the autopilot with a working station through a USB port. Run Mission Planner.
 
 Go to Setup-->Mandatory Hardware-->Frame Type. 
@@ -148,20 +129,26 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
             height="250">
     </figure>
 
-### 2.2 Configure receiver and transmitter
+### 4.2 Configure receiver and transmitter
 1. Bind receiver and transmitter
+    Please see [Transmitter](2_6_Transmitter.md) searching for RadioLink AT9S Pro and RadioLink R12DSM.
 
-Please see [Transmitter](2_6_Transmitter.md) for RadioLink AT9S Pro and RadioLink R12DSM.
-
-For the receiver's protocol, it is suggested to use SBUS. It can be done by pressed the button for 2s and we should see the LED flash blue.
-
-2. Configurate Ardcupilot
-
-##TODO
+    For the receiver's protocol, it is suggested to use SBUS. It can be done by pressed the button for 2s and we should see the LED flashes blue.
 
 
-### 2.3 Configure motors
+2. Configure Ardupilot to use transmitter
+    Ardupilot will automatically detect Radio inputs. There is nothing to be configured.
 
+    When calibrate the transmitter, it is important to set two switches: one to kill, i.e. stop motors, and the other is to change flight modes. They must be on different sides to be user friendly.
+
+    <figure>
+        <img src="1_Assembly/ArduPilot_Kakute/transmitter.png"
+        height = 300>
+    </figure>
+
+
+### 4.3 Configure motors and ESCs
+#### 4.3.1 motors order and direction
 Connect a battery to the drone and also connect the drone to the work station running Mission Planner through a USB port.
 
 1. Test motor order
@@ -198,37 +185,98 @@ Motors directions also must be checked tests. As we can see from the image above
 - motor C, or motor 3, must spin in CCW,
 - motor D, or motor 4, must spin in CW.
 
-Dont worry if they are not in the correct direction. It is possible to change their directions with BLHeLiSuite32 as our ESC is BLHeli32.
+Dont worry if they are not in the correct direction. There are two ways to to inverse the direction of a motor.
+
+##### Change motor direction by switching two wires
+Image motor 3 is connected to the ESC with 3 wires. We find its direction needs to be inverted.
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Motor_direction_wires_step1.png " height="300">
+</figure>
+
+We can inverse the direction by switching any two of the three wires. One example is shown below.
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Motor_direction_wires_step2.png " height="300">
+</figure>
+
+##### Change motor direction with BLHeLiSuite32
+
+Since our ESC is BLHeli32, we can use BLHeLiSuite32 to decide motors' direction.
 
 Config Ardupilot to enable using to change the motors' directions following the steps in [Pass-Through Support](https://ardupilot.org/copter/docs/common-blheli32-passthru.html).
 
 
-Adjust the motors' directions following the Youtube video [How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=SvltkIvUdiLomp0G)
+Adjust the motors' directions following the Youtube video [How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=SvltkIvUdiLomp0G).
 
 It is suggested to update BLHeli32 firmware first and then begin modify parameters.
 <figure>
-        <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Direction.png"
-            height="250">
+        <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Direction.png">
 </figure>
+
+Steps:
+- Connect a battery to the drone and a USB cable to a computer. 
+- We click connect and check buttons. Then, we can find the versions of BLHeili that are 32.8 as shown below
+    <figure>
+            <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Check.png"
+                >
+    </figure>
+- We update the BLHeili versions. Lets click Flash BLHeili and we can see that it is possible to update to 32.9. Click OK.
+    <figure>
+            <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Update.png"
+            >
+    </figure>
+- Wait for 4 ESCs to be updated
+    <figure>
+            <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Update3.png"
+            >
+    </figure>
+- Click Disconnect button. Disconnect the battery and the USB cable.
+
+- Reconnect the battery and the USB cable. Click Connect and Check button to see if all ESCs are updated.
+
+- However spinning motors to check their directions does not work. More investigation is needed here. We need to go back to MissionPlanner to use Motor Tests to spin motors.
+
+- For instance, motor 1 needs to reverse its direction. We can modify Section Motor Direction from Normal to Reversed, then we click button Write Setup.
+    <figure>
+            <img src="1_Assembly/ArduPilot_Kakute/BLHeliSuite32_Motor_Change_Direction.png"
+            >
+    </figure>
+- Click Disconnect button. Disconnect the battery and the USB cable. Reconnect the battery and the USB cable.  Use MissionPlanner's Motor Test to check if their directions are correct now.
 
 After that, disconnect the battery.
 
+#### 4.3.2 ESCs protocols and calibration
+1. we need to choose protocols for our ESC by setting parameter MOT_PWM_TYPE. More details can be found at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
+
+2. As our ESCs supports multiple protocols, we can choose DShot600 as it suits most UAVs. How to choose protocols can be found at [DShot ESCs](https://ardupilot.org/copter/docs/common-dshot-escs.html?highlight=mot_pwm_type).
+
+3. Therefore, we set MOT_PWM_TYPE as 6 that is for DShot600.
+
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Mot_Type.png">
+</figure>
+
+4. Whether ESCs need calibration depends on what protocols are. Check Section About ESC Calibration at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html).
+
+Since our ESCs use DShot600, there is no need to calibrate them. We can skip this step.
+
+For others, there are several ways for ESC calibration at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type). But Semi Automatic ESC-by-ESC Calibration is suggested, as it easier and time-efficient. 
+
+
 Source:
-- https://ardupilot.org/copter/docs/common-blheli32-passthru.html
-- https://discuss.ardupilot.org/t/my-method-for-iteratively-configuring-motor-ordering-and-direction/67644
-- [How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=3Kq7bqo38yqXqJUn)
+- [Ardupilot wiki: BLHeli32 and BLHeli_S ESCs](https://ardupilot.org/copter/docs/common-blheli32-passthru.html)
+- [Ardupilot community: My Method for Iteratively Configuring Motor Ordering and Direction](https://discuss.ardupilot.org/t/my-method-for-iteratively-configuring-motor-ordering-and-direction/67644)
+- [Youtube: How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=3Kq7bqo38yqXqJUn)
 
 
-### 2.4 Calibrate battery
+### 4.4 Calibrate battery
 ##TODO
 
-## 3 Calibrate sensors
-### 3.1 accelerometer and gyroscope
+### 4.5 Calibrate sensors: accelerometer and gyroscope
 If you prefer using QGroundControl, you can read [Sensor Setup using QGroundControl for Ardupilot](https://docs.qgroundcontrol.com/master/en/SetupView/s.ensors_ardupilot.html).
 
-
-1. No compass for Kakute
-
+If you prefer Mission Planner, you can watch this video [ArduPilot FPV Drone Setup (MICRO FPV ARDUCOPTER!)](https://youtu.be/1dmB8oZFucA?si=_w-zzgJoHhbr73cZ).
+#### No compass
+Note that there is no compass for Kakute
 Note that Kakute does not have an internal compass. We can see from [Kakute' introduction at Holybro](https://holybro.com/products/kakute-h7) that
     <figure>
         <img src="1_Assembly/ArduPilot_Kakute/Kakute_components.png"
@@ -241,95 +289,146 @@ IMU is MPU6000 and we can look for MPU6000 information from its datasheet at [MP
             height="200">
     </figure>
 
-We can be 
+Therefore, we need to set ```COMPASS_ENABLE``` to be 0 which means the compass is disabled.
 
-2. Calibrate accelerometer
+#### Calibrate accelerometer
+Go to SETUP->Mandatory Hardware->Accelerometer Calibration 
+    <figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Sensor-Calibration.png"
+            height="200">
+    </figure>
 
-3. Calibrate gyroscope
+Click button Calibrate Accel, then we place the drone into different pose: flat, left, right etc. We need to first place the drone to the requested pose, and click button Next.
 
+Then, it is also suggested to Calibrate Level. We put the drone on a flat surface, then click that button.
 
-### 3.2 Calibrate ESC
-#### 3.2.1 Choose protocol
-1. we need to choose protocols for our ESC by setting parameter MOT_PWM_TYPE. More details can be found at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
+#### Calibrate gyroscope
+However, it seems MissionPlanner does not offer a gyroscope calibration and it is no necessary? Double check is needed here.
 
-2. As our ESC supports multiple protocols, we can choose DShot600 as it suits most UAVs. How to choose protocols can be found at [DShot ESCs](https://ardupilot.org/copter/docs/common-dshot-escs.html?highlight=mot_pwm_type).
+Now the solution is to run QGroundControl. Go to Vehicle Setup->Sensors->Gyroscope.
 
-3. Therefore, we set MOT_PWM_TYPE as 6 that is for DShot600.
+Place the vehicle on a surface and leave it still and click OK to begin.
+    <figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Gyroscope_calibration.jpg"
+            height="200">
+    </figure>
 
-<figure>
-        <img src="1_Assembly/ArduPilot_Kakute/Mot_Type.png">
-</figure>
-
-#### 3.2.2 Calibrate ESC
-
-There are several ways for ESC calibration at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
-
-Here, Semi Automatic ESC-by-ESC Calibration is undertaken, as it easier and time-efficient. 
-
-## 4 Arm drone now!
+### 4.6 Arm drone now!
 Two things are to be done before arming the drone for the first time.
 
 First, insert a SD card to the Kakute to record logs. Then in Mission Planner, we need to set parameters such that flight logs are recorded during tasks.
 
 
 Second, check failure safe and kill switch: 
+1. check the flight mode is STABILIZE
+2. turn off kill switch
+3. place the left stick on right-down position for 5 seconds and we should see propellers spin.
 
-https://www.youtube.com/watch?v=S7VZ796W8VA&ab_channel=TechatHome
-
-https://www.youtube.com/watch?v=lqb8lpuh6uk&ab_channel=RakishRc
-
-1. pre-arm : logging failed https://discuss.ardupilot.org/t/prearm-logging-not-started-prearm-logging-failed-bad-logging-copter-3-6-9/43753
-2. Prearm: Logging Failed error https://discuss.ardupilot.org/t/prearm-logging-failed-error/98750
-3. https://discuss.ardupilot.org/t/prearm-logging-failed-and-no-logs-with-the-version-4-0-3/58475/8
-4. https://discuss.ardupilot.org/t/logging-failed-preventing-arming/34060/6
-5. compass https://discuss.ardupilot.org/t/compass-not-healthy-preventing-arming-even-though-compasses-are-disabled-using-slam-instead/45011/2
+If arming failed, please check the following resources:
+1. [PreArm: Logging not started , PreArm: Logging Failed , Bad Logging : copter 3.6.9](https://discuss.ardupilot.org/t/prearm-logging-not-started-prearm-logging-failed-bad-logging-copter-3-6-9/43753)
+2. [Prearm: Logging Failed error](https://discuss.ardupilot.org/t/prearm-logging-failed-error/98750)
+3. [Prearm logging failed and no logs with the version 4.0.3](https://discuss.ardupilot.org/t/prearm-logging-failed-and-no-logs-with-the-version-4-0-3/58475/8)
+4. [Logging failed, preventing arming](https://discuss.ardupilot.org/t/logging-failed-preventing-arming/34060/6)
+5. [“Compass not healthy” preventing arming even though compasses are disabled (using SLAM instead)](https://discuss.ardupilot.org/t/compass-not-healthy-preventing-arming-even-though-compasses-are-disabled-using-slam-instead/45011/2)
 
 
 ## 5 Tune gains for manual flight
-
-
-Enable log on sd card
+Read [Analytical Multicopter Flight Controller PID Optimization](https://discuss.ardupilot.org/t/analytical-multicopter-flight-controller-pid-optimization/109759) first.
 
 ### 5.1 Use initial tune parameters
+Guides can be found at [ArduCopter, Tuning](https://ardupilot.org/copter/docs/common-tuning.html).
+
+Parameters for motors, battery, and PID gains are needed to be tuned roughly before the first flight. Details can be found at [Setting the Aircraft Up for Tuning](https://ardupilot.org/copter/docs/setting-up-for-tuning.html#setting-up-for-tuning).
+
+To avoid complex tuning, MissionPlanner gives a tool to set parameters based on the drone. We ca find a tool at SETUP->Mandatory Hardware->Initial Parameter Setup, we can automatically obtain the needed parameters after inputting the size of propellers, the number of cells, and voltages of battery.
+
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/Auto_Tunner.png">
 </figure>
-
 
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/Auto_Tunner2.png">
 </figure>
 
-### 5.2 Tune PID gains for drone
+If the quadrotor can takeoff, not perfectly, then we can continue tuning.
+
+
+### 5.2 Interface and guides for tuning attitude and rate
+There is a cascade control in Ardupilot framework. During manual flights, usually STABILIZE mode, we input target attitudes to the attitude controller. It computes the target bodyrates, then the motor torques are computed and sent to motors.
+
+The schematic view is given as below. 
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Copter_AttitudeControlPID.png">
+</figure>
+source = Copter Attitude Control, https://ardupilot.org/dev/docs/apmcopter-programming-attitude-control-2.html.
+
+For a cascade controller, we begin with the gains of inner loop. In other words, we first tune the PID gains for bodyrates, which are 
+- ATC_RAT_PIT_P
+- ATC_RAT_PIT_I
+- ATC_RAT_PIT_D
+- ATC_RAT_RLL_P
+- ATC_RAT_RLL_I
+- ATC_RAT_RLL_D
+
+Then, we tune gains for attitude
+- ATC_ANG_PIT_P
+- ATC_ANG_RLL_P
+- ATC_ANG_YAW_P
+
 PID parameters are in Tab Extended Tuning
 
 <figure>
         <img src="1_Assembly/ArduPilot_Kakute/PID_Parameters.png">
 </figure>
 
-## TODO
+CUAV provides an explanation of this interface in Chinese.
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/pid_tuning_interface.jpg">
+</figure>
+
+source: [CUAV, 扩展调参（pid)](https://doc.cuav.net/tutorial/copter/extension-tuning.html)
+
+Use the parameters in the table given by TMac
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/Tune_Initial_Table.png">
+</figure>
+
+source: Arducopter Tuning (AUTOTUNE, PIDs & FILTERS, FLIGHT TESTS!), [https://youtu.be/AF6aA2z6rhw?si=U-aBvI92rl0DwJIR](https://youtu.be/AF6aA2z6rhw?si=U-aBvI92rl0DwJIR).
 
 
-https://ardupilot.org/copter/docs/setting-up-for-tuning.html#setting-up-for-tuning
+### 5.3 Analyse logs with to tune PID gains
+#### 5.3.1 Setup for recording Logs 
+Logs are essential for us to monitor a drone's status and to tune gains and parameters.
 
-https://ardupilot.org/copter/docs/flying-arducopter.html
+It is Dataflash, or we call log, that can record flight information. It can be saved on a SD card and downloaded using Mavlink.
 
-https://ardupilot.org/copter/docs/initial-tuning-flight.html
+Read [Downloading and Analyzing Data Logs in Mission Planner](https://ardupilot.org/copter/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.html) to undestand how to setup logs.
+
+Two important parameters are 
+- *LOG_BACKEND_TYPE* that decides saving logs on a SD card or  into board dataflash memory.
+- *LOG_BITMASK* chooses what flight data to be recorded, like IMU, GPS, etc.
+
+The [table 1](https://discuss.ardupilot.org/t/how-to-methodically-tune-almost-any-multicopter-using-arducopter-4-4-x/110842/45?u=robind) and [table 2](https://discuss.ardupilot.org/t/how-to-methodically-tune-almost-any-multicopter-using-arducopter-4-4-x/110842/52?u=robind) of [Analytical Multicopter Flight Controller PID Optimization](https://discuss.ardupilot.org/t/analytical-multicopter-flight-controller-pid-optimization/109759) explain Log message and LOG_BITMASK value.
+#### 5.3.2 Log analysis
+We can use Mission planner to download a log and see *Downloading logs via MAVLink* of [Downloading and Analyzing Data Logs in Mission Planner](https://ardupilot.org/copter/docs/common-downloading-and-analyzing-data-logs-in-mission-planner.html).
+
+Flight data are saved in the form of messages in logs, please refer to [Onboard Message Log Messages](https://ardupilot.org/copter/docs/logmessages.html#logmessages) to find which message is for which data. For instance, message ACC records IMU accelerometer data.
+
+[UAV log viewer](https://plot.ardupilot.org/#/) is a tool for Ardupilot to analyse its logs, which allows us to find ref and actual values of attitude and bodyrates.
+
+In *Plot Individual Field*, we choose *ATT* to plot reference and actual values of roll, pitch and yaw angles. *RATE* allows us to checking bodyrate tracking.
+
+One example of checking roll tracking is given here.
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/UAV_log_viewer_attitude.png">
+</figure>
+
+Fly drones and record their data into logs, then tune attitude and rate controllers based on logs.
+
+Here is one example of tuning just for 2 times
+<figure>
+        <img src="1_Assembly/ArduPilot_Kakute/UAV_log_viewer_tuning_result.png">
+</figure>
 
 
-https://discuss.ardupilot.org/t/no-data-from-drone-with-mavros/81183
-
-https://discuss.ardupilot.org/t/mavros-is-not-publishing-any-data/88649/4
-
-
-https://blog.csdn.net/qq_44998513/article/details/133036005
-
-https://docs.px4.io/main/en/flight_controller/kakuteh7.html
-
-https://blog.csdn.net/qq_44998513/article/details/133877790?spm=1001.2014.3001.5502
-
-
-
-https://blog.csdn.net/qq_44998513/article/details/133809430?spm=1001.2014.3001.5502
-
-
+### 5.4 Advanced tuning (optional)

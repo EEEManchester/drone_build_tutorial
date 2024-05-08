@@ -1,4 +1,4 @@
-# 1 Develop kits
+## 1 Develop kits
 1. Drone frame:
     - Chassis TransTEC Lightning X Lite
     - Motor FPV 致盈EX2306 PLUS [site in Taobao](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.27.52b858176s1EdF&id=634695941707)
@@ -15,9 +15,14 @@
     - RadioLink AT9S Pro
     - RadioLink R12DSM [Site in Tabo](https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-22611654662.9.59a41dc7RXezIK&id=561805355565)
 
+6. Useful notes
+    - CUAV on Copters [https://doc.cuav.net/tutorial/copter/](https://doc.cuav.net/tutorial/copter/)
+    - ArduPilot Copter [https://ardupilot.org/copter/index.html](https://ardupilot.org/copter/index.html)
+    - [How to methodically tune (almost) any multicopter using ArduCopter 4.4.x](https://discuss.ardupilot.org/t/how-to-methodically-tune-almost-any-multicopter-using-arducopter-4-4-x/110842), please read this together with this tutorial.
+    - [Analytical Multicopter Flight Controller PID Optimization](https://discuss.ardupilot.org/t/analytical-multicopter-flight-controller-pid-optimization/109759).
 
-# 2. Assembly and configuration steps for manual flights
-## 2.1 Build chassis
+## 2. Assembly and configuration steps for manual flights
+### 2.1 Build chassis
 First, take parts from Lightning X Lite and prepare alex keys.
 <figure>
     <img src="1_Assembly/Chassis/Lightning_X_Lite.jpg"
@@ -85,3 +90,15 @@ Therefore, the three ports of R12DSM should be connected to Kakute in the follow
 - "+" of R12DSM ----> 5V of Kakute
 - "-" of R12DSM ----> GND of Kakute
 - "S.B/PPM" of R12DSM ----> RX6 of Kakute
+
+<figure>
+    <img src="1_Assembly/ArduPilot_Kakute/Transmitter_Connect.jpg"
+         height="200">
+</figure>
+
+
+
+
+
+
+
