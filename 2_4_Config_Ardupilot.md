@@ -1,5 +1,5 @@
-## 3 Firmware Ardupilot and Kakute H7 v1.3
-### 3.1 Check pre-builtin firmware
+# Install and flash Ardupilot firmware
+## 1 Check pre-builtin firmware
 Different pre-built firmware lead to different installation ways.
 
 It is suggested to ask the manufacturer about the pre-built firmware and its version.
@@ -18,10 +18,11 @@ Also, we can switch to Connected status by clicking connect on the top right. Cl
          height="200">
 </figure>
 
-### 3.2 Install driver and bootloader
+## 2 Prepare Ardupilot firmware and flash it
+### 2.1 Install driver and bootloader
 Tutorials are given by Ardupilot at [Loading Firmware onto boards without existing ArduPilot firmware¶](https://ardupilot.org/copter/docs/common-loading-firmware-onto-chibios-only-boards.html). Read this before going further.
 
-### 3.3 Obtain Ardupilot firmware for KakuteH7
+### 2.2 Obtain Ardupilot firmware for KakuteH7
 #### Download Ardupilot firmware
 Since Kakuteh7's prebuilt firmware is not Ardupilot, installation files should include bootloaders. 
 
@@ -72,7 +73,7 @@ Or, we can build an Ardupilot firmware ourself.
         <img src="8_Arduploit/build_bin.png">
     </figure>    
 
-### 3.4 Write Firmware into FC
+### 2.3 Write Firmware into FC
 There are two ways to write Ardupilot firmware into Kakuteh7: STM32CubeProgrammer or BetaFlight Configurator.
 
 **Connect FC in DFU mode**
@@ -110,10 +111,10 @@ if we can see something like Internal Flash, shown below, it means Kakute is in 
 **Use BetaFlight Configurator (To check)** 
 
 
-## 4 Configure Ardupilot
+## 3 Configure Ardupilot
 Please read [Mandatory Hardware Configuration](https://ardupilot.org/copter/docs/configuring-hardware.html) first.
 
-### 4.1 Choose Frame Class and Type Configuration
+### 3.1 Choose Frame Class and Type Configuration
 Connecting the autopilot with a working station through a USB port. Run Mission Planner.
 
 Go to Setup-->Mandatory Hardware-->Frame Type. 
@@ -129,7 +130,7 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
             height="250">
     </figure>
 
-### 4.2 Configure receiver and transmitter
+### 3.2 Configure receiver and transmitter
 1. Bind receiver and transmitter
     Please see [Transmitter](2_6_Transmitter.md) searching for RadioLink AT9S Pro and RadioLink R12DSM.
 
@@ -147,8 +148,8 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
     </figure>
 
 
-### 4.3 Configure motors and ESCs
-#### 4.3.1 motors order and direction
+### 3.3 Configure motors and ESCs
+#### 3.3.1 motors order and direction
 Connect a battery to the drone and also connect the drone to the work station running Mission Planner through a USB port.
 
 1. Test motor order
@@ -244,7 +245,7 @@ Steps:
 
 After that, disconnect the battery.
 
-#### 4.3.2 ESCs protocols and calibration
+#### 3.3.2 ESCs protocols and calibration
 1. we need to choose protocols for our ESC by setting parameter MOT_PWM_TYPE. More details can be found at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
 
 2. As our ESCs supports multiple protocols, we can choose DShot600 as it suits most UAVs. How to choose protocols can be found at [DShot ESCs](https://ardupilot.org/copter/docs/common-dshot-escs.html?highlight=mot_pwm_type).
@@ -268,10 +269,10 @@ Source:
 - [Youtube: How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=3Kq7bqo38yqXqJUn)
 
 
-### 4.4 Calibrate battery
+### 3.4 Calibrate battery
 ##TODO
 
-### 4.5 Calibrate sensors: accelerometer and gyroscope
+### 3.5 Calibrate sensors: accelerometer and gyroscope
 If you prefer using QGroundControl, you can read [Sensor Setup using QGroundControl for Ardupilot](https://docs.qgroundcontrol.com/master/en/SetupView/s.ensors_ardupilot.html).
 
 If you prefer Mission Planner, you can watch this video [ArduPilot FPV Drone Setup (MICRO FPV ARDUCOPTER!)](https://youtu.be/1dmB8oZFucA?si=_w-zzgJoHhbr73cZ).
@@ -313,7 +314,7 @@ Place the vehicle on a surface and leave it still and click OK to begin.
             height="200">
     </figure>
 
-### 4.6 Arm drone now!
+## 4 Arm drone now!
 Two things are to be done before arming the drone for the first time.
 
 First, insert a SD card to the Kakute to record logs. Then in Mission Planner, we need to set parameters such that flight logs are recorded during tasks.

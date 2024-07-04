@@ -1,34 +1,12 @@
-<<<<<<< HEAD
 # Install and configure BetaFlight
-## 0 Develop kits
-1. Drone frame:
-    - Chassis TransTEC Lightning X Lite
-    - Motor FPV 致盈EX2306 PLUS [site in Taobao](https://item.taobao.com/item.htm?spm=a1z10.5-c-s.w4002-22611654657.27.52b858176s1EdF&id=634695941707)
-2. ESC: Aocoda 60A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012)
-
-3. Autopilot and framework
-    - Aocoda RC H743 [site in Taobo](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xUOMZu&id=679995875558)     
-    - BetaFlight 4.4.0
-4. Onboard computer and OS
-    - Raspberry Pi
-    - Ubuntu 20.04
-5. Transmitter
-    - RadioLink AT9S Pro
-    - RadioLink R12DSM [Site in Tabo](https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-22611654662.9.59a41dc7RXezIK&id=561805355565)
-6. Work station
-    - Ubuntu 20.04
-
 ## 1 Install and flash BetaFlight firmware
-=======
-# 3 Build and flash customised BetaFlight firmware
->>>>>>> Build_Drone
 <figure>
     <img src="1_Assembly/BetaFlight_Aocoda/logo.png"
          height="100">
 </figure>
 
 [BetaFlight](https://betaflight.com/) is flight controller firmware for flying multi-rotor craft and fixed wing craft. Because of its cutting edge performances, BetaFlight is one of the largest flight firmwares in the FPV drone racing and freestyle community. 
-## 3.1 Install BetaFlight Configurator
+## 2.1 Install BetaFlight Configurator
 BetaFlight Configurator is a tool for us to flash and calibrate firmwares.
 
 Setup Guide shows steps to install BetaFlight Configurator.
@@ -48,8 +26,8 @@ Setup Guide shows steps to install BetaFlight Configurator.
 </figure>
 
 
-## 3.2 build BetaFlight for Aocoda H743
-#### 3.2.1 Build Betaflight firmware from source
+## 2.2 build BetaFlight for Aocoda H743
+#### 2.2.1 Build Betaflight firmware from source
 Steps to build firmware H743 for example
 1. install official firmware, i.e. .hex
 2. save the result of ```diff all``` into config.txt
@@ -66,33 +44,16 @@ Steps to build firmware H743 for example
 5. get the built firmware
     it is located at *BetaFlight/obj/XXX.hex*.
 
-## 3.3A flash BetaFlight to Aocoda H743
+## 2.3A flash BetaFlight to Aocoda H743
 1. connect autopilot board to a work station through a USB port. It is supposed to see the LED flashing after connection.
 
 2. run BetaFlight Configurator
 
-<<<<<<< HEAD
 3. write customized firmware
     - **enable DFU mode of the autopilot board**
     - enable "no reboot sequence"
     - enable "Full clip erase" if your previous installation failed and you cannot connect your autopilot
     - click "Load Firmware" and choose the obtained firmware XXX.hex. 
-=======
-3. backup pre-built BetaFlight config files (you can skip this step if you can access Aoco_H7_Config_Manufacturer.txt in /firmware/Aocoda)
-    - click button connect on the top right
-    - click CLI tap
-    - type ```diff all``` in the terminal which a lot of pars will be shown 
-    - copy and save those par in a txt file, call it preconfig.txt
-<figure>
-    <img src="1_Assembly/BetaFlight_Aocoda/Betaflight_Config_save.png">
-</figure>
-
-4. write customized firmware
-    - **enable DFU mode of the autopilot board**
-    - enable "no reboot sequence"
-    - enable "Full clip erase" if your previous installation failed and you cannot connect your autopilot
-    - click "Load Firmware" and choose the downloaded firmware betaflight_4.4.0_STM32H743.hex or the firmware you built.
->>>>>>> Build_Drone
     - click "Flash Firmware" and the process is done when 'programming:successful' can is shown.
     <figure>
         <img src="1_Assembly/BetaFlight_Aocoda/Betaflight_Config_flash.png">
@@ -113,7 +74,7 @@ Steps to build firmware H743 for example
     <img src="1_Assembly/BetaFlight_Aocoda/BetaFlight_flash_finished.png">
     </figure>
 
-## 3.3B flash BetaFlight to KakuteH7Mini
+## 2.3B flash BetaFlight to KakuteH7Mini
 1. Enable DFU mode of KakuteH7Mini and connect it to a base station with Betaflight Configurater running.
 2.  Download and flash official firmware by choosing KakuteH7Mini as the target board with
     - "no reboot sequence" enabled
@@ -130,19 +91,15 @@ Steps to build firmware H743 for example
     </figure>
 4. Reboot and choose ''Apply custom defaults''
 
-## 4 Configure and calibrate BetaFlight
+## 3 Configure and calibrate BetaFlight
 **REMOVE propellers before doing anything else**
 
-### 4.1 Configure transmitter and receiver
+### 3.1 Configure transmitter and receiver
 
-<<<<<<< HEAD
-#### 2.1.1 Bind receiver and transmitter
-=======
-#### 4.1.1 Bind receiver and transmitter
->>>>>>> Build_Drone
+#### 3.1.1 Bind receiver and transmitter
 Please see [Transmitter](2_6_Transmitter.md) searching for RadioLink AT9S Pro and RadioLink R12DSM
 
-#### 4.1.2 Configure receiver using BetaFlight Configurator
+#### 3.1.2 Configure receiver using BetaFlight Configurator
 1. Define ports as Serial (via UART)
 2. Choose protocol
     - SBUS and switch the RadioLink R12DSM into S-BUS model when the LED flashes blue.
@@ -158,13 +115,9 @@ Please see [Transmitter](2_6_Transmitter.md) searching for RadioLink AT9S Pro an
     <img src="1_Assembly/BetaFlight_Aocoda/transmitter.png"
     height = 400>
     </figure>
-<<<<<<< HEAD
-5. Adjust sticks' sensitivities with the buttons in green circles such that central positions of sticks should correspond to around 1507.
-=======
 5. Adjust sticks' sensitivities with the buttons in green circles such that central positions of sticks should correspond to around 1507. **Note** use the buttons in green circles to make the range of each channel to be 1505-2000, especially for the thrust channel as Betaflight does not allow arming if the thrust channel is above 1050 by default.
->>>>>>> Build_Drone
 
-### 4.2 Configure motors
+### 3.2 Configure motors
 NOTE: REMOVE propellers if you did not do that.
 
 1. Check frame type and motor order.
@@ -198,7 +151,7 @@ NOTE: REMOVE propellers if you did not do that.
 
     Choose motor by index first, and then if the direction is wrong, we just need to click "Reverse".
 
-### 4.3 Configure flight modes
+### 3.3 Configure flight modes
 
 There are several modes:
 - Arm mode. It used as a kill switch as it can enable and disable motor output.
@@ -231,16 +184,12 @@ Other modes can be found at [Modes](https://betaflight.com/docs/development/Mode
 
 
 
-### 4.4 Configure power & battery
+### 3.4 Configure power & battery
 1. check if BetaFlight Configurator find the correct number of cells.
 
 
 2. Choose battery source
 Two options are available here
-<<<<<<< HEAD
-- Onboard ADC means the voltage and current are measured by the autopilot's ADC. 
-- ESC means they are measured by ESC telemetry. To use ESC telemetry for voltage measurement, the ESC board needs have a pin named after telemetry that is connected to the autopilot. A pin named after current is needed for current measurement.
-=======
     - Onboard ADC means the voltage and current are measured by the autopilot's ADC. 
     - ESC means they are measured by ESC telemetry. To use ESC telemetry for voltage measurement, the ESC board needs have a pin named after telemetry that is connected to the autopilot. A pin named after current is needed for current measurement.
 
@@ -249,17 +198,11 @@ Two options are available here
     <figure>
             <img src="1_Assembly/BetaFlight_Aocoda/battery_measure.png">
     </figure>
->>>>>>> Build_Drone
 
 
 3. Amperage Meter (Current)
-    This depends on ESC instead of autopilots.
-
-<<<<<<< HEAD
-The parameter Scale in Amperage Meter should be given by manufacturer. As for our Aocoda 3060A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012), the scale is set to be 160.    
-=======
-    The parameter Scale in Amperage Meter should be given by manufacturer. As for our Aocoda 3060A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012), the scale is set to be 160. It is 120 for KakuteH7Mini [site at Holybro](https://holybro.com/products/kakute-h7-mini-stacks).   
->>>>>>> Build_Drone
+    - This depends on ESC instead of autopilots.
+    - The parameter Scale in Amperage Meter should be given by manufacturer. As for our Aocoda 3060A 4 in 1 [site in Taobao](https://item.taobao.com/item.htm?spm=a1z0d.6639537/tb.1997196601.4.55627484xw5sv5&id=682898024012), the scale is set to be 160. It is 120 for KakuteH7Mini [site at Holybro](https://holybro.com/products/kakute-h7-mini-stacks).   
     <figure>
         <img src="1_Assembly/BetaFlight_Aocoda/current_scale.png">
     </figure>
@@ -283,7 +226,7 @@ After hearing the music, we can click the button Save.
 
 
 
-### 4.4 Calibrate sensors
+### 3.4 Calibrate sensors
 
 Aocoda has embedded an accelerometer and a gyroscope. 
 
@@ -295,5 +238,5 @@ It finishes when the message "Accelerometer calibration finished" is displayed o
         <img src="1_Assembly/BetaFlight_Aocoda/calibrate_acc.png">
 </figure>
 
-### 4.5 First flights and PID tuning
+### 3.5 First flights and PID tuning
 ##TODO
