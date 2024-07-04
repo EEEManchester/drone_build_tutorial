@@ -93,6 +93,8 @@ Run ardupilot firmware
 ```shell
     cd Ardupilot/ArduCopter
     sim_vehicle.py -v ArduCopter -f gazebo-iris --console
+    # OR
+    sim_vehicle.py -v ArduCopter --console --map
 ```
 we should find an interface, a council and a terminal.
 <figure>

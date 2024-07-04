@@ -13,7 +13,7 @@
 5. Transmitter
     - RadioLink AT9S Pro
     - RadioLink R12DSM [Site in Tabo](https://item.taobao.com/item.htm?spm=a1z10.3-c-s.w4002-22611654662.9.59a41dc7RXezIK&id=561805355565)
-6. Work station
+6. Workstation
     - Ubuntu 20.04
 
 # 2 Assembly MAVs
@@ -58,7 +58,7 @@ We can find the pins of ESC and autopilot at the [Aocoda 60A 4 in 1](https://ite
          height="400">
 </figure>
 
-More specifically, they share the same strcture and we can connect them directly like this
+More specifically, they share the same structure and we can connect them directly like this
 <figure>
     <img src="1_Assembly/BetaFlight_Aocoda/Autopilot_ESC.jpg"
          height="250">
@@ -75,4 +75,13 @@ Therefore, the three ports of R12DSM should be connected to Kakute in the follow
 - "+" of R12DSM ----> 5V of Aocoda
 - "-" of R12DSM ----> GND of Aocoda
 - "S.B/PPM" of R12DSM ----> RX1 of Aocoda
+<figure>
+    <img src="1_Assembly/ArduPilot_Kakute/Transmitter_Connect.jpg"
+         height="200">
+</figure>
 
+##TODO
+<figure>
+        <img src="1_Assembly/BetaFlight_Aocoda/Acoda_quadrotor.jpg" 
+        height = 300>
+</figure>
