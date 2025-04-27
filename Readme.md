@@ -22,6 +22,10 @@ It explains how to install and configure PX4 or Ardupilot, ROS and ROS packages 
 - Multiple drones with PX4
 - Multiple drones with Ardupilot
     
+#### 1.3 Simulation uding Docker
+- PX4 with Docker
+    -   [PX4](2_docker_px4.md)
+- Ardupilot with Docker 
 
 ### 2 Experiment preparation
 
