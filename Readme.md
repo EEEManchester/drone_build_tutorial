@@ -24,7 +24,7 @@ It explains how to install and configure PX4 or Ardupilot, ROS and ROS packages 
     
 #### 1.3 Simulation uding Docker
 - PX4 with Docker
-    -   [PX4](2_docker_px4.md)
+    -   [PX4 with single quadrotor](2_docker_px4.md)
 - Ardupilot with Docker 
 
 ### 2 Experiment preparation

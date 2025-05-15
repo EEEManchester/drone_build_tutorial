@@ -1,4 +1,7 @@
 # PX4 in Docker
+This rep is to proivde a development environment using PX4-Gazebo in Docker. That is, a PX4 source code should be downloaded and prepared on your host machine, which would be used by this tutorial.
+
+## (optional) Background of PX4 and Docker 
 PX4 provides official guides and Docker images for simulation at [PX4 Docker Containers](https://docs.px4.io/main/en/test_and_ci/docker.html).
 
 It includes containers for different Ubuntu versions, and the corresponding ROS application. This feature is achieved by a hierarchical architecture.
@@ -18,14 +21,8 @@ graph TD
 
 Even it is suggested to use ```docker_run.sh``` in the PX4 source code, I still prefer building images myself and custmerise it, which is introduced in section *Calling Docker Manually* in [PX4 Docker Containers](https://docs.px4.io/main/en/test_and_ci/docker.html).
 
-## PX4 in ROS noetic
-**Step 1: Prepare Docker Files and PX4 Source Code**
-
-First, download the following files into the folder ```Docker/px4_noetic```:
-- Dockerfile
-- entrypoint.sh
-- build_image.sh
-    
+## 1. Download PX4 source code
+**Step 1: Prepare PX4 Source Code**    
 Then, we get PX4 source code to a certain lolcation.
 ```bash
     cd YOUR_PX4
@@ -63,23 +60,35 @@ From the ```Docker/px4_noetic folder``` run
     ```bash
     bash ./build_image.sh
     ```
+## 2. Build Docker images in ```Docker/PX4_single_UAV```
+You can find the following files:
+- ```build_image.sh``` to build a Docker image using ```Dockerfile```
+- ```run_container.sh``` to run a Docker container built before
+- ```Dockerfile``` 
+- ```entrypoint.sh``` to build PX4 simulation and launch it in ros 
+- ```data``` to save your data and videos
+- ```drone_simulation_tools``` to launch mavros and px4 simulation
 
-**Step 4: Run the Docker Container** 
-In ```run_container.sh```, set ```PX4_SRC_DIR``` to be where the source code is, i.e. ```YOUR_PX4/PX4-Autopilot```. For instance,
+Configurations can be done:
+1. It is possible to change the image name in ```build_image.sh```
 ```bash
-    PX4_SRC_DIR=~/Desktop/Docker/PX4/PX4-Autopilot
+    IMAGE_NAME="px4_ros_noetic"
 ```
-Then, start the container by 
+2. Set the path to your PX4 source code in
+```bash
+    PX4_SRC_DIR=path_to_PX4/PX4-Autopilot
+```
+
+Then, we can build a image named after ```px4_ros_noetic``` by running 
+```bash
+    bash build_image.sh
+```
+and run the container which may take longer for the first time
 ```bash
     bash run_container.sh
 ```
-**Step 5: Build and Launch PX4 SITL**
-1. start PX4 simulation of a quadrotor in Gazebo 
-        ```bash
-            make px4_sitl_default gazebo-classic
-        ```
 
-2. If you encounter permission errors (especially after switching PX4 versions), fix it with:
+In case, if you encounter permission errors (especially after switching PX4 versions), fix it with:
 ```bash
     git config --global --add safe.directory /src/PX4-Autopilot
     chown -R root:root /src/PX4-Autopilot
