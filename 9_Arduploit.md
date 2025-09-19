@@ -88,3 +88,5 @@ Ardupilot provides us with two guided modes:
 
 Source
 - [ArduCopter Flight Controllers](https://nrotella.github.io/journal/arducopter-flight-controllers.html)
+- [ArduCopter drone control stack](https://nrotella.github.io/journal/ardupilot-drone-control-stack.html)
+

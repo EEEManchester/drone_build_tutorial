@@ -55,12 +55,7 @@ Or you want to switch to different version later, and here is what you need to, 
     git submodule update --init --recursive
     ```
 
-**Step 3: Build the Docker Image**   
-From the ```Docker/px4_noetic folder``` run
-    ```bash
-    bash ./build_image.sh
-    ```
-## 2. Build Docker images in ```Docker/PX4_single_UAV```
+## 2. Run Docker containers 
 You can find the following files:
 - ```build_image.sh``` to build a Docker image using ```Dockerfile```
 - ```run_container.sh``` to run a Docker container built before
