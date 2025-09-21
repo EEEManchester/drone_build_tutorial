@@ -3,13 +3,15 @@ This rep is to proivde a development environment using PX4-Gazebo in Docker that
 
 From PX4, v1.14, uXRCE-DDS middleware is implemented in PX$ firmware to communicatei with ROS2. As shown in the figure below, uXRCE-DDS middleware is composed of two parts
 - uXRACE-DDS client is built inside PX4 firmware
--  uXRACE-DDS agent should be running on the onboard computer for real-world epxeriments or on the host machine for simulation.
+- uXRACE-DDS agent should be running on the onboard computer for real-world epxeriments or on the host machine for simulation.
 <figure>
     <img src="10_Docker/Px4_ROS2/px4_DDS.svg"
     height="200">
 </figure>
 
-Therefore, two Dockerfiles are provided here to conduct simulation with PX4 and ros2.
+Good examples and tutorials that help this rep are
+- [ROS2_PX4_Offboard_Example](https://github.com/ARK-Electronics/ROS2_PX4_Offboard_Example)
+- [px4-offboard](https://github.com/Jaeyoung-Lim/px4-offboard)
 
 ## 1 PX4 simulation with Gazebo
 **Step 1: Prepare PX4 Source Code**    
@@ -132,8 +134,9 @@ Finally, we should see
     <img src="10_Docker/Px4_ROS2/ros2_dds_px4_gazebo_sim.png">
 </figure>
 
-## 3 ROS2 application with PX4
+## 3 ROS2 communication with PX4
 
+## 3.1 ROS2 pkgs for PX4 messages
 In order to read and send messages defined by PX4, we need to build and install `px4_ros_com` and `px4_msgs` packages in our workspace.
 
 Note that
@@ -295,6 +298,10 @@ hagl_max: .inf
 ```
 
 In fact, we can find ros2 topics related to PX4 at [dds_topics.yaml](https://github.com/PX4/PX4-Autopilot/blob/main/src/modules/uxrce_dds_client/dds_topics.yaml).
+
+## 4 Control PX4 in Gazebo using ROS2
+One example is provided at [ROS 2 Offboard Control Example](https://docs.px4.io/main/en/ros2/offboard_control.html).
+
 
 ## Reference
 - [OS 2 User Guide, PX4]https://docs.px4.io/main/en/ros2/user_guide.html
