@@ -1,5 +1,8 @@
 # PX4 for ROS2 in Docker
-This rep is to proivde a development environment using PX4-Gazebo in Docker that is compataible with ROS2 Humble. 
+
+NOTE: IT IS NOT NOT NOT NOT recommended to use FK PX4!
+
+This rep is to provide a development environment using PX4-Gazebo in Docker that is compataible with ROS2 Humble. 
 
 From PX4, v1.14, uXRCE-DDS middleware is implemented in PX$ firmware to communicatei with ROS2. As shown in the figure below, uXRCE-DDS middleware is composed of two parts
 - uXRACE-DDS client is built inside PX4 firmware
@@ -301,6 +304,196 @@ In fact, we can find ros2 topics related to PX4 at [dds_topics.yaml](https://git
 
 ## 4 Control PX4 in Gazebo using ROS2
 One example is provided at [ROS 2 Offboard Control Example](https://docs.px4.io/main/en/ros2/offboard_control.html).
+
+
+### 4.1 Subscribe to PX4 topics
+
+
+### 4.2 Publish to PX4 topics
+
+
+### 4.3 Send commands to PX4
+
+
+#### 5 Arm and switch to offboard
+
+
+#### 6 Control
+
+##### 6.1 
+
+To obtain the mass of `x500`, we can run 
+```bash
+    $ gz model -m x500_0 --link
+```
+and we should get 
+```bash
+Requesting state for world [default]...
+
+- Link [11]
+  - Name: base_link
+  - Parent: x500_0 [10]
+  - Mass (kg): 2.000000
+  - Inertial Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.000000]
+    [0.000000 -0.000000 0.000000]
+  - Inertial Matrix (kg.m^2):
+    [0.021667 0.000000 0.000000]
+    [0.000000 0.021667 0.000000]
+    [0.000000 0.000000 0.040000]
+  - Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.240000]
+    [0.000000 -0.000000 0.000000]
+  - Sensor [25]
+    - Name: air_pressure_sensor
+    - Parent: x500_0 [10]
+    - Pose [ XYZ (m) ] [ RPY (rad) ]:
+      [0.000000 0.000000 0.000000]
+      [0.000000 -0.000000 0.000000]
+    - Reference altitude (m): 0
+    - Pressure noise:
+      - Mean (Pa): 0
+      - Bias mean (Pa): 0
+      - Standard deviation (Pa): 0.01
+      - Bias standard deviation (Pa): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (Pa): 0
+      - Dynamic bias correlation time (s): 0
+  - Sensor [26]
+    - Name: imu_sensor
+    - Parent: x500_0 [10]
+    - Pose [ XYZ (m) ] [ RPY (rad) ]:
+      [0.000000 0.000000 0.000000]
+      [0.000000 -0.000000 0.000000]
+    - Linear acceleration X-axis noise:
+      - Mean (m/s^2): 0
+      - Bias mean (m/s^2): 0
+      - Standard deviation (m/s^2): 0.00186
+      - Bias standard deviation (m/s^2): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (m/s^2): 0.006
+      - Dynamic bias correlation time (s): 300
+    - Linear acceleration Y-axis noise:
+      - Mean (m/s^2): 0
+      - Bias mean (m/s^2): 0
+      - Standard deviation (m/s^2): 0.00186
+      - Bias standard deviation (m/s^2): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (m/s^2): 0.006
+      - Dynamic bias correlation time (s): 300
+    - Linear acceleration Z-axis noise:
+      - Mean (m/s^2): 0
+      - Bias mean (m/s^2): 0
+      - Standard deviation (m/s^2): 0.00186
+      - Bias standard deviation (m/s^2): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (m/s^2): 0.006
+      - Dynamic bias correlation time (s): 300
+    - Angular velocity X-axis noise:
+      - Mean (rad/s): 0
+      - Bias mean (rad/s): 0
+      - Standard deviation (rad/s): 0.00018665
+      - Bias standard deviation (rad/s): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (rad/s): 3.8785e-05
+      - Dynamic bias correlation time (s): 1000
+    - Angular velocity Y-axis noise:
+      - Mean (rad/s): 0
+      - Bias mean (rad/s): 0
+      - Standard deviation (rad/s): 0.00018665
+      - Bias standard deviation (rad/s): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (rad/s): 3.8785e-05
+      - Dynamic bias correlation time (s): 1000
+    - Angular velocity Z-axis noise:
+      - Mean (rad/s): 0
+      - Bias mean (rad/s): 0
+      - Standard deviation (rad/s): 0.00018665
+      - Bias standard deviation (rad/s): 0
+      - Precision: 0
+      - Dynamic bias standard deviation (rad/s): 3.8785e-05
+      - Dynamic bias correlation time (s): 1000
+    - Gravity direction X [XYZ]: 1 0 0
+    - Gravity direction X parent frame:
+    - Localization:CUSTOM
+    - Custom RPY: 0 0 0
+    - Custom RPY parent frame:
+    - Orientation enabled:1
+  - Sensor [27]
+    - Name: navsat_sensor
+    - Parent: x500_0 [10]
+    - Pose [ XYZ (m) ] [ RPY (rad) ]:
+      [0.000000 0.000000 0.000000]
+      [0.000000 -0.000000 0.000000]
+- Link [28]
+  - Name: rotor_0
+  - Parent: x500_0 [10]
+  - Mass (kg): 0.016077
+  - Inertial Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.000000]
+    [0.000000 -0.000000 0.000000]
+  - Inertial Matrix (kg.m^2):
+    [0.000000 0.000000 0.000000]
+    [0.000000 0.000026 0.000000]
+    [0.000000 0.000000 0.000026]
+  - Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.174000 -0.174000 0.300000]
+    [0.000000 -0.000000 -0.000000]
+- Link [32]
+  - Name: rotor_1
+  - Parent: x500_0 [10]
+  - Mass (kg): 0.016077
+  - Inertial Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.000000]
+    [0.000000 -0.000000 0.000000]
+  - Inertial Matrix (kg.m^2):
+    [0.000000 0.000000 0.000000]
+    [0.000000 0.000026 0.000000]
+    [0.000000 0.000000 0.000026]
+  - Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [-0.174000 0.174000 0.300000]
+    [0.000000 -0.000000 -0.000000]
+- Link [36]
+  - Name: rotor_2
+  - Parent: x500_0 [10]
+  - Mass (kg): 0.016077
+  - Inertial Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.000000]
+    [0.000000 -0.000000 0.000000]
+  - Inertial Matrix (kg.m^2):
+    [0.000000 0.000000 0.000000]
+    [0.000000 0.000026 0.000000]
+    [0.000000 0.000000 0.000026]
+  - Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.174000 0.174000 0.300000]
+    [0.000000 -0.000000 -0.000000]
+- Link [40]
+  - Name: rotor_3
+  - Parent: x500_0 [10]
+  - Mass (kg): 0.016077
+  - Inertial Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [0.000000 0.000000 0.000000]
+    [0.000000 -0.000000 0.000000]
+  - Inertial Matrix (kg.m^2):
+    [0.000000 0.000000 0.000000]
+    [0.000000 0.000026 0.000000]
+    [0.000000 0.000000 0.000026]
+  - Pose [ XYZ (m) ] [ RPY (rad) ]:
+    [-0.174000 -0.174000 0.300000]
+    [0.000000 -0.000000 -0.000000]
+```
+
+We can compute the total mass of `x500` that is `2.0643kg`.
+
+X (F) / normalised_thurst = (2.0643*9.8)/0.72
+
+normalised_thurst = X (F) * 0.72/(2.0643*9.8)
+
+
+x: 0.2744081914424896
+y: -0.06982909142971039
+z: -0.7043076753616333
+
 
 
 ## Reference

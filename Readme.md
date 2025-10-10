@@ -32,7 +32,7 @@ It explains how to install and configure PX4 or Ardupilot, ROS and ROS packages 
 For ROS2, only Docker approaches is shown as the author feels tired of configuring environment especially with poor documentation provided by XX.
 ##### 1.2.1 **single** quadrotor with PX4 and Ardupilot
  -   [PX4 with single quadrotor2](2_docker_px4_ros2.md)
- -   [Ardupilot with single quadrotor ROS2](2_docker_ardupilot.md)
+ -   [Ardupilot with single quadrotor](2_docker_ardupilot_ros2.md)
 
 
 ### 2 Experiment preparation
@@ -59,7 +59,10 @@ For ROS2, only Docker approaches is shown as the author feels tired of configuri
 2. [Ardupilot](2_4_Config_Ardupilot.md)
 3. [Betaflight](2_5_Config_BetaFlight.md)
 
-#### 2.3 Onboard computer setup
+#### 2.3 ESP32 WiFi telemetry - DroneBridge
+1. [Ardupilot](2_ESP32_WiFi_telemetry_Ardupilot.md)
+
+#### 2.4 Onboard computer setup
     
 It demonstrates steps to add an onboard computer to a drone. It includes how to power it within the power system of Pixhawk and how to enable ROS communication among it, Pixhawk and base station.
 
@@ -70,6 +73,8 @@ It demonstrates steps to add an onboard computer to a drone. It includes how to 
     - [Set up communication between Pi and Pixhawk with PX4](4_Experiment_Communication_Pi_Pixhawk.md)
 3. Enable communication between onboad computer and base station in ROS through WIFI
     - [Set up ROS communcation between onboard computer and base station through WIFI](4_Experiment_ROS_Communication_Pi_BaseStation.md)
+
+
 
 ### 3 Drone controllers
 1. [Use mavros_controller](7_Mavros_Controller.md)
@@ -94,4 +99,4 @@ It demonstrates steps to add an onboard computer to a drone. It includes how to 
 
 2. Ardupilot
     - [Introduction of Ardupilot](9_Arduploit.md)
-    - [Ardupilot and ROS2]()
+    - [Ardupilot and ROS2](9_1_Ardupilot_ROS2.md)

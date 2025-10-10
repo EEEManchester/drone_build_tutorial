@@ -5,7 +5,7 @@ This rep is to proivde a development environment using PX4-Gazebo in Docker that
 ### 1.1 build ROS2 pkgs for Ardupilot
 This is developed in a Docker container with humble with the working space being set as `ros2_ws`.
 
-Step 1. get 
+Step 1. get micro-ROS-Agent
 ```bash
     cd ros2_ws/src
     git clone --recursive -b humble https://github.com/micro-ROS/micro-ROS-Agent.git micro_ros_agent
