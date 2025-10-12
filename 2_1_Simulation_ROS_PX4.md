@@ -1,4 +1,4 @@
-roslaunch# Simulation setup ROS, PX4, Gazebo and mavros (Mavlink) 
+# Simulation setup ROS, PX4, Gazebo and mavros (Mavlink) 
 This is to setup simulation environment to simulate drone (PX4) in Gazebo and ROS.
 
 Software and ROS packages needed include

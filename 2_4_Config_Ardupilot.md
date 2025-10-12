@@ -1,128 +1,34 @@
-# Install and flash Ardupilot firmware
-## 1 Check pre-builtin firmware
-Different pre-built firmware lead to different installation ways.
+# Install and Configure Ardupilot firmware
 
-It is suggested to ask the manufacturer about the pre-built firmware and its version.
+## 1. Install Ardupilot
 
-Our Kakute H7 v1.3 has a pre-built firmware of BetaFlight. Then the version can be found with the help of BetaFlight Configurator that can auto detect the pre-built board and firmware.
+### 1.1 Install Arduplot for Kakute H7 with pre-builtin firmware for Betaflight.
+For flight controllers like Kakute H7, they may have pre-builtin firmwares Betaflight and we cannot install Ardupilot firmware using Mission Planner directly. 
 
-Run BetaFlight Configurator, in Disconnected status, we click Firmware Flasher on the left sidebar, then it will auto detect the board and the firmware version
-<figure>
-    <img src="1_Assembly/ArduPilot_Kakute/Kakute_prebuilt_board.png"
-         height="200">
-</figure>
+Therefore, it needs to erase and formate the flight controller and then flash the Ardupilot.
 
-Also, we can switch to Connected status by clicking connect on the top right. Click CLI on the left side bar, typing dump on the terminal on the right will give more information 
-<figure>
-    <img src="1_Assembly/ArduPilot_Kakute/Kakute_prebuilt_firmware.png"
-         height="200">
-</figure>
-
-## 2 Prepare Ardupilot firmware and flash it
-### 2.1 Install driver and bootloader
-Tutorials are given by Ardupilot at [Loading Firmware onto boards without existing ArduPilot firmware¶](https://ardupilot.org/copter/docs/common-loading-firmware-onto-chibios-only-boards.html). Read this before going further.
-
-### 2.2 Obtain Ardupilot firmware for KakuteH7
-#### Download Ardupilot firmware
-Since Kakuteh7's prebuilt firmware is not Ardupilot, installation files should include bootloaders. 
-
-Following steps shown in [Loading Firmware onto boards without existing ArduPilot firmware](https://ardupilot.org/planner/docs/common-loading-firmware-onto-chibios-only-boards.html):
-
-1. Go to webpage [https://firmware.ardupilot.org/Copter/stable-4.4.0/KakuteH7/](https://firmware.ardupilot.org/Copter/stable-4.4.0/KakuteH7/)
-
-2. Download arducopter_with_bl.hex.
-
-Or, we can build an Ardupilot firmware ourself.
-#### Build Ardupilot firmware from source code
-1. use Waf to build an Ardupilot firmware for the chosen board. Tutorials to use Waf https://github.com/ArduPilot/ardupilot/blob/master/BUILD.md.
-    - clean previous built firmware
-    ```shell
-         cd ardupliot
-         ./waf distclean
-    ``` 
-    - The available list can be found by 
-    ```shell
-        cd ardupliot
-        ./waf list_boards
-    ```
-    <figure>
-        <img src="8_Arduploit/available_boards.png">
-    </figure>
-
-    - video tutorial for next two steps https://youtu.be/lNSvAPZOM_o.
-    - choose firmware - it is Pixhawk5X for us
-    ```shell
-        cd ardupliot 
-        ./waf configure --board Pixhawk5X
-    ```
-    <figure>
-        <img src="8_Arduploit/build_config.png">
-    </figure>
-    
-    - build it
-    ```shell
-        cd ardupliot
-        ./waf copter
-    ```
-    <figure>
-        <img src="8_Arduploit/build_result.png">
-    </figure>
-
-    - find the built ardupliot file at /ardupliot/build/board_name/bin, like
-    <figure>
-        <img src="8_Arduploit/build_bin.png">
-    </figure>    
-
-### 2.3 Write Firmware into FC
-There are two ways to write Ardupilot firmware into Kakuteh7: STM32CubeProgrammer or BetaFlight Configurator.
-
-**Connect FC in DFU mode**
-
-Kakute must be connected in DFU mode. To do that, press the button of Kakute, and then connect it to the work station through a USB port.
-
-Check if Kakute is in DFU mode, we type
-```shell
-    sudo dfu-util --list
-```
-if we can see something like Internal Flash, shown below, it means Kakute is in DFU mode. 
-<figure>
-    <img src="1_Assembly/ArduPilot_Kakute/DFU_check.png"
-         height="100">
-</figure>
-
-**Use STM32CubeProgrammer**
-1. Download STM32CubeProgrammer software for Linux from [its official site](https://www.st.com/en/development-tools/stm32cubeprog.html?dl=r%2FDZ7hJ7r7LZnJS4M%2Bj%2FYg%3D%3D%2CrqQw3Z8zMJTVH%2FiHwZRxG3hJGQZEmlN4OzbGJFeuEufO47XaPWyM38drgWLJg%2F%2FukxP6agHPDG343C5L3VFsTTk12wTB%2FrA3oq9%2FGySQjLM3nRGLsi7eIQH9DlYY5OUSVtr25RNJsWoeocZdEfwKn9T7waqy41WKTicuSubVQdd1fd%2B0ydjzklycTlZd3z5c2CLMiyXRW6Dp3sndw6IxOB14m2l2wbA6%2FKQhfiyTPQe7NHIEkvcHbRwAyYBAJ22lSYc%2FzN8rHJSJh9EFm6ND6vltYTICAqp%2BihBh%2BHCVrrPfkE3nf9OUm%2BaBrMd9breQH71gc8%2B31MtN75QSPpBOAHqhdAD1VdxVDoGwk9GEUJVc8oE6F5dxFST1GI2xA6eC)
-1. Install and run STM32CubeProgrammer
-2. Choose USB as connection way and choose USB1, according to your station, as Port. Click flash button next port if nothing shows there.
-
-<figure>
-    <img src="1_Assembly/ArduPilot_Kakute/Step1_STM32CubeProgrammer.png"
->
-</figure>
-
-3. Click Open file and choose downloaded arducopter_with_bl.hex.
-4. Click button Download and it begins wiring Ardupilot into Kakuteh7.
-<figure>
-    <img src="1_Assembly/ArduPilot_Kakute/Step2_STM32CubeProgrammer.png">
-</figure>
-
-5. Click button Disconnect and unplug the USB cable. 
-
-**Use BetaFlight Configurator (To check)** 
+The steps can be found at [Install Arduplot for pre-builtin firmware that is Betaflight](2_4_Config_Ardupilot_Prebuilt4Betaflight_Install.md)
 
 
-## 3 Configure Ardupilot
+### 1.2 Install Arduplot for flight controllers like Pixhawk and Orange Cube.
+
+## 2 Configure Ardupilot
 Please read [Mandatory Hardware Configuration](https://ardupilot.org/copter/docs/configuring-hardware.html) first.
 
-### 3.1 Choose Frame Class and Type Configuration
-Connecting the autopilot with a working station through a USB port. Run Mission Planner.
+### 2.1 Choose Frame Class and Type Configuration
+The first step is to connect the autopilot to a laptop or a computer through a USB port. Run Mission Planner.
 
-Go to Setup-->Mandatory Hardware-->Frame Type. 
+The first setting to do is choose the drone type, by which I mean, it is a quadrotor, a fix-wing UAV, or a hexrotor. This defines the most elementary setting of a UAV. 
+
+There are also subcategoreis for each option. For instance, for a quadrotor, there can be `X` or `＋` it depends on the mechanic design and also the ESC settings. 
+
+Go to `Setup-->Mandatory Hardware-->Frame Type`. 
 - Choose Quad in tap Frame Class (Quad stands for Quadrotor)
     <figure>
     <img src="1_Assembly/ArduPilot_Kakute/Mission_Planner_setup1.png">
 </figure>
-- Since our chassis and ESC are for BetaFlight type, we need to go to Configuration->Full parameter list, and set FRAME_TYPE to be 12.
+
+Since our chassis and ESC are for BetaFlight type, we need to go to Configuration->Full parameter list, and set FRAME_TYPE to be 12.
 
 All supported types are available [here](https://ardupilot.org/copter/docs/connect-escs-and-motors.html)
     <figure>
@@ -130,7 +36,7 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
             height="250">
     </figure>
 
-### 3.2 Configure receiver and transmitter
+### 2.2 Configure receiver and transmitter
 1. Bind receiver and transmitter
     Please see [Transmitter](2_6_Transmitter.md) searching for RadioLink AT9S Pro and RadioLink R12DSM.
 
@@ -148,8 +54,8 @@ All supported types are available [here](https://ardupilot.org/copter/docs/conne
     </figure>
 
 
-### 3.3 Configure motors and ESCs
-#### 3.3.1 motors order and direction
+### 2.3 Configure motors and ESCs
+#### 2.3.1 motors order and direction
 Connect a battery to the drone and also connect the drone to the work station running Mission Planner through a USB port.
 
 1. Test motor order
@@ -245,7 +151,7 @@ Steps:
 
 After that, disconnect the battery.
 
-#### 3.3.2 ESCs protocols and calibration
+#### 2.3.2 ESCs protocols and calibration
 1. we need to choose protocols for our ESC by setting parameter MOT_PWM_TYPE. More details can be found at [Electronic Speed Controller (ESC) Calibration](https://ardupilot.org/copter/docs/esc-calibration.html?highlight=mot_pwm_type).
 
 2. As our ESCs supports multiple protocols, we can choose DShot600 as it suits most UAVs. How to choose protocols can be found at [DShot ESCs](https://ardupilot.org/copter/docs/common-dshot-escs.html?highlight=mot_pwm_type).
@@ -269,10 +175,10 @@ Source:
 - [Youtube: How To Update BLHeli 32 & Change Motor Directions](https://youtu.be/pjPI1xvcntw?si=3Kq7bqo38yqXqJUn)
 
 
-### 3.4 Calibrate battery
+### 2.4 Calibrate battery
 ##TODO
 
-### 3.5 Calibrate sensors: accelerometer and gyroscope
+### 2.5 Calibrate sensors: accelerometer and gyroscope
 If you prefer using QGroundControl, you can read [Sensor Setup using QGroundControl for Ardupilot](https://docs.qgroundcontrol.com/master/en/SetupView/s.ensors_ardupilot.html).
 
 If you prefer Mission Planner, you can watch this video [ArduPilot FPV Drone Setup (MICRO FPV ARDUCOPTER!)](https://youtu.be/1dmB8oZFucA?si=_w-zzgJoHhbr73cZ).
@@ -314,7 +220,7 @@ Place the vehicle on a surface and leave it still and click OK to begin.
             height="200">
     </figure>
 
-## 4 Arm drone now!
+## 3 Arm drone now!
 Two things are to be done before arming the drone for the first time.
 
 First, insert a SD card to the Kakute to record logs. Then in Mission Planner, we need to set parameters such that flight logs are recorded during tasks.

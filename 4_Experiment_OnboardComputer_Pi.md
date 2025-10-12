@@ -1,5 +1,8 @@
-# Set Raspberry Pi 4B as an onboard computer
-Big picture of a drone with a Pixhawk 5 and a Raspberry Pi 4b.
+# Set up Raspberry Pi for ROS1 application
+
+Here show two main ways:
+- Ubuntu 20 (server or desktop) + ros noetic
+- Ubuntu 22 server + Docker (ros noetic) 
 
 <figure>
     <img src="4_Experiment_OnboardComputer_Setup/Drone_components.png"
@@ -7,7 +10,6 @@ Big picture of a drone with a Pixhawk 5 and a Raspberry Pi 4b.
          alt="Albuquerque, New Mexico">
     <figcaption></figcaption>
 </figure>
-
 
 ## 1. Brief introduction of onboard computer (Raspberry Pi 4B)
 Onboard computer is responsible for transfer commands from base station to autoploit and convert sensor information from autoploit, cameras etc. back to Onboard computers.
@@ -37,7 +39,7 @@ Raspberry Pi Imager is official tool to install OS for raspberry pi boards. It c
 Here are several potions for OS to be used on Raspberry Pi 4b:
 - Ubuntu Desktop/Server 20.04
 - **(recommended)** Ubuntu Mate 20.04 for Raspberry Pi
-- Raspberry Pi OS
+- Ubuntu Desktop/Server 22.04 (Docker approach)
 
 ## 3. Install Ubuntu Server 20.04
 A server is lighter than a Desktop as it does not contain packages for GUI and Office. Thus, choosing server is also a good choice for an onboard computer.
@@ -94,43 +96,19 @@ Now, we should see a Ubuntu Mate start in the monitor. Here is what we need to d
             sudo apt-mark hold linux-generic linux-image-generic linux-headers-generic
         ```
 
-## 5 Install Raspberry Pi OS (not fully tested)
-Raspberry Pi OS is an official operating system supported by Raspberry Pi.
+## 4. Install Ubuntu Server 22.04 (Docker approach)
+The last verion of Raspberry Pi Imager in 2025 allows more settings at the beginning.
 
-After understanding how to use Raspberry Pi Imager, a choice is going to be made for choosing a version of Raspberry Pi OS, yes, another choice of versions :( . In fact, Raspberry Pi OS is built using a Linux kernel of Debian, therefore we can find Debian version information of each Raspberry Pi OS. Raspberry Pi OS uses Debian 11 (Bullseye), while Raspberry Pi OS (Legacy) takes Debian 10 (Buster).
+For instance, it is possible to configure WIFI
 <figure>
-    <img src="4_Experiment_OnboardComputer_Setup/Raspberry_OS_option1.png"
-         height="200">
-    <figcaption>Raspberry Pi OS with Debian 11 (Bullseye)</figcaption>
-</figure>
-<figure>
-    <img src="4_Experiment_OnboardComputer_Setup/Raspberry_OS_option2.png"
-         height="200">
-    <figcaption>Raspberry Pi OS (Legacy) with Debian 10 (Buster)</figcaption>
+    <img src="4_Experiment_OnboardComputer_Setup/imager_w.png"
+         height="190">
+    <figcaption>Raspberry Pi Imager</figcaption>
 </figure>
 
-
-Wait a minute. Think about the most important tools are to be used on onboard computers; that is ROS. Choosing Raspberry Pi OS (Debian 11) or Raspberry Pi OS (Legacy) (Debian 10) depends on which one allows us to use a proper ROS.
-
-Till April 2022, there two ROS options to choose: ROS Melodic and ROS Noetic. Noetic is developed for Debian 10 (Buster) and Melodic is for Debian 9 (Stretch). So, Debian 11 (Bullseye) is not supported yet for ROS 1 or never. The only choice is Debian 10 (Buster), then we must install Raspberry Pi OS (Legacy).
-
-Flashing Raspberry Pi OS (Legacy) into a SD card and use that to boot Raspberry Pi. 
+Setting an available WIFI here is helpful for us to install tools and libraries after.
 
 
-## 6 Install Ubuntu Core for Raspberry Pi
-### 6.1 Introduction of Ubuntu Core
-In one word, **Ubuntu Core** is the optimised version of Ubuntu for robotics and ROS. **Snaps**, the de facto container for packaging software on Ubuntu, enhanced to support ROS applications. 
-
-[Ubuntu official site](https://ubuntu.com/core/docs) states that
-- Ubuntu Core is a version of the Ubuntu operating system designed and engineered for **Internt of Things (IoT)** and embedded systems.
-- Ubuntu Core is ideal for embedded devices because it manages itself. Whether it’s running on an **Intel NUC** hidden for media streaming, or a **Raspberry Pi** handling garage door automation, Ubuntu Core remains transparent, trustworthy and autonomous.
-
-More information about how Ubuntu supports robotics can be found at 
-- [Robotics document](https://ubuntu.com/robotics/docs)
-- [Robotics explanation](https://ubuntu.com/robotics/docs/explanation)
-
-### 6.2 Tutorial for using ROS on Ubuntu Core
-https://ubuntu.com/core/docs/uc20/install-raspberry-pi#heading--requirements
 
 
 Ref:
