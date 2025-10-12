@@ -31,7 +31,7 @@ It explains how to install and configure PX4 or Ardupilot, ROS and ROS packages 
 #### 1.2 ROS2 
 For ROS2, only Docker approaches is shown as the author feels tired of configuring environment especially with poor documentation provided by XX.
 ##### 1.2.1 **single** quadrotor with PX4 and Ardupilot
- -   [PX4 with single quadrotor2](2_docker_px4_ros2.md)
+ -   [PX4 with single quadrotor](2_docker_px4_ros2.md)
  -   [Ardupilot with single quadrotor](2_docker_ardupilot_ros2.md)
 
 
