@@ -2,7 +2,7 @@
 This rep is to proivde a development environment using PX4-Gazebo in Docker that is compataible with ROS2 Humble. 
 
 ## 1. Setup Ardupilot with ROS2
-### 1.1 build ROS2 pkgs for Ardupilot
+### 1.1 Build ROS2 pkgs for Ardupilot
 This is developed in a Docker container with humble with the working space being set as `ros2_ws`.
 
 Step 1. get micro-ROS-Agent
@@ -93,7 +93,7 @@ Step 3. build Ardupilot for STL (only ArduCopter is needed here)
 ```bash
     cd ros2_ws/src/ardupilot
     ./waf distclean 
-    ./waf configure --board sitl --enable-DDS
+    ./waf configure --board sitl --enable-DDS # Note --enable-DDS for version after 4.7 while --enable-dds for version before
     ./waf copter
 ```
 we should see 
@@ -135,7 +135,7 @@ Then, it is possible to launch simulation using `ROS2 launch`.
 ```bash
     cd ros2_ws
     source install/setup.bash
-    ROS2 launch ardupilot_sitl sitl_dds_udp.launch.py \
+    ros2 launch ardupilot_sitl sitl_dds_udp.launch.py \
         transport:=udp4 \
         synthetic_clock:=True \
         wipe:=False \
@@ -143,7 +143,7 @@ Then, it is possible to launch simulation using `ROS2 launch`.
         speedup:=1 \
         slave:=0 \
         instance:=0 \
-        defaults:=$(ROS2 pkg prefix ardupilot_sitl)/share/ardupilot_sitl/config/default_params/copter.parm,$(ROS2 pkg prefix ardupilot_sitl)/share/ardupilot_sitl/config/default_params/dds_udp.parm \
+        defaults:=$(ros2 pkg prefix ardupilot_sitl)/share/ardupilot_sitl/config/default_params/copter.parm,$(ros2 pkg prefix ardupilot_sitl)/share/ardupilot_sitl/config/default_params/dds_udp.parm \
         sim_address:=127.0.0.1 \
         master:=tcp:127.0.0.1:5760 \
         sitl:=127.0.0.1:5501
@@ -329,3 +329,26 @@ Launch `QGroundControl` to change two more paramers that are`DDS_ENABLE` and `DD
 Save it, kill and restart simulation.
 
 Thus, we should be able to see all the topics with `ROS2 topics`.
+
+
+### 1.4 Use a sepcified verison of Ardupilot
+We can use a speficied version of Ardupilot in simulaion, for instance `Copter-4.6.2`. 
+
+Before `Step 3. build Ardupilot for STL (only ArduCopter is needed here)` in the section 1.2,
+
+we frist creat a new branch from main based on the tag `Copter-4.6.2`
+```bash
+    git checkout -b my-copter-4.6.2 Copter-4.6.2
+```
+Then, we need to update the submodules to match 
+```bash
+    $li@Robot:~/Desktop/Project/ROS2_Ardupilot/ardupilot$ git submodule update --init --recursive
+
+    Submodule path 'modules/ChibiOS': checked out '88b84600b59d2f39c9d9137aacdc9f098b374b4a'
+    Submodule path 'modules/DroneCAN/DSDL': checked out '0856687a5acb42b55d29bbad8f4fc9e19b4989fc'
+    Submodule path 'modules/DroneCAN/dronecan_dsdlc': checked out '43d8a9ed909e18f169c001a0f418edc72269b36b'
+    Submodule path 'modules/DroneCAN/libcanard': checked out '9b05a4d8eebf82684053d07e6d04fe2b0c922a6e'
+    Submodule path 'modules/lwip': checked out '143a6a5cb8023921b5dced55c30551ffb752b640'
+    Submodule path 'modules/mavlink': checked out 'bb87bc7390af7f21d9ad33a45c8be02997fecd24'
+    Submodule path 'modules/mavlink/pymavlink': checked out '8ba67079211a4315681bc84a44c37b383448d664'
+```
